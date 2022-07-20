@@ -14,20 +14,11 @@
     <children>
       <component id="99ad9" class="javax.swing.JToggleButton" binding="btnActiveDiners">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="14"/>
-          <text value="&lt;html&gt;&lt;center&gt;Comensales activos&lt;/center&gt;&lt;html&gt;"/>
-        </properties>
-      </component>
-      <component id="bffd5" class="javax.swing.JToggleButton" binding="btnAllDiners">
-        <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="14"/>
-          <text value="&lt;html&gt;&lt;center&gt;Todos los comensales&lt;/center&gt;&lt;html&gt;"/>
+          <text value="&lt;html&gt;&lt;center&gt;Comensales activos&lt;/center&gt;&lt;html&gt;"/>
         </properties>
       </component>
       <vspacer id="66996">
@@ -35,6 +26,15 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
+      <component id="bffd5" class="javax.swing.JToggleButton" binding="btnAllDiners">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="14"/>
+          <text value="&lt;html&gt;&lt;center&gt;Todos los comensales&lt;/center&gt;&lt;html&gt;"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

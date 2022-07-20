@@ -1,10 +1,12 @@
 package com.moreno.views;
 
 import com.moreno.App;
+import com.moreno.controllers.Attendances;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.CPane;
 import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
+import com.moreno.models.Attendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
@@ -17,12 +19,13 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.List;
 
 public class VPrincipal extends JFrame{
     private JPanel contentPane;
     private JMenu btnMenuInicio;
-    private JButton btnStudents;
+    private JButton btnAllDiners;
     private JButton btnAttendance;
     private JButton btnDiners;
     private JButton btnGestionar;
@@ -39,14 +42,16 @@ public class VPrincipal extends JFrame{
     private MenuDiners menuDiners;
     private MenuAttendance menuAttendance;
     public static List<Diner> diners;
+    public static List<Diner> dinersActives;
+    public static List<Attendance> attendancesToday;
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
         initComponents();
-        btnStudents.addActionListener(new ActionListener() {
+        btnAllDiners.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menuDiners.loadActiveDiners();
+                menuDiners.loadAllDiners();
             }
         });
         btnDiners.addActionListener(new ActionListener() {
@@ -69,7 +74,12 @@ public class VPrincipal extends JFrame{
         });
     }
     private void loadLists(){
+        Calendar start=Calendar.getInstance();
+        Calendar end=Calendar.getInstance();
+        end.add(Calendar.DATE,1);
         diners= Diners.getTodos();
+        dinersActives=Diners.getActives();
+        attendancesToday= Attendances.getOfDate(Utilities.getDate(start.getTime()),Utilities.getDate(end.getTime()));
     }
     private void loadMenuDiners(){
         Utilities.updateComponents(menuDiners.getContentPane());
@@ -112,7 +122,7 @@ public class VPrincipal extends JFrame{
         cargarCursores();
         loadMenus();
         loadMenuDiners();
-        menuDiners.loadActiveDiners();
+        menuDiners.loadAllDiners();
         pack();
         setLocationRelativeTo(null);
     }
@@ -130,7 +140,7 @@ public class VPrincipal extends JFrame{
         border.getBorderInsets(btnDiners).set(0,4,0,4);
     }
     private void cargarCursores(){
-        btnStudents.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnAllDiners.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnNewAttendance.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnAttendance.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDiners.setCursor(new Cursor(Cursor.HAND_CURSOR));

@@ -51,14 +51,16 @@
                 <preferred-size width="-1" height="20"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <floatable value="false"/>
+            </properties>
             <border type="none"/>
             <children>
-              <component id="92ebf" class="javax.swing.JButton" binding="btnStudents">
+              <component id="92ebf" class="javax.swing.JButton" binding="btnAllDiners">
                 <constraints/>
                 <properties>
                   <icon value="com/moreno/Icons/x32/studentsSelected.png"/>
-                  <text value="Comensales activos"/>
+                  <text value="Todos los comensales"/>
                 </properties>
               </component>
               <component id="202c7" class="javax.swing.JButton" binding="btnNewAttendance">
@@ -324,7 +326,9 @@
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <tabLayoutPolicy value="1"/>
+            </properties>
             <border type="none"/>
             <children/>
           </tabbedpane>

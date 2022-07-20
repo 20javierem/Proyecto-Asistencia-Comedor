@@ -1,7 +1,7 @@
 package com.moreno.views.tabs;
 
 import com.moreno.custom.TabPane;
-import com.moreno.utilities.utilitiesTables.UtilitiesTables;
+import com.moreno.utilitiesTables.UtilitiesTables;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

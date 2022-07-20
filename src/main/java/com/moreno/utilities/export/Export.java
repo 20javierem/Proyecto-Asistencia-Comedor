@@ -10,7 +10,6 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,6 +25,7 @@ public class Export {
     private static HSSFSheet hoja;
     private static HSSFCellStyle styleCabecera;
     private static CellStyle dateFormat;
+
     public static void exportar(String titulo,String[] nombreColumnas, List<Object[]> datos){
         if(!datos.isEmpty()){
             if(pedirNombre(titulo)){

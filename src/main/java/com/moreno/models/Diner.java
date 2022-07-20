@@ -16,7 +16,7 @@ public class Diner extends Moreno {
     @GeneratedValue(generator = "increment")
     private Integer id;
 
-    @NotBlank(message = "Nombre")
+    @NotBlank(message = "Nombres")
     private String names;
 
     @NotBlank(message = "Apellidos")
@@ -90,6 +90,17 @@ public class Diner extends Moreno {
 
     public List<Attendance> getAttendances() {
         return attendances;
+    }
+
+
+    public static Diner createDiner(String[] attributes){
+        Diner diner=new Diner();
+        diner.setDni(attributes[0]);
+        diner.setNames(attributes[1]);
+        diner.setLastNames(attributes[2]);
+        diner.setCode(attributes[3]);
+        diner.setPhone(attributes[4]);
+        return diner;
     }
 
 }

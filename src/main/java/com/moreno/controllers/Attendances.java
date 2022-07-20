@@ -8,6 +8,7 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
@@ -27,11 +28,23 @@ public class Attendances extends Moreno {
         todos = new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }
-
+    public static Attendance getOfDinerAndDate(Diner diner,Date date){
+        Calendar start=Calendar.getInstance();
+        start.setTime(date);
+        Calendar end=Calendar.getInstance();
+        end.setTime(date);
+        end.add(Calendar.DATE,1);
+        criteria = builder.createQuery(Attendance.class);
+        root=criteria.from(Attendance.class);
+        criteria.select(root).where(builder.and(
+                builder.between(root.get("date"), start.getTime(),end.getTime()),
+                builder.equal(root.get("diner"),diner)));
+        return session.createQuery(criteria).uniqueResult();
+    }
     public static Vector<Attendance> getOfDate(Date start,Date end){
         criteria = builder.createQuery(Attendance.class);
         root=criteria.from(Attendance.class);
-        criteria.select(root).where(builder.between(root.get("date"), Utilities.getDate(start),Utilities.getDate(end)));
+        criteria.select(root).where(builder.between(root.get("date"), start,end));
         return new Vector<>(session.createQuery(criteria).getResultList());
     }
 }

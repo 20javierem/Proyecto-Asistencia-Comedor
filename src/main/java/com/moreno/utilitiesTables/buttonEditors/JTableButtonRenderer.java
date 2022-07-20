@@ -1,4 +1,4 @@
-package com.moreno.utilities.utilitiesTables.buttonEditors;
+package com.moreno.utilitiesTables.buttonEditors;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

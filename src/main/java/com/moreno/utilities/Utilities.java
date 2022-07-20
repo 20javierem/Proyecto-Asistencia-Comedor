@@ -2,8 +2,7 @@ package com.moreno.utilities;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.moreno.App;
-import com.moreno.utilities.utilitiesTables.UtilitiesTables;
+import com.moreno.utilitiesTables.UtilitiesTables;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperReport;
@@ -20,7 +19,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -59,7 +57,7 @@ public class Utilities {
                 case "Claro":
                     UIManager.setLookAndFeel(new FlatIntelliJLaf());
                     break;
-                default:
+                case "Oscuro":
                     UIManager.setLookAndFeel(new FlatDarkLaf());
                     break;
             }

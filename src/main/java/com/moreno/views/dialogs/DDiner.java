@@ -1,8 +1,10 @@
 package com.moreno.views.dialogs;
 
+import com.moreno.Notify;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
+import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.validators.DinerValidator;
 import com.moreno.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
@@ -22,9 +24,16 @@ public class DDiner extends JDialog{
     private JTextField txtCode;
     private Diner diner;
     private boolean update=false;
+    private JTable table;
 
-    public DDiner(){
-        this(new Diner());
+    public DDiner(JTable table){
+        this(new Diner(),table);
+    }
+    public DDiner(Diner diner,JTable table){
+        super(Utilities.getJFrame(),"Nuevo comensal",true);
+        this.diner=diner;
+        this.table=table;
+        initComponents();
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,11 +46,6 @@ public class DDiner extends JDialog{
                 onCancel();
             }
         });
-    }
-    public DDiner(Diner diner){
-        super(Utilities.getJFrame(),"Nuevo comensal",true);
-        this.diner=diner;
-        initComponents();
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -84,14 +88,23 @@ public class DDiner extends JDialog{
         if (errors.isEmpty()) {
             diner.save();
             if(update){
+                updateTable();
                 dispose();
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Cambios guardados");
             }else{
                 VPrincipal.diners.add(diner);
+                updateTable();
                 diner=new Diner();
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Comensal creado");
                 loadDiner();
             }
         } else {
             DinerValidator.mostrarErrores(errors);
+        }
+    }
+    private void updateTable(){
+        if(table!=null){
+            UtilitiesTables.actualizarTabla(table);
         }
     }
     private void loadDiner(){

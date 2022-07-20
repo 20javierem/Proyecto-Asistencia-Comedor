@@ -2,6 +2,7 @@ package com.moreno.models;
 
 import com.moreno.utilities.Moreno;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 public class Attendance extends Moreno {
     @Id
+    @GeneratedValue(generator = "increment")
     private Integer id;
 
     @ManyToOne

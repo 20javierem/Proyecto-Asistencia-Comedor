@@ -1,7 +1,7 @@
-package com.moreno.utilities.utilitiesTables;
+package com.moreno.utilitiesTables;
 
 import com.moreno.utilities.Utilities;
-import com.moreno.utilities.utilitiesTables.buttonEditors.JButtonAction;
+import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

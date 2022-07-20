@@ -25,6 +25,20 @@ public class Diners extends Moreno {
         return todos;
     }
 
+    public static Diner getByDni(String dni){
+        criteria = builder.createQuery(Diner.class);
+        root=criteria.from(Diner.class);
+        criteria.select(root)
+                .where(builder.equal(root.get("dni"),dni));
+        return session.createQuery(criteria).uniqueResult();
+    }
+    public static Diner getByCode(String code){
+        criteria = builder.createQuery(Diner.class);
+        root=criteria.from(Diner.class);
+        criteria.select(root)
+                .where(builder.equal(root.get("code"),code));
+        return session.createQuery(criteria).uniqueResult();
+    }
     public static Vector<Diner> getActives(){
         criteria = builder.createQuery(Diner.class);
         root=criteria.from(Diner.class);

@@ -131,6 +131,9 @@
       <item class="com.moreno.custom.CButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="true" auto-create-binding="true" can-attach-label="false">
         <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="0" />
       </item>
+      <item class="com.toedter.calendar.JDateChooser" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
     </group>
   </component>
 </project>

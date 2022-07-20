@@ -186,10 +186,10 @@ public class TabbedPane extends JTabbedPane {
         });
 
         buttonEsquina.setIcon(new ImageIcon(App.class.getResource("Icons/x16/menu1.png")));
-        buttonEsquina.addMouseListener(new MouseAdapter() {
+        buttonEsquina.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                pop_up.show(buttonEsquina,e.getX(),e.getY());
+            public void actionPerformed(ActionEvent e) {
+                pop_up.show(buttonEsquina,buttonEsquina.getVisibleRect().x,buttonEsquina.getVisibleRect().y+buttonEsquina.getHeight());
             }
         });
         toolBar.add(Box.createHorizontalGlue());

@@ -1,5 +1,6 @@
 package com.moreno.views.dialogs;
 
+import com.moreno.Notify;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
 import com.moreno.views.VPrincipal;
@@ -48,6 +49,7 @@ public class DSettings extends JDialog{
         propiedades.setTema(cbbTema.getSelectedItem().toString());
         propiedades.save();
         dispose();
+        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","Cambios guardados");
     }
     private void onCancel(){
         Utilities.setTema(propiedades.getTema());
