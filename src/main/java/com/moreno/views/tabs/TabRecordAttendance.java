@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 public class TabRecordAttendance {
     private TabPane tabPane;
-    private JButton nuevoEstudianteButton;
     private JTable table;
 
     public TabRecordAttendance(){

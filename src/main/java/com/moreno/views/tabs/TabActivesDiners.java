@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 public class TabActivesDiners {
 
     private TabPane tabPane;
-    private JButton nuevoEstudianteButton;
     private JTable table;
+    private JTextField txtSearch;
 
     public TabActivesDiners(){
         initComponents();
