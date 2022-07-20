@@ -13,5 +13,6 @@
         <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="com.moreno.models.Diner"/>
+        <mapping class="com.moreno.models.Attendance"/>
     </session-factory>
 </hibernate-configuration>

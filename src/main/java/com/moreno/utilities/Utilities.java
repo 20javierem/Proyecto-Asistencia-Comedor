@@ -257,55 +257,6 @@ public class Utilities {
         return Base64.getDecoder().decode(property);
     }
 
-//    public static void generarNotaVenta(DnDTabbedPane tabbedPane, Credentials credentials, Sale sale, Boolean imprimir) {
-//        InputStream pathReport = Principal.class.getResourceAsStream("JasperReport/Blank_A4_1.jasper");
-//        String logo=Principal.class.getResource("Images/buitre.png").getPath();
-//        try {
-//            if(pathReport!=null){
-//                List<DetailSale> items=new ArrayList<>(sale.getDetailSales());
-//                items.add(0, items.get(0));
-//                JasperReport report=(JasperReport) JRLoader.loadObject(pathReport);
-//                JRBeanArrayDataSource sp=new JRBeanArrayDataSource(items.toArray());
-//                Map<String,Object> parameters=new HashMap<>();
-//                parameters.put("tipoDocumentoEmpresa","Ruc");
-//                parameters.put("rfc","10620205546");
-//                parameters.put("direccion",sale.getBranch().getFiscal_address());
-//                parameters.put("telefono",sale.getBranch().getPhone());
-//                parameters.put("email",sale.getBranch().getEmail());
-//                parameters.put("logo",logo);
-//                parameters.put("ciudad",sale.getBranch().getUrbanization());
-//                parameters.put("numeroticket",String.valueOf(101010+ sale.getId()));
-//                parameters.put("subtotal",precio.format(sale.getSub_total()));
-//                parameters.put("tipoCambio",moneda.format(credentials.getCompany().getExchanged_rate()));
-//                parameters.put("total",moneda.format(sale.getTotal()));
-//                parameters.put("importeEnLetras","son muchos soles");
-//                parameters.put("fechaEmision",sale.getCreated());
-//                parameters.put("message",sale.getBranch().getMessage());
-//                parameters.put("nombreCliente",sale.getClient()!=null?sale.getClient().getTrade_name():"--");
-//                parameters.put("vendedor",sale.getUser().getFirst_name()+" "+sale.getUser().getLast_name());
-//                parameters.put("clienteDni",sale.getClient()!=null?sale.getClient().getNumber_document():"--");
-//                parameters.put("formaDePago",sale.isPaymentTransfer()?"Transferencia":"Efectivo");
-//                parameters.put("tipoDocumentoCliente","DNI");
-//                parameters.put("productos",sp);
-//                JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
-//                if(viewer!=null){
-//                    Integer idVenta=101010+sale.getId();
-//                    viewer.setTitle("Venta NR"+idVenta);
-//                    if(tabbedPane.indexOfTab(viewer.getTitle())==-1){
-//                        tabbedPane.addTab(viewer.getTitle(), viewer.getRootPane());
-//                        tabbedPane.setSelectedComponent(viewer.getRootPane());
-//                    }
-//                    tabbedPane.setSelectedIndex(tabbedPane.indexOfTab(viewer.getTitle()));
-//                }else{
-//                    Utilities.sendNotification("Error","Ocurrió un error", TrayIcon.MessageType.ERROR);
-//                }
-//            }else{
-//                sendNotification("Error","No se encontró la plantilla", TrayIcon.MessageType.ERROR);
-//            }
-//        } catch (JRException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public static JasperViewer getjasperViewer(JasperReport report, Map<String, Object> parameters, JRBeanArrayDataSource sp,boolean isExitOnClose){
         try {
             JasperViewer jasperViewer=new JasperViewer(JasperFillManager.fillReport(report,parameters,sp),isExitOnClose);

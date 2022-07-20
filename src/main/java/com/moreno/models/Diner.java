@@ -34,7 +34,7 @@ public class Diner extends Moreno {
     @OneToMany(mappedBy = "diner")
     private List<Attendance> attendances=new ArrayList<>();
 
-    private boolean active;
+    private boolean active=false;
 
     public Integer getId() {
         return id;

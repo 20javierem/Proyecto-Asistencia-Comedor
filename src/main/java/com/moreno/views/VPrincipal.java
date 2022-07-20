@@ -1,9 +1,11 @@
 package com.moreno.views;
 
 import com.moreno.App;
+import com.moreno.controllers.Diners;
 import com.moreno.custom.CPane;
 import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
+import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
 import com.moreno.views.dialogs.DSettings;
@@ -15,6 +17,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VPrincipal extends JFrame{
     private JPanel contentPane;
@@ -35,6 +38,7 @@ public class VPrincipal extends JFrame{
     private Propiedades propiedades;
     private MenuDiners menuDiners;
     private MenuAttendance menuAttendance;
+    public static List<Diner> diners;
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
@@ -63,6 +67,9 @@ public class VPrincipal extends JFrame{
                 menuAttendance.loadRegisterAttendance();
             }
         });
+    }
+    private void loadLists(){
+        diners= Diners.getTodos();
     }
     private void loadMenuDiners(){
         Utilities.updateComponents(menuDiners.getContentPane());
@@ -99,6 +106,7 @@ public class VPrincipal extends JFrame{
         Utilities.setJFrame(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
+        loadLists();
         loadMenuItems();
         quitarBordes();
         cargarCursores();
