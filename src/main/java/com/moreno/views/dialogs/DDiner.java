@@ -2,7 +2,6 @@ package com.moreno.views.dialogs;
 
 import com.moreno.Notify;
 import com.moreno.models.Diner;
-import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.validators.DinerValidator;
@@ -22,6 +21,8 @@ public class DDiner extends JDialog{
     private JTextField txtDni;
     private JTextField txtPhone;
     private JTextField txtCode;
+    private JComboBox cbbSex;
+    private JComboBox cbbState;
     private Diner diner;
     private boolean update=false;
     private JTable table;
@@ -79,11 +80,13 @@ public class DDiner extends JDialog{
         dispose();
     }
     private void save(){
+        diner.setDni(txtDni.getText().trim());
         diner.setNames(txtNames.getText().trim());
         diner.setLastNames(txtLastNames.getText().trim());
+        diner.setMale(cbbSex.getSelectedIndex()==1);
         diner.setCode(txtCode.getText().trim());
-        diner.setDni(txtDni.getText().trim());
         diner.setPhone(txtPhone.getText().trim());
+        diner.setActive(cbbState.getSelectedIndex()==0);
         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
         if (errors.isEmpty()) {
             diner.save();
@@ -111,7 +114,9 @@ public class DDiner extends JDialog{
         txtNames.setText(diner.getNames());
         txtLastNames.setText(diner.getLastNames());
         txtDni.setText(diner.getDni());
+        cbbSex.setSelectedIndex(diner.isMale()?1:0);
         txtCode.setText(diner.getCode());
         txtPhone.setText(diner.getPhone());
+        cbbState.setSelectedIndex(diner.isActive()?0:1);
     }
 }

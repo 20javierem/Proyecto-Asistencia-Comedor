@@ -5,6 +5,7 @@ import com.moreno.Notify;
 import com.moreno.controllers.Attendances;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.TabPane;
+import com.moreno.custom.TxtSearch;
 import com.moreno.models.Attendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Utilities;
@@ -23,7 +24,7 @@ import java.util.Date;
 public class TabRegisterAttendance {
     private TabPane tabPane;
     private JTable table;
-    private JTextField txtDiner;
+    private TxtSearch txtDiner;
     private AttendanceTableModel model;
 
     public TabRegisterAttendance(){
@@ -43,16 +44,20 @@ public class TabRegisterAttendance {
         if(!code.isBlank()){
             Diner diner= Diners.getByCode(code);
             if(diner!=null){
-                if(Attendances.getOfDinerAndDate(diner,Utilities.getDate(new Date()))==null){
-                    Attendance attendance=new Attendance();
-                    attendance.setDate(new Date());
-                    attendance.setDiner(diner);
-                    attendance.save();
-                    VPrincipal.attendancesToday.add(attendance);
-                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Asistencia registrada");
-                    UtilitiesTables.actualizarTabla(table);
+                if(diner.isActive()){
+                    if(Attendances.getOfDinerAndDate(diner,Utilities.getDate(new Date()))==null){
+                        Attendance attendance=new Attendance();
+                        attendance.setDate(new Date());
+                        attendance.setDiner(diner);
+                        attendance.save();
+                        VPrincipal.attendancesToday.add(attendance);
+                        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Asistencia registrada");
+                        UtilitiesTables.actualizarTabla(table);
+                    }else{
+                        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","El comensal ya registró su asistencia");
+                    }
                 }else{
-                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","El comensal ya registró su asistencia");
+                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","El comensal está inactivo");
                 }
             }else{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ALERTA","No se encontró al comensal");
@@ -67,7 +72,7 @@ public class TabRegisterAttendance {
                 UtilitiesTables.actualizarTabla(table);
             }
         });
-        loadPlaceHolders();
+        txtDiner.setPlaceHolderText("Código...");
         loadTable();
     }
     private void loadTable(){
@@ -75,10 +80,6 @@ public class TabRegisterAttendance {
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
         AttendanceCellRendered.setCellRenderer(table);
-    }
-    private void loadPlaceHolders(){
-        txtDiner.putClientProperty("JTextField.placeholderText","Código...");
-        txtDiner.putClientProperty("JTextField.leadingIcon",new ImageIcon(App.class.getResource("Icons/x24/lupa.png")));
     }
     public TabPane getTabPane(){
         return tabPane;

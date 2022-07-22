@@ -24,11 +24,9 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="6231" class="javax.swing.JTextField" binding="txtDiner">
+              <component id="4678c" class="com.moreno.custom.TxtSearch" binding="txtDiner">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font size="16"/>

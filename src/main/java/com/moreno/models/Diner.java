@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,9 @@ public class Diner extends Moreno {
 
     @NotBlank(message = "Apellidos")
     private String lastNames;
+
+    @NotNull
+    private boolean male;
 
     @NotBlank(message = "código")
     private String code;
@@ -45,7 +49,7 @@ public class Diner extends Moreno {
     }
 
     public void setNames(String names) {
-        this.names = names;
+        this.names = names.toUpperCase();
     }
 
     public String getLastNames() {
@@ -53,7 +57,7 @@ public class Diner extends Moreno {
     }
 
     public void setLastNames(String lastNames) {
-        this.lastNames = lastNames;
+        this.lastNames = lastNames.toUpperCase();
     }
 
     public String getCode() {
@@ -92,14 +96,22 @@ public class Diner extends Moreno {
         return attendances;
     }
 
+    public boolean isMale() {
+        return male;
+    }
+
+    public void setMale(boolean male) {
+        this.male = male;
+    }
 
     public static Diner createDiner(String[] attributes){
         Diner diner=new Diner();
-        diner.setDni(attributes[0]);
-        diner.setNames(attributes[1]);
-        diner.setLastNames(attributes[2]);
-        diner.setCode(attributes[3]);
-        diner.setPhone(attributes[4]);
+        diner.setDni(attributes[0].trim());
+        diner.setNames(attributes[1].trim());
+        diner.setLastNames(attributes[2].trim());
+        diner.setMale(Boolean.parseBoolean(attributes[3]));
+        diner.setCode(attributes[4].trim());
+        diner.setPhone(attributes[5].trim());
         return diner;
     }
 

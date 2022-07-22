@@ -1,6 +1,8 @@
 package com.moreno.views.tabs;
 
+import com.moreno.App;
 import com.moreno.custom.TabPane;
+import com.moreno.custom.TxtSearch;
 import com.moreno.utilitiesTables.UtilitiesTables;
 
 import javax.swing.*;
@@ -10,6 +12,11 @@ import java.awt.event.ActionListener;
 public class TabRecordAttendance {
     private TabPane tabPane;
     private JTable table;
+    private JComboBox cbbSex;
+    private TxtSearch txtSearch;
+    private JButton restablecerButton;
+    private JButton btnClearFilters;
+    private JComboBox comboBox1;
 
     public TabRecordAttendance(){
         initComponents();
@@ -22,8 +29,8 @@ public class TabRecordAttendance {
                 UtilitiesTables.actualizarTabla(table);
             }
         });
+        txtSearch.setPlaceHolderText("Buscar...");
     }
-
     public TabPane getTabPane(){
         return tabPane;
     }

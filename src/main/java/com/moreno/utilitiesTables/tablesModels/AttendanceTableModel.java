@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 public class AttendanceTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","CÓDIGO","DNI","CELULAR"};
-    private Class[] m_colTypes = {Integer.class, Date.class, Integer.class, Integer.class, String.class, Integer.class, String.class};
+    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","SEXO","CÓDIGO","DNI","CELULAR"};
+    private Class[] m_colTypes = {Integer.class, Date.class, String.class, String.class,String.class, String.class, String.class, String.class};
     private List<Attendance> vector;
 
     public AttendanceTableModel(List<Attendance> vector){
@@ -46,8 +46,10 @@ public class AttendanceTableModel extends AbstractTableModel {
             case 3:
                 return attendance.getDiner().getLastNames();
             case 4:
-                return attendance.getDiner().getCode();
+                return attendance.getDiner().isMale()?"MASCULINO":"FEMENINO";
             case 5:
+                return attendance.getDiner().getCode();
+            case 6:
                 return attendance.getDiner().getDni();
             default:
                 return attendance.getDiner().getPhone();

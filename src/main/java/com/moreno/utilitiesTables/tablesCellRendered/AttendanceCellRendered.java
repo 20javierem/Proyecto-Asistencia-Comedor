@@ -37,6 +37,7 @@ public class AttendanceCellRendered extends DefaultTableCellRenderer {
                 case "CÓDIGO":
                 case "DNI":
                 case "CELULAR":
+                case "SEXO":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
                     table.getColumn(table.getColumnName(column)).setMaxWidth(100);
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);

@@ -8,8 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class DinerTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","NOMBRES","APELLIDOS","CÓDIGO","DNI","CELULAR","ACTIVO",""};
-    private Class[] m_colTypes = {Integer.class, String.class, Integer.class, Integer.class, String.class, Integer.class, String.class,JButton.class};
+    private String[] columnNames = {"ID","NOMBRES","APELLIDOS","CÓDIGO","DNI","SEXO","CELULAR","ACTIVO",""};
+    private Class[] m_colTypes = {Integer.class, String.class, String.class, String.class,String.class, String.class, String.class, String.class,JButton.class};
     private List<Diner> vector;
 
     public DinerTableModel(List<Diner> vector){
@@ -46,8 +46,10 @@ public class DinerTableModel extends AbstractTableModel {
             case 4:
                 return diner.getDni();
             case 5:
-                return diner.getPhone();
+                return diner.isMale()?"MASCULINO":"FEMENINO";
             case 6:
+                return diner.getPhone();
+            case 7:
                 return diner.isActive()?"SI":"NO";
             default:
                 return new JButtonAction("x16/editar.png");

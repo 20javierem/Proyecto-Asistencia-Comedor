@@ -3,8 +3,6 @@ package com.moreno.views.menus;
 import com.moreno.custom.CPane;
 import com.moreno.custom.TabbedPane;
 import com.moreno.utilities.Utilities;
-import com.moreno.views.tabs.TabActivesDiners;
-import com.moreno.views.tabs.TabAllDiners;
 import com.moreno.views.tabs.TabRecordAttendance;
 import com.moreno.views.tabs.TabRegisterAttendance;
 

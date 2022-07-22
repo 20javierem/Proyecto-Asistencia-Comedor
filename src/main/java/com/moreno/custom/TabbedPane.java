@@ -148,7 +148,6 @@ public class TabbedPane extends JTabbedPane {
         pop_up.addSeparator();
         pop_up.add(cerrarOtras);
         pop_up.add(cerrarTodas);
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -184,8 +183,7 @@ public class TabbedPane extends JTabbedPane {
                 }
             }
         });
-
-        buttonEsquina.setIcon(new ImageIcon(App.class.getResource("Icons/x16/menu1.png")));
+        buttonEsquina.setIcon(new ImageIcon(App.class.getResource("Icons/x24/menu.png")));
         buttonEsquina.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

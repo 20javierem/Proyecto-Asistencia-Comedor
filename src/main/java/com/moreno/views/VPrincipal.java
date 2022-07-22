@@ -3,6 +3,7 @@ package com.moreno.views;
 import com.moreno.App;
 import com.moreno.controllers.Attendances;
 import com.moreno.controllers.Diners;
+import com.moreno.custom.CButton;
 import com.moreno.custom.CPane;
 import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
@@ -38,6 +39,7 @@ public class VPrincipal extends JFrame{
     private JPanel paneMenus;
     private JButton btnExit;
     private JLabel lblNotify;
+    private CButton btnReports;
     private Propiedades propiedades;
     private MenuDiners menuDiners;
     private MenuAttendance menuAttendance;
@@ -72,19 +74,27 @@ public class VPrincipal extends JFrame{
                 menuAttendance.loadRegisterAttendance();
             }
         });
+        btnReports.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
-    private void loadLists(){
-        Calendar start=Calendar.getInstance();
-        Calendar end=Calendar.getInstance();
-        end.add(Calendar.DATE,1);
-        diners= Diners.getTodos();
-        dinersActives=Diners.getActives();
-        attendancesToday= Attendances.getOfDate(Utilities.getDate(start.getTime()),Utilities.getDate(end.getTime()));
+    private void loadMenuStatistics(){
+        Utilities.updateComponents(menuDiners.getContentPane());
+        despintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioDefault.png")));
+        despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
+        pintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/estadisticaSelected.png")));
+        splitPane.setRightComponent(null);
+        splitPane.setRightComponent(menuDiners.getContentPane());
+        contentPane.updateUI();
     }
     private void loadMenuDiners(){
         Utilities.updateComponents(menuDiners.getContentPane());
         despintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioDefault.png")));
         despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
+        despintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaDefault.png")));
         pintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/studentsSelected.png")));
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(menuDiners.getContentPane());
@@ -94,11 +104,22 @@ public class VPrincipal extends JFrame{
         Utilities.updateComponents(menuAttendance.getContentPane());
         despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/studentsDefault.png")));
         despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
+        despintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaDefault.png")));
         pintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioSelected.png")));
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(menuAttendance.getContentPane());
         contentPane.updateUI();
     }
+
+    private void loadLists(){
+        Calendar start=Calendar.getInstance();
+        Calendar end=Calendar.getInstance();
+        end.add(Calendar.DATE,1);
+        diners= Diners.getTodos();
+        dinersActives=Diners.getActives();
+        attendancesToday= Attendances.getOfDate(Utilities.getDate(start.getTime()),Utilities.getDate(end.getTime()));
+    }
+
     private void despintar(JButton boton,Icon icon){
         boton.setIcon(icon);
         boton.setContentAreaFilled(false);
@@ -135,9 +156,11 @@ public class VPrincipal extends JFrame{
         btnAttendance.setBorder(border);
         btnDiners.setBorder(border);
         btnGestionar.setBorder(border);
+        btnReports.setBorder(border);
         border.getBorderInsets(btnGestionar).set(0,4,0,4);
         border.getBorderInsets(btnAttendance).set(0,4,0,4);
         border.getBorderInsets(btnDiners).set(0,4,0,4);
+        border.getBorderInsets(btnReports).set(0,4,0,4);
     }
     private void cargarCursores(){
         btnAllDiners.setCursor(new Cursor(Cursor.HAND_CURSOR));

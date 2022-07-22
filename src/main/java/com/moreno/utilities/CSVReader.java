@@ -28,7 +28,7 @@ public class CSVReader {
                 String line = bufferedReader.readLine();
                 while (line!=null){
                     String[] attributes = line.split(",");
-                    if(attributes.length==5){
+                    if(attributes.length==6){
                         Diner diner = Diner.createDiner(attributes);
                         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
                         if (errors.isEmpty()) {
