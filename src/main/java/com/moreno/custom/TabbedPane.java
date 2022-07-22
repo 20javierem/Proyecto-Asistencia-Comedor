@@ -722,9 +722,9 @@ class Cross extends JPanel {
         closeButton.setBorderPainted(false);
         closeButton.setPreferredSize(new Dimension(20,20));
         closeButton.setToolTipText("Cerrar Pestaña " + title);
-        closeButton.setIcon(getImage("cerrar.png"));
-        closeButton.setRolloverIcon(getImage("cerrar2.png"));
-        closeButton.setPressedIcon(getImage("cerrar3.png"));
+        closeButton.setIcon(getImage("close.png"));
+        closeButton.setRolloverIcon(getImage("close2.png"));
+        closeButton.setPressedIcon(getImage("close3.png"));
         closeButton.addActionListener(e -> jTabbedPane.removeTabAt(jTabbedPane.indexOfTab(title)));
         add(this.title, gbc);
         gbc.gridx++;

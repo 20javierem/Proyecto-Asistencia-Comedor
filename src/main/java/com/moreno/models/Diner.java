@@ -104,15 +104,17 @@ public class Diner extends Moreno {
         this.male = male;
     }
 
-    public static Diner createDiner(String[] attributes){
-        Diner diner=new Diner();
-        diner.setDni(attributes[0].trim());
-        diner.setNames(attributes[1].trim());
-        diner.setLastNames(attributes[2].trim());
-        diner.setMale(Boolean.parseBoolean(attributes[3]));
-        diner.setCode(attributes[4].trim());
-        diner.setPhone(attributes[5].trim());
-        return diner;
+    public Diner(){
+
+    }
+    public Diner(String[] attributes){
+        setDni(attributes[0].trim());
+        setNames(attributes[1].trim());
+        setLastNames(attributes[2].trim());
+        setMale(Boolean.parseBoolean(attributes[3]));
+        setCode(attributes[4].trim());
+        setPhone(attributes[5].trim());
+        setActive(Boolean.parseBoolean(attributes[6]));
     }
 
 }

@@ -26,7 +26,6 @@ public class DDiner extends JDialog{
     private Diner diner;
     private boolean update=false;
     private JTable table;
-
     public DDiner(JTable table){
         this(new Diner(),table);
     }

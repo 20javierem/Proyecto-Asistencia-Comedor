@@ -5,6 +5,8 @@ import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
 import com.moreno.views.VPrincipal;
 
+import java.awt.*;
+
 /**
  * Hello world!
  *

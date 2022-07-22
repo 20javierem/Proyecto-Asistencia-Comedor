@@ -28,8 +28,8 @@ public class CSVReader {
                 String line = bufferedReader.readLine();
                 while (line!=null){
                     String[] attributes = line.split(",");
-                    if(attributes.length==6){
-                        Diner diner = Diner.createDiner(attributes);
+                    if(attributes.length==7){
+                        Diner diner = new Diner(attributes);
                         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
                         if (errors.isEmpty()) {
                             if(Diners.getByDni(diner.getDni())==null){
@@ -37,6 +37,8 @@ public class CSVReader {
                                 VPrincipal.diners.add(diner);
                                 UtilitiesTables.actualizarTabla(table);
                             }
+                        }else{
+                            DinerValidator.mostrarErrores(errors);
                         }
                     }
                     line = bufferedReader.readLine();

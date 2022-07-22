@@ -11,8 +11,13 @@ public class TxtSearch extends JTextField {
     private JButton btnClearSearch=new JButton();
 
     public TxtSearch(){
-        putClientProperty("JTextField.leadingIcon",new ImageIcon(App.class.getResource("Icons/x24/lupa.png")));
+        putClientProperty("JTextField.padding",new Insets(0,2,0,0));
+        putClientProperty("JTextField.leadingIcon",new ImageIcon(App.class.getResource("Icons/x16/lupa.png")));
+        btnClearSearch.putClientProperty("JButton.buttonType","square");
+        btnClearSearch.setContentAreaFilled(false);
         btnClearSearch.setIcon(new ImageIcon(App.class.getResource("Icons/x24/cerrar.png")));
+        btnClearSearch.setRolloverIcon(new ImageIcon(App.class.getResource("Icons/x24/cerrar2.png")));
+        btnClearSearch.setPressedIcon(new ImageIcon(App.class.getResource("Icons/x24/cerrar3.png")));
         btnClearSearch.setCursor(new Cursor(Cursor.HAND_CURSOR));
         putClientProperty("JTextField.trailingComponent",btnClearSearch);
         btnClearSearch.setVisible(false);
