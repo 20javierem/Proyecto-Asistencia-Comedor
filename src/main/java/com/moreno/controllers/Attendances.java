@@ -29,22 +29,17 @@ public class Attendances extends Moreno {
         return todos;
     }
     public static Attendance getOfDinerAndDate(Diner diner,Date date){
-        Calendar start=Calendar.getInstance();
-        start.setTime(date);
-        Calendar end=Calendar.getInstance();
-        end.setTime(date);
-        end.add(Calendar.DATE,1);
         criteria = builder.createQuery(Attendance.class);
         root=criteria.from(Attendance.class);
         criteria.select(root).where(builder.and(
-                builder.between(root.get("date"), start.getTime(),end.getTime()),
+                builder.between(root.get("date"), Utilities.getDateStart(date),Utilities.getDateEnd(date)),
                 builder.equal(root.get("diner"),diner)));
         return session.createQuery(criteria).uniqueResult();
     }
     public static Vector<Attendance> getOfDate(Date start,Date end){
         criteria = builder.createQuery(Attendance.class);
         root=criteria.from(Attendance.class);
-        criteria.select(root).where(builder.between(root.get("date"), start,end));
+        criteria.select(root).where(builder.between(root.get("date"),Utilities.getDateStart(start),Utilities.getDateEnd(end)));
         return new Vector<>(session.createQuery(criteria).getResultList());
     }
 }

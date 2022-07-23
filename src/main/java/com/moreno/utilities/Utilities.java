@@ -93,12 +93,21 @@ public class Utilities {
         }
 
     }
-    public static Date getDate(Date date){
+    public static Date getDateStart(Date date){
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
+        return calendar.getTime();
+    }
+    public static Date getDateEnd(Date date){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR,00);
+        calendar.set(Calendar.MINUTE,00);
+        calendar.set(Calendar.SECOND,00);
+        calendar.add(Calendar.DATE,1);
         return calendar.getTime();
     }
     public static boolean precioEsValido(KeyEvent e, String precio){

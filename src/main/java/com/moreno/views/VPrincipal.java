@@ -112,12 +112,10 @@ public class VPrincipal extends JFrame{
     }
 
     private void loadLists(){
-        Calendar start=Calendar.getInstance();
-        Calendar end=Calendar.getInstance();
-        end.add(Calendar.DATE,1);
+        Calendar date=Calendar.getInstance();
         diners= Diners.getTodos();
         dinersActives=Diners.getActives();
-        attendancesToday= Attendances.getOfDate(Utilities.getDate(start.getTime()),Utilities.getDate(end.getTime()));
+        attendancesToday= Attendances.getOfDate(date.getTime(),date.getTime());
     }
 
     private void despintar(JButton boton,Icon icon){
@@ -171,7 +169,8 @@ public class VPrincipal extends JFrame{
         paneNotify.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     private void loadMenuItems(){
-        JMenuItem menuSettings=new JMenuItem("configuraciones");
+        JMenuItem menuSettings=new JMenuItem("Configuraciones");
+        JMenuItem menuExport=new JMenuItem("Exportar");
         menuSettings.setIcon(new ImageIcon(App.class.getResource("Icons/x16/settings.png")));
         menuSettings.addActionListener(new ActionListener() {
             @Override
@@ -179,7 +178,15 @@ public class VPrincipal extends JFrame{
                 loadSettings();
             }
         });
+        menuExport.setIcon(new ImageIcon(App.class.getResource("Icons/x16/export.png")));
+        menuExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadSettings();
+            }
+        });
         btnMenuInicio.add(menuSettings);
+        btnMenuInicio.add(menuExport);
     }
     private void loadSettings(){
         DSettings dSettings=new DSettings(this,propiedades);

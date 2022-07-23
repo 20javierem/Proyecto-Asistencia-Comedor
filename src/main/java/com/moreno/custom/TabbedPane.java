@@ -17,6 +17,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabbedPane extends JTabbedPane {
 
@@ -35,6 +37,24 @@ public class TabbedPane extends JTabbedPane {
     private Double minY=0.0;
     private JButton buttonEsquina=new JButton();
     private JToolBar toolBar=new JToolBar();
+    private JPopupMenu pop_up = new JPopupMenu();
+
+    @Override
+    public Component[] getComponents() {
+        if(super.getComponents().length>=1){
+            Component[] components=new Component[super.getComponents().length+1];
+            int i=0;
+            for (Component component:super.getComponents()){
+                components[i]=component;
+                i++;
+            }
+            components[i]=pop_up;
+            return components;
+        }
+        return super.getComponents();
+
+    }
+
 
     @Override
     public void removeTabAt(int index) {
@@ -117,7 +137,6 @@ public class TabbedPane extends JTabbedPane {
 
     private void insertarButtons(){
         //creacion de pop_up
-        JPopupMenu pop_up = new JPopupMenu();
         JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
         JMenuItem cerrarOtras = new JMenuItem("Cerrar Otras Pestañas");
         JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");

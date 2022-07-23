@@ -45,7 +45,7 @@ public class TabRegisterAttendance {
             Diner diner= Diners.getByCode(code);
             if(diner!=null){
                 if(diner.isActive()){
-                    if(Attendances.getOfDinerAndDate(diner,Utilities.getDate(new Date()))==null){
+                    if(Attendances.getOfDinerAndDate(diner,Utilities.getDateStart(new Date()))==null){
                         Attendance attendance=new Attendance();
                         attendance.setDate(new Date());
                         attendance.setDiner(diner);

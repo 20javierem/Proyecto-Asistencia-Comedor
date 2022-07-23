@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.moreno.views.tabs.TabRecordAttendance">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.moreno.views.tabs.TabRecordAttendanceDiner">
   <grid id="27dc6" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="558" height="485"/>
+      <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="9bc9d" class="com.moreno.custom.TabPane" binding="tabPane" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+      <grid id="96f42" class="com.moreno.custom.TabPane" binding="tabPane" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -16,7 +16,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="9fd71" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="5">
+          <grid id="c6146" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="5">
             <margin top="5" left="5" bottom="5" right="5"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
@@ -24,53 +24,12 @@
             <properties/>
             <border type="none" title="Opciones"/>
             <children>
-              <vspacer id="a90fe">
+              <vspacer id="3226e">
                 <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="a9924" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                  <text value="Sexo:"/>
-                </properties>
-              </component>
-              <component id="e9885" class="javax.swing.JComboBox" binding="cbbSex">
-                <constraints>
-                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                  <model>
-                    <item value="TODOS"/>
-                    <item value="FEMENINO"/>
-                    <item value="MASCULINO"/>
-                  </model>
-                </properties>
-              </component>
-              <component id="6eefd" class="com.moreno.custom.TxtSearch" binding="txtSearch">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                </properties>
-              </component>
-              <component id="44533" class="javax.swing.JButton" binding="btnClearFilters">
-                <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                  <text value="Limpiar"/>
-                </properties>
-              </component>
-              <component id="db58d" class="javax.swing.JLabel">
+              <component id="8ce6f" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -79,7 +38,7 @@
                   <text value="Fecha:"/>
                 </properties>
               </component>
-              <component id="6df87" class="javax.swing.JComboBox" binding="cbbDate">
+              <component id="cbceb" class="javax.swing.JComboBox" binding="cbbDate">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -93,7 +52,7 @@
                   </model>
                 </properties>
               </component>
-              <grid id="ce133" binding="paneEntreFecha" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="840a3" binding="paneEntreFecha" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -103,19 +62,19 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="603b6" class="com.toedter.calendar.JDateChooser" binding="fechaInicio" custom-create="true">
+                  <component id="aaba5" class="com.toedter.calendar.JDateChooser" binding="fechaInicio" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
-                  <component id="d557d" class="com.toedter.calendar.JDateChooser" binding="fechaFin" custom-create="true">
+                  <component id="7d1a4" class="com.toedter.calendar.JDateChooser" binding="fechaFin" custom-create="true">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
                 </children>
               </grid>
-              <grid id="4d48c" binding="paneHastaFecha" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="3a46d" binding="paneHastaFecha" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -125,14 +84,14 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="70c6a" class="com.toedter.calendar.JDateChooser" binding="fechaHasta" custom-create="true">
+                  <component id="50e51" class="com.toedter.calendar.JDateChooser" binding="fechaHasta" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
                 </children>
               </grid>
-              <grid id="9182a" binding="paneDesdeFecha" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="288c5" binding="paneDesdeFecha" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -142,14 +101,14 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="a0ce7" class="com.toedter.calendar.JDateChooser" binding="fechaDesde" custom-create="true">
+                  <component id="40e0c" class="com.toedter.calendar.JDateChooser" binding="fechaDesde" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
                 </children>
               </grid>
-              <component id="514d7" class="javax.swing.JButton" binding="btnBuscar">
+              <component id="f9dd7" class="javax.swing.JButton" binding="btnBuscar">
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -158,9 +117,9 @@
                   <text value="Buscar"/>
                 </properties>
               </component>
-              <component id="768e7" class="javax.swing.JButton" binding="btnExport">
+              <component id="c005e" class="javax.swing.JButton" binding="btnExport">
                 <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font size="14"/>
@@ -169,7 +128,7 @@
               </component>
             </children>
           </grid>
-          <grid id="8dd13" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="2693b" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -177,14 +136,14 @@
             <properties/>
             <border type="none" title="Registros"/>
             <children>
-              <scrollpane id="b433b">
+              <scrollpane id="83fee">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="b1a74" class="javax.swing.JTable" binding="table">
+                  <component id="23b3e" class="javax.swing.JTable" binding="table">
                     <constraints/>
                     <properties>
                       <font size="14"/>
