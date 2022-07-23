@@ -40,10 +40,10 @@ public class UtilitiesTables {
         componente.setBackground(defaultTableCellRenderer.getBackground());
         componente.setForeground(defaultTableCellRenderer.getForeground());
         if(value instanceof Date){
-            componente.setText(Utilities.formatoFechaHora.format(value));
+            componente.setText(Utilities.formatoFecha.format(value));
         }else{
             if(value instanceof Double){
-                componente.setText(Utilities.precio.format(value));
+                componente.setText(Utilities.moneda.format(value));
             }else{
                 componente.setText(String.valueOf(value));
             }
@@ -72,14 +72,14 @@ public class UtilitiesTables {
         return componente;
     }
 
-    public static Component isButonSelected(boolean isSelected, String icono,JTable table){
+    public static Component isSelected(boolean isSelected,JComponent component,JTable table){
         if(isSelected){
-            return new JButtonAction(icono,table.getSelectionBackground());
+            component.setBackground(table.getSelectionBackground());
         }else{
-            return new JButtonAction(icono,table.getBackground());
+            component.setBackground(table.getBackground());
         }
+        return component;
     }
-
     public static void pintarComponente(Component component,boolean estado,boolean isSelected){
         if(!estado){
             if(!isSelected){

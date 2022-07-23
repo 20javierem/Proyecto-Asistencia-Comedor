@@ -1,6 +1,7 @@
 package com.moreno.utilitiesTables.tablesCellRendered;
 
 import com.moreno.utilitiesTables.UtilitiesTables;
+import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,7 +30,7 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
             table.getColumnModel().getColumn(column).setMaxWidth(25);
             table.getColumnModel().getColumn(column).setMinWidth(25);
             table.getColumnModel().getColumn(column).setPreferredWidth(25);
-            return UtilitiesTables.isButonSelected(isSelected,"x16/editar.png",table);
+            return UtilitiesTables.isSelected(isSelected,new JButtonAction("x16/editar.png"),table);
         }else{
             JTextField componente=buscarTexto(listaFiltros,value,column,this);
             switch(table.getColumnName(column)){
@@ -39,7 +40,6 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
                     table.getColumn(table.getColumnName(column)).setMinWidth(40);
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(40);
                     break;
-                case "CÓDIGO":
                 case "DNI":
                 case "CELULAR":
                 case "SEXO":

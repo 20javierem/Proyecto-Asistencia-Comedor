@@ -26,9 +26,6 @@ public class Diner extends Moreno {
     @NotNull
     private boolean male;
 
-    @NotBlank(message = "código")
-    private String code;
-
     @NotBlank(message = "DNI")
     private String dni;
 
@@ -36,7 +33,7 @@ public class Diner extends Moreno {
     private String phone;
 
     @OneToMany(mappedBy = "diner")
-    private List<Attendance> attendances=new ArrayList<>();
+    private List<DinerAttendance> dinerAttendances =new ArrayList<>();
 
     private boolean active=false;
 
@@ -58,14 +55,6 @@ public class Diner extends Moreno {
 
     public void setLastNames(String lastNames) {
         this.lastNames = lastNames.toUpperCase();
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getDni() {
@@ -92,8 +81,8 @@ public class Diner extends Moreno {
         this.active = active;
     }
 
-    public List<Attendance> getAttendances() {
-        return attendances;
+    public List<DinerAttendance> getAttendances() {
+        return dinerAttendances;
     }
 
     public boolean isMale() {
@@ -112,9 +101,8 @@ public class Diner extends Moreno {
         setNames(attributes[1].trim());
         setLastNames(attributes[2].trim());
         setMale(Boolean.parseBoolean(attributes[3]));
-        setCode(attributes[4].trim());
-        setPhone(attributes[5].trim());
-        setActive(Boolean.parseBoolean(attributes[6]));
+        setPhone(attributes[4].trim());
+        setActive(Boolean.parseBoolean(attributes[5]));
     }
 
 }

@@ -46,7 +46,7 @@ public class TabAllDiners {
         btnImportDiners.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CSVReader.importDiners(table);
+                loadImportDiners();
             }
         });
         txtSearch.getBtnClearSearch().addActionListener(new ActionListener() {
@@ -76,7 +76,9 @@ public class TabAllDiners {
             }
         });
     }
-
+    private void loadImportDiners(){
+        CSVReader.importDiners(table,this);
+    }
     private void clearFilters(){
         cbbSex.setSelectedIndex(0);
         txtSearch.getBtnClearSearch().doClick();
@@ -90,10 +92,10 @@ public class TabAllDiners {
         listaFiltros.clear();
 
         if (cbbSex.getSelectedIndex()!=0) {
-            filtros.add(RowFilter.regexFilter(cbbSex.getSelectedItem().toString(), 5));
+            filtros.add(RowFilter.regexFilter(cbbSex.getSelectedItem().toString(), 4));
         }
         if(!txtSearch.getText().isBlank()){
-            filtros.add(RowFilter.regexFilter(txtSearch.getText(), 1,2,3,4,6));
+            filtros.add(RowFilter.regexFilter(txtSearch.getText(), 1,2,3,5));
             listaFiltros.put(1,txtSearch.getText());
             listaFiltros.put(2,txtSearch.getText());
             listaFiltros.put(3,txtSearch.getText());

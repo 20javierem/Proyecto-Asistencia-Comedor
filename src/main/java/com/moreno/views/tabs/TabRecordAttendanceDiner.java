@@ -27,7 +27,7 @@ public class TabRecordAttendanceDiner {
         initComponents();
     }
     private void initComponents(){
-        tabPane.setTitle("Reporte comensal: "+diner.getCode());
+        tabPane.setTitle("Reporte comensal: "+diner.getDni());
     }
 
     private void createUIComponents() {

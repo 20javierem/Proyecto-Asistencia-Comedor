@@ -2,6 +2,7 @@ package com.moreno.views.dialogs;
 
 import com.moreno.Notify;
 import com.moreno.models.Diner;
+import com.moreno.models.DinerAttendance;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.validators.DinerValidator;
@@ -20,7 +21,6 @@ public class DDiner extends JDialog{
     private JTextField txtLastNames;
     private JTextField txtDni;
     private JTextField txtPhone;
-    private JTextField txtCode;
     private JComboBox cbbSex;
     private JComboBox cbbState;
     private Diner diner;
@@ -83,7 +83,6 @@ public class DDiner extends JDialog{
         diner.setNames(txtNames.getText().trim());
         diner.setLastNames(txtLastNames.getText().trim());
         diner.setMale(cbbSex.getSelectedIndex()==1);
-        diner.setCode(txtCode.getText().trim());
         diner.setPhone(txtPhone.getText().trim());
         diner.setActive(cbbState.getSelectedIndex()==0);
         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
@@ -95,6 +94,13 @@ public class DDiner extends JDialog{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Cambios guardados");
             }else{
                 VPrincipal.diners.add(diner);
+                if(diner.isActive()){
+                    if(VPrincipal.attendancesToday!=null){
+                        DinerAttendance dinerAttendance=new DinerAttendance(diner,VPrincipal.attendancesToday);
+                        dinerAttendance.save();
+                        VPrincipal.attendancesToday.getAttendances().add(dinerAttendance);
+                    }
+                }
                 updateTable();
                 diner=new Diner();
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Comensal creado");
@@ -114,7 +120,6 @@ public class DDiner extends JDialog{
         txtLastNames.setText(diner.getLastNames());
         txtDni.setText(diner.getDni());
         cbbSex.setSelectedIndex(diner.isMale()?1:0);
-        txtCode.setText(diner.getCode());
         txtPhone.setText(diner.getPhone());
         cbbState.setSelectedIndex(diner.isActive()?0:1);
     }

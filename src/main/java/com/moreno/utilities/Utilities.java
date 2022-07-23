@@ -42,7 +42,7 @@ public class Utilities {
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm a");
     public static DateFormat año=new SimpleDateFormat("yyyy");
     public static NumberFormat moneda = NumberFormat.getCurrencyInstance();
-    public static NumberFormat precio = new DecimalFormat("$#,###.##");
+    public static NumberFormat numberFormat=new DecimalFormat("###,###,###.##");
     public static String getFormatoFecha(){
         return "dd/MM/yyyy";
     }
@@ -99,6 +99,7 @@ public class Utilities {
         calendar.set(Calendar.HOUR,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
+        calendar.add(Calendar.SECOND,-1);
         return calendar.getTime();
     }
     public static Date getDateEnd(Date date){
@@ -108,6 +109,7 @@ public class Utilities {
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
         calendar.add(Calendar.DATE,1);
+        calendar.add(Calendar.SECOND,1);
         return calendar.getTime();
     }
     public static boolean precioEsValido(KeyEvent e, String precio){

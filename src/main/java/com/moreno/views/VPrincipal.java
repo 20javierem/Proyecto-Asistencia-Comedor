@@ -1,13 +1,14 @@
 package com.moreno.views;
 
 import com.moreno.App;
-import com.moreno.controllers.Attendances;
+import com.moreno.controllers.DayAttendances;
+import com.moreno.controllers.DinnerAttendance;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.CButton;
 import com.moreno.custom.CPane;
 import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
-import com.moreno.models.Attendance;
+import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
@@ -21,6 +22,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class VPrincipal extends JFrame{
@@ -45,7 +47,7 @@ public class VPrincipal extends JFrame{
     private MenuAttendance menuAttendance;
     public static List<Diner> diners;
     public static List<Diner> dinersActives;
-    public static List<Attendance> attendancesToday;
+    public static DayAttendance attendancesToday;
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
@@ -112,10 +114,9 @@ public class VPrincipal extends JFrame{
     }
 
     private void loadLists(){
-        Calendar date=Calendar.getInstance();
         diners= Diners.getTodos();
         dinersActives=Diners.getActives();
-        attendancesToday= Attendances.getOfDate(date.getTime(),date.getTime());
+        attendancesToday= DayAttendances.getOfDate(new Date());
     }
 
     private void despintar(JButton boton,Icon icon){

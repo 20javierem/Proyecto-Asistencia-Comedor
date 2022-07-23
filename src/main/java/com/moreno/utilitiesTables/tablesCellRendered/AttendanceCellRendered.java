@@ -1,6 +1,7 @@
 package com.moreno.utilitiesTables.tablesCellRendered;
 
 import com.moreno.utilitiesTables.UtilitiesTables;
+import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,7 +25,7 @@ public class AttendanceCellRendered extends DefaultTableCellRenderer {
             table.getColumnModel().getColumn(column).setMaxWidth(25);
             table.getColumnModel().getColumn(column).setMinWidth(25);
             table.getColumnModel().getColumn(column).setPreferredWidth(25);
-            return UtilitiesTables.isButonSelected(isSelected,"x16/editar.png",table);
+            return UtilitiesTables.isSelected(isSelected,new JButtonAction("x16/editar.png"),table);
         }else{
             JTextField componente=buscarTexto(null,value,column,this);
             switch(table.getColumnName(column)){
@@ -34,20 +35,15 @@ public class AttendanceCellRendered extends DefaultTableCellRenderer {
                     table.getColumn(table.getColumnName(column)).setMinWidth(40);
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(40);
                     break;
-                case "CÓDIGO":
                 case "DNI":
                 case "CELULAR":
                 case "SEXO":
+                case "ASISTIÓ":
+                case "FECHA":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
                     table.getColumn(table.getColumnName(column)).setMaxWidth(100);
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(100);
-                    break;
-                case "FECHA":
-                    componente.setHorizontalAlignment(SwingConstants.CENTER);
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(125);
-                    table.getColumn(table.getColumnName(column)).setMinWidth(125);
-                    table.getColumn(table.getColumnName(column)).setPreferredWidth(125);
                     break;
                 default:
                     break;
