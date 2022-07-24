@@ -1,8 +1,6 @@
 package com.moreno.controllers;
 
 import com.moreno.models.DayAttendance;
-import com.moreno.models.Diner;
-import com.moreno.models.DinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -22,5 +20,28 @@ public class DayAttendances extends Moreno {
         criteria.select(root).where(builder.between(root.get("date"),Utilities.getDateStart(date),Utilities.getDateEnd(date)));
         return session.createQuery(criteria).uniqueResult();
     }
+
+    public static Vector<DayAttendance> getByRangeOfDate(Date start,Date end){
+        criteria = builder.createQuery(DayAttendance.class);
+        root=criteria.from(DayAttendance.class);
+        criteria.select(root).where(builder.between(root.get("date"),Utilities.getDateStart(start),Utilities.getDateEnd(end)));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
+    }
+    public static Vector<DayAttendance> getBefore(Date end){
+        criteria = builder.createQuery(DayAttendance.class);
+        root=criteria.from(DayAttendance.class);
+        criteria.select(root).where(builder.lessThan(root.get("date"),Utilities.getDateEnd(end)));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
+    }
+    public static Vector<DayAttendance> getAfter(Date start){
+        criteria = builder.createQuery(DayAttendance.class);
+        root=criteria.from(DayAttendance.class);
+        criteria.select(root).where(builder.greaterThan(root.get("date"),Utilities.getDateStart(start)));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
+    }
+
 
 }

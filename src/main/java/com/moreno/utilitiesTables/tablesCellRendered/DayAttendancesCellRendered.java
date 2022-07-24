@@ -9,10 +9,10 @@ import java.awt.*;
 
 import static com.moreno.utilitiesTables.UtilitiesTables.buscarTexto;
 
-public class AttendanceCellRendered extends DefaultTableCellRenderer {
+public class DayAttendancesCellRendered extends DefaultTableCellRenderer {
 
     public static void setCellRenderer(JTable table){
-        AttendanceCellRendered cellRendered=new AttendanceCellRendered();
+        DayAttendancesCellRendered cellRendered=new DayAttendancesCellRendered();
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(cellRendered);
         }
@@ -22,10 +22,10 @@ public class AttendanceCellRendered extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if(table.getColumnClass(column).equals(JButton.class)){
-            table.getColumnModel().getColumn(column).setMaxWidth(25);
-            table.getColumnModel().getColumn(column).setMinWidth(25);
-            table.getColumnModel().getColumn(column).setPreferredWidth(25);
-            return UtilitiesTables.isSelected(isSelected,new JButtonAction("x16/editar.png"),table);
+            table.getColumnModel().getColumn(column).setMaxWidth(60);
+            table.getColumnModel().getColumn(column).setMinWidth(60);
+            table.getColumnModel().getColumn(column).setPreferredWidth(60);
+            return UtilitiesTables.isButonSelected(isSelected,"x16/mostrarContraseña.png",table);
         }else{
             JTextField componente=buscarTexto(null,value,column,this);
             switch(table.getColumnName(column)){
@@ -38,8 +38,11 @@ public class AttendanceCellRendered extends DefaultTableCellRenderer {
                 case "DNI":
                 case "CELULAR":
                 case "SEXO":
-                case "ASISTIÓ":
+                case "ASISTIERON":
+                case "FALTARON":
                 case "FECHA":
+                case "% ASISTIERON":
+                case "% FALTARON":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
                     table.getColumn(table.getColumnName(column)).setMaxWidth(100);
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);

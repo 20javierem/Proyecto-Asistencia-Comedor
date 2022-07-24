@@ -10,7 +10,7 @@ import com.moreno.models.Diner;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
-import com.moreno.utilitiesTables.tablesCellRendered.AttendanceCellRendered;
+import com.moreno.utilitiesTables.tablesCellRendered.DinerAttendanceCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DinerAttendanceTableModel;
 import com.moreno.views.VPrincipal;
 
@@ -53,6 +53,9 @@ public class TabRegisterAttendance {
                     if(!dinerAttendance.isAttended()){
                         dinerAttendance.setAttended(true);
                         dinerAttendance.save();
+                        VPrincipal.attendancesToday.setTotalDinerNotAttendance(VPrincipal.attendancesToday.getTotalDinerNotAttendance()-1);
+                        VPrincipal.attendancesToday.setTotalDinerAttendance(VPrincipal.attendancesToday.getTotalDinerAttendance()+1);
+                        VPrincipal.attendancesToday.save();
                         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Asistencia registrada");
                         UtilitiesTables.actualizarTabla(table);
                         loadCalculateTotals();
@@ -91,7 +94,7 @@ public class TabRegisterAttendance {
         model=new DinerAttendanceTableModel(VPrincipal.attendancesToday.getAttendances());
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
-        AttendanceCellRendered.setCellRenderer(table);
+        DinerAttendanceCellRendered.setCellRenderer(table);
         loadCalculateTotals();
     }
     private void loadHashMap(){
@@ -100,20 +103,8 @@ public class TabRegisterAttendance {
         }
     }
     private void loadCalculateTotals(){
-        int totalAsistieron=0;
-        int totalFaltaron=0;
-        for (DinerAttendance dinerAttendance:VPrincipal.attendancesToday.getAttendances()){
-            if (dinerAttendance.isAttended()){
-                totalAsistieron++;
-            }else{
-                totalFaltaron++;
-            }
-        }
-        double totalFaltaonPorcentual= (double) (totalAsistieron*100) / VPrincipal.attendancesToday.getAttendances().size();
-        double totalFaltaronPorcentual= (double) (totalFaltaron*100) / VPrincipal.attendancesToday.getAttendances().size();
-
-        lblAsistieron.setText("Asistieron: "+totalAsistieron+" : "+Utilities.numberFormat.format(totalFaltaonPorcentual)+"%");
-        lblFaltaron.setText("Faltaron: "+totalFaltaron+" : "+Utilities.numberFormat.format(totalFaltaronPorcentual)+"%");
+        lblAsistieron.setText(VPrincipal.attendancesToday.getTotalDinerAttendance()+" : "+VPrincipal.attendancesToday.getPercentageAtendet());
+        lblFaltaron.setText(VPrincipal.attendancesToday.getTotalDinerNotAttendance()+" : "+VPrincipal.attendancesToday.getPercentageNotAtendet());
     }
     public TabPane getTabPane(){
         return tabPane;

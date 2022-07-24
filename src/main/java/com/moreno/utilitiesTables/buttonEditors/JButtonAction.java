@@ -9,10 +9,10 @@ import java.awt.event.MouseEvent;
 
 public class JButtonAction extends JButton {
 
-    public JButtonAction(String icon, String texto) {
+    public JButtonAction(String icon, String text) {
         setIcon(new ImageIcon(App.class.getResource("Icons/"+icon)));
-        setText(texto);
-        setHorizontalTextPosition(2);
+        setText(text);
+        setHorizontalTextPosition(4);
         initialize();
     }
     public JButtonAction(String icon) {
@@ -23,6 +23,14 @@ public class JButtonAction extends JButton {
         setBackground(background);
         setBorder(BorderFactory.createEmptyBorder());
         setIcon(new ImageIcon(App.class.getResource("Icons/"+icon)));
+        initialize();
+    }
+    public JButtonAction(String icon,String text, Color background) {
+        setBackground(background);
+        setBorder(BorderFactory.createEmptyBorder());
+        setIcon(new ImageIcon(App.class.getResource("Icons/"+icon)));
+        setText(text);
+        setHorizontalTextPosition(4);
         initialize();
     }
     private void initialize() {

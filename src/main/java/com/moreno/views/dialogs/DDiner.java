@@ -99,6 +99,7 @@ public class DDiner extends JDialog{
                         DinerAttendance dinerAttendance=new DinerAttendance(diner,VPrincipal.attendancesToday);
                         dinerAttendance.save();
                         VPrincipal.attendancesToday.getAttendances().add(dinerAttendance);
+                        VPrincipal.attendancesToday.setTotalDinerNotAttendance(VPrincipal.attendancesToday.getTotalDinerNotAttendance()+1);
                     }
                 }
                 updateTable();

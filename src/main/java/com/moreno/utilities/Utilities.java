@@ -26,10 +26,7 @@ import java.math.BigInteger;
 import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -47,7 +44,7 @@ public class Utilities {
         return "dd/MM/yyyy";
     }
     private static JFrame jFrame;
-
+    public static Format dayFormat = new SimpleDateFormat("EEEE");
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }

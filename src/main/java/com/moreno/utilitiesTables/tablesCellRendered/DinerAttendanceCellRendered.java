@@ -5,19 +5,14 @@ import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.util.Map;
 
 import static com.moreno.utilitiesTables.UtilitiesTables.buscarTexto;
 
-public class DinerCellRendered extends DefaultTableCellRenderer {
-    private Map<Integer, String> listaFiltros;
-    public DinerCellRendered(Map<Integer, String> listaFiltros){
-        this.listaFiltros=listaFiltros;
-    }
-    public static void setCellRenderer(JTable table,Map<Integer, String> listaFiltros){
-        DinerCellRendered cellRendered=new DinerCellRendered(listaFiltros);
+public class DinerAttendanceCellRendered extends DefaultTableCellRenderer {
+
+    public static void setCellRenderer(JTable table){
+        DinerAttendanceCellRendered cellRendered=new DinerAttendanceCellRendered();
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(cellRendered);
         }
@@ -32,7 +27,7 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
             table.getColumnModel().getColumn(column).setPreferredWidth(25);
             return UtilitiesTables.isButonSelected(isSelected,"x16/editar.png",table);
         }else{
-            JTextField componente=buscarTexto(listaFiltros,value,column,this);
+            JTextField componente=buscarTexto(null,value,column,this);
             switch(table.getColumnName(column)){
                 case "ID":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
@@ -43,16 +38,12 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
                 case "DNI":
                 case "CELULAR":
                 case "SEXO":
+                case "ASISTENCIA":
+                case "FECHA":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
                     table.getColumn(table.getColumnName(column)).setMaxWidth(100);
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(100);
-                    break;
-                case "ACTIVO":
-                    componente.setHorizontalAlignment(SwingConstants.CENTER);
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
-                    table.getColumn(table.getColumnName(column)).setMinWidth(80);
-                    table.getColumn(table.getColumnName(column)).setPreferredWidth(80);
                     break;
                 default:
                     break;

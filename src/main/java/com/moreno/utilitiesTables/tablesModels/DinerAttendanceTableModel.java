@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DinerAttendanceTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","SEXO","DNI","CELULAR","ASISTIÓ"};
+    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","SEXO","DNI","CELULAR","ASISTENCIA"};
     private Class[] m_colTypes = {Integer.class, Date.class, String.class,String.class, String.class, String.class, String.class,String.class};
     private List<DinerAttendance> vector;
 

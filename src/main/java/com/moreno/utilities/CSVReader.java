@@ -42,6 +42,8 @@ public class CSVReader {
                                         DinerAttendance dinerAttendance=new DinerAttendance(diner,VPrincipal.attendancesToday);
                                         dinerAttendance.save();
                                         VPrincipal.attendancesToday.getAttendances().add(dinerAttendance);
+                                        VPrincipal.attendancesToday.setTotalDinerNotAttendance(VPrincipal.attendancesToday.getTotalDinerNotAttendance()+1);
+                                        VPrincipal.attendancesToday.save();
                                     }
                                 }
                                 UtilitiesTables.actualizarTabla(table);

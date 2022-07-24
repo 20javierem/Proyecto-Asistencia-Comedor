@@ -71,14 +71,19 @@ public class UtilitiesTables {
         }
         return componente;
     }
-
-    public static Component isSelected(boolean isSelected,JComponent component,JTable table){
+    public static Component isButonSelected(boolean isSelected, String icono,JTable table){
         if(isSelected){
-            component.setBackground(table.getSelectionBackground());
+            return new JButtonAction(icono,table.getSelectionBackground());
         }else{
-            component.setBackground(table.getBackground());
+            return new JButtonAction(icono,table.getBackground());
         }
-        return component;
+    }
+    public static Component isButonSelected(boolean isSelected, String icono,String text,JTable table){
+        if(isSelected){
+            return new JButtonAction(icono,text,table.getSelectionBackground());
+        }else{
+            return new JButtonAction(icono,text,table.getBackground());
+        }
     }
     public static void pintarComponente(Component component,boolean estado,boolean isSelected){
         if(!estado){

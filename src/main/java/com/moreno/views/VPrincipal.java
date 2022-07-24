@@ -48,6 +48,7 @@ public class VPrincipal extends JFrame{
     public static List<Diner> diners;
     public static List<Diner> dinersActives;
     public static DayAttendance attendancesToday;
+    public static List<DayAttendance> attendancesOfMonth;
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
@@ -117,6 +118,9 @@ public class VPrincipal extends JFrame{
         diners= Diners.getTodos();
         dinersActives=Diners.getActives();
         attendancesToday= DayAttendances.getOfDate(new Date());
+        Calendar start= Calendar.getInstance();
+        start.set(Calendar.DATE,1);
+        attendancesOfMonth=DayAttendances.getByRangeOfDate(start.getTime(),new Date());
     }
 
     private void despintar(JButton boton,Icon icon){
