@@ -59,6 +59,10 @@ public class DayAttendancesTableModel extends AbstractTableModel {
     public DayAttendance get(int index){
         return vector.get(index);
     }
+
+    public List<DayAttendance> getVector(){
+        return vector;
+    }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if (m_colTypes[columnIndex].equals(JButton.class)){

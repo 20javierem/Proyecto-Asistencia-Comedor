@@ -6,6 +6,7 @@ import com.moreno.custom.TabPane;
 import com.moreno.custom.TxtSearch;
 import com.moreno.models.DayAttendance;
 import com.moreno.utilities.Utilities;
+import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.tablesCellRendered.DayAttendancesCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
@@ -48,6 +49,15 @@ public class TabRecordAttendance {
                 getRecords();
             }
         });
+        btnExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                export();
+            }
+        });
+    }
+    private void export(){
+        UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),false);
     }
     private void initComponents(){
         tabPane.setTitle("Historial de asistencia");
@@ -61,39 +71,39 @@ public class TabRecordAttendance {
         loadTable(VPrincipal.attendancesOfMonth);
     }
     private void getRecords(){
-        Date start = null;
-        Date end = null;
+        btnBuscar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        Date start;
+        Date end;
         if(paneEntreFecha.isVisible()){
-            if(fechaInicio.getDate()!=null){
+            if(fechaInicio.getDate()!=null&&fechaFin.getDate()!=null){
                 start=fechaInicio.getDate();
-            }
-            if(fechaFin.getDate()!=null){
                 end=fechaFin.getDate();
+                loadTable(DayAttendances.getByRangeOfDate(start,end));
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE", "Asistencias cargadas");
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó las fechas");
             }
+            btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         if(paneDesdeFecha.isVisible()){
             if(fechaDesde.getDate()!=null){
                 start=fechaDesde.getDate();
+                loadTable(DayAttendances.getAfter(start));
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE", "Asistencias cargadas");
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó la fecha");
             }
+            btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         if(paneHastaFecha.isVisible()){
             if(fechaHasta.getDate()!=null){
                 end=fechaHasta.getDate();
-            }
-        }
-        if(start!=null||end!=null){
-            btnBuscar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            if(start==null){
                 loadTable(DayAttendances.getBefore(end));
-            }else if(end==null){
-                loadTable(DayAttendances.getAfter(start));
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE", "Asistencias cargadas");
             }else{
-                loadTable(DayAttendances.getByRangeOfDate(start,end));
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó la fecha");
             }
             btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE", "Asistencias cargadas");
-        }else{
-            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó la fecha");
         }
     }
     private void loadPlaceHolders(){

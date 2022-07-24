@@ -53,8 +53,7 @@ public class TabRegisterAttendance {
                     if(!dinerAttendance.isAttended()){
                         dinerAttendance.setAttended(true);
                         dinerAttendance.save();
-                        VPrincipal.attendancesToday.setTotalDinerNotAttendance(VPrincipal.attendancesToday.getTotalDinerNotAttendance()-1);
-                        VPrincipal.attendancesToday.setTotalDinerAttendance(VPrincipal.attendancesToday.getTotalDinerAttendance()+1);
+                        VPrincipal.attendancesToday.calculateTotals();
                         VPrincipal.attendancesToday.save();
                         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Asistencia registrada");
                         UtilitiesTables.actualizarTabla(table);

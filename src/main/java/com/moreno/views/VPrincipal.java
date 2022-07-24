@@ -12,6 +12,7 @@ import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
+import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
 import com.moreno.views.menus.MenuDiners;
@@ -138,6 +139,7 @@ public class VPrincipal extends JFrame{
         setContentPane(contentPane);
         setTitle("Software de asistencia");
         Utilities.setJFrame(this);
+        Utilities.setTabbedPane(tabbedPane);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
         loadLists();

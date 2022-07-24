@@ -3,9 +3,7 @@ package com.moreno.models;
 import com.moreno.controllers.Diners;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
-import com.moreno.views.VPrincipal;
 import jakarta.persistence.*;
-import jdk.jfr.Timespan;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +25,9 @@ public class DayAttendance extends Moreno {
 
     private Integer totalDinerNotAttendance=0;
 
-    public DayAttendance() {
-    }
+    private String percentageAtendet="0%";
+
+    private String percentageNotAtendet="100%";
 
     public Integer getId() {
         return id;
@@ -36,6 +35,10 @@ public class DayAttendance extends Moreno {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getStringDate(){
+        return Utilities.formatDate.format(date);
     }
 
     public void setDate(Date date) {
@@ -54,28 +57,47 @@ public class DayAttendance extends Moreno {
         return totalDinerNotAttendance;
     }
 
-    public void setTotalDinerNotAttendance(Integer totalDinerNotAttendance) {
-        this.totalDinerNotAttendance = totalDinerNotAttendance;
-    }
-
     public List<DinerAttendance> getAttendances() {
         return attendances;
     }
 
-    public String getPercentageAtendet(){
-        double totalFaltaonPorcentual= (double) (getTotalDinerAttendance()*100) / getAttendances().size();
-        return Utilities.numberFormat.format(totalFaltaonPorcentual)+"%";
+    public void calculateTotals(){
+        int totalAssisted=0;
+        int totalNotAssited=0;
+        for(DinerAttendance dinerAttendance:getAttendances()){
+            if(dinerAttendance.isAttended()){
+                totalAssisted++;
+            }else{
+                totalNotAssited++;
+            }
+        }
+        totalDinerAttendance=totalAssisted;
+        totalDinerNotAttendance=totalNotAssited;
+        double totalAttendetPorcentual= (double) (getTotalDinerAttendance()*100) / getAttendances().size();
+        percentageAtendet=Utilities.numberFormat.format(totalAttendetPorcentual)+"%";
+        double totalNotAttendedPorcentual= (double) (getTotalDinerNotAttendance()*100) / getAttendances().size();
+        percentageNotAtendet=Utilities.numberFormat.format(totalNotAttendedPorcentual)+"%";
     }
-    public String getPercentageNotAtendet(){
-        double totalFaltaonPorcentual= (double) (getTotalDinerNotAttendance()*100) / getAttendances().size();
-        return Utilities.numberFormat.format(totalFaltaonPorcentual)+"%";
+
+    public String getPercentageAtendet() {
+        return percentageAtendet;
     }
+
+    public String getPercentageNotAtendet() {
+        return percentageNotAtendet;
+    }
+
+
+    public DayAttendance() {
+
+    }
+
     public DayAttendance(Date date){
         this.date=date;
         for (Diner diner: Diners.getActives()){
             DinerAttendance dinerAttendance=new DinerAttendance(diner,this);
             attendances.add(dinerAttendance);
         }
-        setTotalDinerNotAttendance(Diners.getActives().size());
+        calculateTotals();
     }
 }

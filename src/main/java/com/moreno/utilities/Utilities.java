@@ -2,6 +2,7 @@ package com.moreno.utilities;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.moreno.custom.TabbedPane;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -34,7 +35,8 @@ import java.time.ZoneId;
 import java.util.*;
 
 public class Utilities {
-    public static DateFormat formatoFecha=new SimpleDateFormat("yyyy-MM-dd");
+    public static DateFormat formatoFecha=new SimpleDateFormat("dd-MM-yyyy");
+    public static DateFormat formatDate=new SimpleDateFormat("dd-MM-yy");
     public static DateFormat formatoFechaHora=new SimpleDateFormat("dd/MM/yyyy: h:mm a");
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm a");
     public static DateFormat año=new SimpleDateFormat("yyyy");
@@ -44,7 +46,8 @@ public class Utilities {
         return "dd/MM/yyyy";
     }
     private static JFrame jFrame;
-    public static Format dayFormat = new SimpleDateFormat("EEEE");
+    private static TabbedPane tabbedPane;
+    public static SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }
@@ -70,6 +73,14 @@ public class Utilities {
         return jFrame;
     }
 
+    public static TabbedPane getTabbedPane() {
+        return tabbedPane;
+    }
+
+    public static void setTabbedPane(TabbedPane tabbedPane) {
+        Utilities.tabbedPane = tabbedPane;
+    }
+
     public static void updateComponents(JComponent parent){
         Font font=parent.getFont();
         parent.updateUI();
@@ -84,7 +95,6 @@ public class Utilities {
             for(Component component:parent.getComponents()){
                 if(component instanceof JComponent){
                     updateComponents((JComponent) component);
-
                 }
             }
         }
@@ -93,20 +103,21 @@ public class Utilities {
     public static Date getDateStart(Date date){
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
-        calendar.set(Calendar.HOUR,00);
+        calendar.set(Calendar.HOUR_OF_DAY,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
         calendar.add(Calendar.SECOND,-1);
+        System.out.println(Utilities.formatoFechaHora.format(calendar.getTime()));
         return calendar.getTime();
     }
     public static Date getDateEnd(Date date){
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
-        calendar.set(Calendar.HOUR,00);
+        calendar.add(Calendar.DATE,1);
+        calendar.set(Calendar.HOUR_OF_DAY,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
-        calendar.add(Calendar.DATE,1);
-        calendar.add(Calendar.SECOND,1);
+        System.out.println(Utilities.formatoFechaHora.format(calendar.getTime()));
         return calendar.getTime();
     }
     public static boolean precioEsValido(KeyEvent e, String precio){
@@ -271,49 +282,4 @@ public class Utilities {
         return Base64.getDecoder().decode(property);
     }
 
-    public static JasperViewer getjasperViewer(JasperReport report, Map<String, Object> parameters, JRBeanArrayDataSource sp,boolean isExitOnClose){
-        try {
-            JasperViewer jasperViewer=new JasperViewer(JasperFillManager.fillReport(report,parameters,sp),isExitOnClose);
-            JPanel panel= (JPanel) jasperViewer.getRootPane().getContentPane().getComponent(0);
-            JRViewer visor= (JRViewer) panel.getComponent(0);
-            JRViewerToolbar toolbar= (JRViewerToolbar) visor.getComponent(0);
-            toolbar.getInsets().set(2,2,2,2);
-            toolbar.setLayout(new FlowLayout(FlowLayout.CENTER,2,3));
-            toolbar.setMaximumSize(new Dimension(toolbar.getWidth(),46));
-            toolbar.setMinimumSize(new Dimension(toolbar.getWidth(),46));
-            toolbar.setPreferredSize(new Dimension(toolbar.getWidth(),46));
-            JRViewerPanel jrViewer= (JRViewerPanel) visor.getComponent(1);
-            JScrollPane jScrollPane= (JScrollPane) jrViewer.getComponent(0);
-            jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-            ((JPanel)visor.getComponent(2)).setLayout(new FlowLayout(FlowLayout.CENTER));
-            Font font=new Font(new JTextField().getFont().getFontName(),Font.PLAIN,14);
-            ((JPanel)visor.getComponent(2)).getComponent(0).setFont(font);
-            for (Component component: toolbar.getComponents()){
-                if(component instanceof JTextField||component instanceof JComboBox){
-                    component.setMaximumSize(new Dimension(component.getMaximumSize().width,40));
-                    component.setPreferredSize(new Dimension(component.getMaximumSize().width,40));
-                    component.setMinimumSize(new Dimension(component.getMaximumSize().width,40));
-                }else{
-                    component.setMaximumSize(new Dimension(40,40));
-                    component.setPreferredSize(new Dimension(40,40));
-                    component.setMinimumSize(new Dimension(40,40));
-                }
-            }
-            JButton mrZoom=(JButton)toolbar.getComponent(14);
-            JButton mnZoom=(JButton)toolbar.getComponent(15);
-            jScrollPane.addMouseWheelListener(e -> {
-               if(e.isControlDown()){
-                   if (e.getWheelRotation() < 0) {
-                       mrZoom.doClick();
-                   } else {
-                       mnZoom.doClick();
-                   }
-               }
-            });
-            return jasperViewer;
-        } catch (JRException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
