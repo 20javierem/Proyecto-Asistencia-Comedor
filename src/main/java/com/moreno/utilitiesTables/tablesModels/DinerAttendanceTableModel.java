@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DinerAttendanceTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","SEXO","DNI","CELULAR","ASISTENCIA"};
-    private Class[] m_colTypes = {Integer.class, Date.class, String.class,String.class, String.class, String.class, String.class,String.class};
+    private String[] columnNames = {"ID","FECHA","NOMBRES","APELLIDOS","DNI","CELULAR","ASISTENCIA"};
+    private Class[] m_colTypes = {Integer.class, Date.class, String.class, String.class, String.class, String.class,String.class};
     private List<DinerAttendance> vector;
 
     public DinerAttendanceTableModel(List<DinerAttendance> vector){
@@ -45,15 +45,18 @@ public class DinerAttendanceTableModel extends AbstractTableModel {
             case 3:
                 return dinerAttendance.getDiner().getLastNames();
             case 4:
-                return dinerAttendance.getDiner().isMale()?"MASCULINO":"FEMENINO";
-            case 5:
                 return dinerAttendance.getDiner().getDni();
-            case 6:
+            case 5:
                 return dinerAttendance.getDiner().getPhone();
             default:
                 return dinerAttendance.isAttended()?"ASISTIÓ":"FALTA";
         }
     }
+
+    public List<DinerAttendance> getVector() {
+        return vector;
+    }
+
     public DinerAttendance get(int index){
         return vector.get(index);
     }

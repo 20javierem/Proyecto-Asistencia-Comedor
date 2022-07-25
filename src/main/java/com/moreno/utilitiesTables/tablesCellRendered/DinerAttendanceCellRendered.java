@@ -37,7 +37,6 @@ public class DinerAttendanceCellRendered extends DefaultTableCellRenderer {
                     break;
                 case "DNI":
                 case "CELULAR":
-                case "SEXO":
                 case "ASISTENCIA":
                 case "FECHA":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);

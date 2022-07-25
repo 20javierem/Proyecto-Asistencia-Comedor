@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Entity
 public class DinerAttendance extends Moreno {
+
     @Id
     @GeneratedValue(generator = "increment")
     private Integer id;
@@ -25,7 +26,15 @@ public class DinerAttendance extends Moreno {
     public DinerAttendance() {
 
     }
-
+    public String getDinerNames(){
+        return diner.getLastNames()+" "+diner.getNames();
+    }
+    public String getDinerDni(){
+        return diner.getDni();
+    }
+    public String getAttendet(){
+        return attended?"ASISTIÓ":"FALTA";
+    }
     public Integer getId() {
         return id;
     }

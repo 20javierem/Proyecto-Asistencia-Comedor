@@ -3,22 +3,21 @@ package com.moreno.views.tabs;
 import com.moreno.Notify;
 import com.moreno.controllers.DayAttendances;
 import com.moreno.custom.TabPane;
-import com.moreno.custom.TxtSearch;
 import com.moreno.models.DayAttendance;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
+import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDayAttendance;
+import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DayAttendancesCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
 import com.moreno.views.VPrincipal;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +34,11 @@ public class TabRecordAttendance {
     private JDateChooser fechaDesde;
     private JButton btnBuscar;
     private JButton btnExport;
+    private JLabel lblTotalAttendances;
+    private JLabel lbltotalNotAttendances;
     private DayAttendancesTableModel model;
+    private int totalAttendances=0;
+    private int totalNotAttendances=0;
 
     public TabRecordAttendance(){
         initComponents();
@@ -57,7 +60,17 @@ public class TabRecordAttendance {
         });
     }
     private void export(){
-        UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),false);
+        UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+    }
+    private void calculateTotals(){
+        totalAttendances=0;
+        totalNotAttendances=0;
+        for (DayAttendance dayAttendance:model.getVector()){
+            totalAttendances+=dayAttendance.getTotalDinerAttendance();
+            totalNotAttendances+=dayAttendance.getTotalDinerNotAttendance();
+        }
+        lblTotalAttendances.setText(String.valueOf(totalAttendances));
+        lbltotalNotAttendances.setText(String.valueOf(totalNotAttendances));
     }
     private void initComponents(){
         tabPane.setTitle("Historial de asistencia");
@@ -65,6 +78,7 @@ public class TabRecordAttendance {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UtilitiesTables.actualizarTabla(table);
+                calculateTotals();
             }
         });
         loadPlaceHolders();
@@ -117,6 +131,8 @@ public class TabRecordAttendance {
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
         DayAttendancesCellRendered.setCellRenderer(table);
+        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDayAttendance(table));
+        calculateTotals();
     }
     public TabPane getTabPane(){
         return tabPane;

@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 public class DayAttendance extends Moreno {
+
     @Id
     @GeneratedValue(generator = "increment")
     private Integer id;

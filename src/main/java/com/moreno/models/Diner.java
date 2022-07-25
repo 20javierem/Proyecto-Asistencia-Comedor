@@ -13,6 +13,7 @@ import java.util.List;
 
 @Entity
 public class Diner extends Moreno {
+
     @Id
     @GeneratedValue(generator = "increment")
     private Integer id;

@@ -26,7 +26,7 @@ public class TabRegisterAttendance {
     private TabPane tabPane;
     private JTable table;
     private TxtSearch txtDiner;
-    private JLabel lblAsistieron;
+    private JLabel lblAttendances;
     private JLabel lblFaltaron;
     private DinerAttendanceTableModel model;
     private HashMap<String,DinerAttendance> attendanceHashMap=new HashMap<>();
@@ -82,7 +82,6 @@ public class TabRegisterAttendance {
         txtDiner.setPlaceHolderText("DNI...");
         loadTable();
     }
-
     private void loadTable(){
         if(VPrincipal.attendancesToday==null) {
             VPrincipal.attendancesToday = new DayAttendance(new Date());
@@ -102,7 +101,7 @@ public class TabRegisterAttendance {
         }
     }
     private void loadCalculateTotals(){
-        lblAsistieron.setText(VPrincipal.attendancesToday.getTotalDinerAttendance()+" : "+VPrincipal.attendancesToday.getPercentageAtendet());
+        lblAttendances.setText(VPrincipal.attendancesToday.getTotalDinerAttendance()+" : "+VPrincipal.attendancesToday.getPercentageAtendet());
         lblFaltaron.setText(VPrincipal.attendancesToday.getTotalDinerNotAttendance()+" : "+VPrincipal.attendancesToday.getPercentageNotAtendet());
     }
     public TabPane getTabPane(){
