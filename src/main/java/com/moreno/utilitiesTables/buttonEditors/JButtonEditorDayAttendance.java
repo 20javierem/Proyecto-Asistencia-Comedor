@@ -19,6 +19,7 @@ public class JButtonEditorDayAttendance extends AbstractCellEditor implements Ta
     private JTable table;
 
     public JButtonEditorDayAttendance(JTable table) {
+
         this.table=table;
         button=new JButtonAction("x16/mostrarContraseña.png");
         iniciarComponentes();
@@ -29,8 +30,10 @@ public class JButtonEditorDayAttendance extends AbstractCellEditor implements Ta
     }
     public void actionPerformed(ActionEvent e) {
         if(table.getSelectedRow()!=-1){
+            button.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             DayAttendance dayAttendance=((DayAttendancesTableModel) table.getModel()).get(table.convertRowIndexToModel(table.getSelectedRow()));
             UtilitiesReports.generateReportDayAttendance(dayAttendance);
+            button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
 

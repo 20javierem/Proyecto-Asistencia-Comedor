@@ -1,7 +1,6 @@
 package com.moreno.utilities;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.*;
 import com.moreno.custom.TabbedPane;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import net.sf.jasperreports.engine.JRException;
@@ -53,24 +52,28 @@ public class Utilities {
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }
-    public static void setTema(String tema){
-        try {
-            switch (tema){
-                case "Claro":
-                    UIManager.setLookAndFeel(new FlatIntelliJLaf());
-                    break;
-                case "Oscuro":
-                    UIManager.setLookAndFeel(new FlatDarkLaf());
-                    break;
-            }
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
 
+    public static void setTema(String tema){
+        switch (tema){
+            case "Ligth":
+                FlatIntelliJLaf.setup();
+                break;
+            case "Oscuro":
+                FlatDarkLaf.setup();
+                break;
+            case "Claro":
+                FlatLightLaf.setup();
+                break;
+            case "Darcula":
+                FlatDarculaLaf.setup();
+                break;
+        }
     }
+
     public static void setJFrame(JFrame jFrame){
         Utilities.jFrame=jFrame;
     }
+
     public static JFrame getJFrame(){
         return jFrame;
     }
@@ -100,7 +103,6 @@ public class Utilities {
                 }
             }
         }
-
     }
     public static Date getDateStart(Date date){
         Calendar calendar=Calendar.getInstance();

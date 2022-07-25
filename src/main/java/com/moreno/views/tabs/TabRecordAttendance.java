@@ -8,7 +8,6 @@ import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDayAttendance;
-import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DayAttendancesCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
 import com.moreno.views.VPrincipal;
@@ -33,7 +32,7 @@ public class TabRecordAttendance {
     private JPanel paneDesdeFecha;
     private JDateChooser fechaDesde;
     private JButton btnBuscar;
-    private JButton btnExport;
+    private JButton btnGenerateReport;
     private JLabel lblTotalAttendances;
     private JLabel lbltotalNotAttendances;
     private DayAttendancesTableModel model;
@@ -52,15 +51,17 @@ public class TabRecordAttendance {
                 getRecords();
             }
         });
-        btnExport.addActionListener(new ActionListener() {
+        btnGenerateReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                export();
+                generateReport();
             }
         });
     }
-    private void export(){
+    private void generateReport(){
+        btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+        btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
     private void calculateTotals(){
         totalAttendances=0;

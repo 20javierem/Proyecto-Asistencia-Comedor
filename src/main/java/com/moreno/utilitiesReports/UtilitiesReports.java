@@ -25,7 +25,7 @@ import java.util.List;
 public class UtilitiesReports {
 
     public static void generateReportAttendances(Date start,Date end, List<DayAttendance> attendanceList,int totalAttendances,int totalNotAttendances) {
-        InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDaysAttendance.jasper");
+        InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDaysAttendances.jasper");
         try {
             if(pathReport!=null){
                 List<DayAttendance> list=new ArrayList<>(attendanceList);
@@ -60,6 +60,39 @@ public class UtilitiesReports {
     }
     public static void generateReportDayAttendance(DayAttendance dayAttendance) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDayAttendance.jasper");
+        try {
+            if(pathReport!=null){
+                List<DinerAttendance> list=new ArrayList<>(dayAttendance.getAttendances());
+                list.add(0,new DinerAttendance());
+                JasperReport report=(JasperReport) JRLoader.loadObject(pathReport);
+                JRBeanArrayDataSource sp=new JRBeanArrayDataSource(list.toArray());
+                Map<String,Object> parameters=new HashMap<>();
+                parameters.put("date",Utilities.formatoFecha.format(dayAttendance.getDate()));
+                parameters.put("dinerAttendances",sp);
+                parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
+                parameters.put("totalNotAttendances",dayAttendance.getTotalDinerNotAttendance());
+                parameters.put("totalAttendanesPercentaje",dayAttendance.getPercentageNotAtendet());
+                JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
+                if(viewer!=null){
+                    viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(dayAttendance.getDate())+")");
+                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
+                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    }
+                    Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
+                    Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
+                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                }else{
+                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
+                }
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","No se encontró la plantilla");
+            }
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void generateReportDinerAttendance(DayAttendance dayAttendance) {
+        InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinerAttendances.jasper");
         try {
             if(pathReport!=null){
                 List<DinerAttendance> list=new ArrayList<>(dayAttendance.getAttendances());

@@ -41,8 +41,8 @@ public class DayAttendancesCellRendered extends DefaultTableCellRenderer {
                 case "ASISTIERON":
                 case "FALTARON":
                 case "FECHA":
-                case "% ASISTIERON":
-                case "% FALTARON":
+                case "ASISTIERON %":
+                case "FALTARON %":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
                     table.getColumn(table.getColumnName(column)).setMaxWidth(100);
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);

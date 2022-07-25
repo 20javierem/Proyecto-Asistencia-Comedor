@@ -14,17 +14,14 @@ public class DSettings extends JDialog{
     private JComboBox cbbTema;
     private JButton btnAplyThme;
     private JTextField txtNameInstitution;
-    private JTextField txtDatabaseUrl;
-    private JButton btnTryConection;
     private JButton btnHecho;
     private JButton btnSave;
     private Propiedades propiedades=Utilities.getPropiedades();
-    private VPrincipal vPrincipal;
+    private final VPrincipal vPrincipal;
 
     public DSettings(VPrincipal vPrincipal){
         super(vPrincipal);
         this.vPrincipal=vPrincipal;
-        this.propiedades=propiedades;
         initComponents();
         btnAplyThme.addActionListener(new ActionListener() {
             @Override
@@ -45,6 +42,7 @@ public class DSettings extends JDialog{
             }
         });
     }
+
     private void save(){
         propiedades.setTema((String) cbbTema.getSelectedItem());
         propiedades.setNameInstitute(txtNameInstitution.getText());
@@ -59,7 +57,7 @@ public class DSettings extends JDialog{
         dispose();
     }
     private void changeTheme(){
-        Utilities.setTema(cbbTema.getSelectedItem().toString());
+        Utilities.setTema(String.valueOf(cbbTema.getSelectedItem()));
         Utilities.updateComponents(getRootPane());
         Utilities.updateComponents(vPrincipal.getRootPane());
     }

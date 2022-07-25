@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DayAttendancesTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","FECHA","DÍA","ASISTIERON","FALTARON","% ASISTIERON","% FALTARON","DETALLE"};
+    private String[] columnNames = {"ID","FECHA","DÍA","ASISTIERON","FALTARON","ASISTIERON %","FALTARON %","DETALLE"};
     private Class[] m_colTypes = {Integer.class, Date.class, String.class,String.class, String.class,String.class,String.class, JButton.class};
     private List<DayAttendance> vector;
 
