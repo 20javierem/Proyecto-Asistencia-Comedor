@@ -31,14 +31,14 @@ public class DayAttendances extends Moreno {
     public static Vector<DayAttendance> getBefore(Date end){
         criteria = builder.createQuery(DayAttendance.class);
         root=criteria.from(DayAttendance.class);
-        criteria.select(root).where(builder.lessThan(root.get("date"),Utilities.getDateEnd(end)));
+        criteria.select(root).where(builder.lessThan(root.get("date"),Utilities.getDateLessThan(end)));
         todos=new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }
     public static Vector<DayAttendance> getAfter(Date start){
         criteria = builder.createQuery(DayAttendance.class);
         root=criteria.from(DayAttendance.class);
-        criteria.select(root).where(builder.greaterThan(root.get("date"),Utilities.getDateStart(start)));
+        criteria.select(root).where(builder.greaterThan(root.get("date"),Utilities.getDateGreaterThan(start)));
         todos=new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }

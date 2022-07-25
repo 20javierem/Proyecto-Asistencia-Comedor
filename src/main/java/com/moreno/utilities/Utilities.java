@@ -106,20 +106,36 @@ public class Utilities {
         calendar.set(Calendar.HOUR_OF_DAY,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
-        calendar.add(Calendar.SECOND,-1);
-        System.out.println(Utilities.formatoFechaHora.format(calendar.getTime()));
         return calendar.getTime();
     }
     public static Date getDateEnd(Date date){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY,23);
+        calendar.set(Calendar.MINUTE,59);
+        calendar.set(Calendar.SECOND,59);
+        return calendar.getTime();
+    }
+
+    public static Date getDateGreaterThan(Date date){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY,00);
+        calendar.set(Calendar.MINUTE,00);
+        calendar.set(Calendar.SECOND,00);
+        calendar.add(Calendar.SECOND,-1);
+        return calendar.getTime();
+    }
+    public static Date getDateLessThan(Date date){
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE,1);
         calendar.set(Calendar.HOUR_OF_DAY,00);
         calendar.set(Calendar.MINUTE,00);
         calendar.set(Calendar.SECOND,00);
-        System.out.println(Utilities.formatoFechaHora.format(calendar.getTime()));
         return calendar.getTime();
     }
+
     public static boolean precioEsValido(KeyEvent e, String precio){
         int caracter = e.getKeyChar();
         if(caracter==46){
