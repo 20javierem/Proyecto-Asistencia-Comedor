@@ -1,8 +1,11 @@
 package com.moreno.views.tabs;
 
+import com.moreno.App;
 import com.moreno.custom.TabPane;
 import com.moreno.custom.TxtSearch;
+import com.moreno.models.Diner;
 import com.moreno.utilities.CSVReader;
+import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerCellRendered;
@@ -12,10 +15,7 @@ import com.moreno.views.dialogs.DDiner;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +115,37 @@ public class TabAllDiners {
         });
         txtSearch.setPlaceHolderText("Buscar...");
         loadTable();
+        insertarMenuPopUp();
+    }
+    private void insertarMenuPopUp(){
+        JPopupMenu pop_up = new JPopupMenu();
+        JMenuItem editarProducto = new JMenuItem("Ver historial de asistencia", new ImageIcon(App.class.getResource("Icons/x16/mostrarContraseña.png")));
+        editarProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadRecordAttendanceDiner();
+            }
+        });
+        pop_up.add(editarProducto);
+        table.addMouseListener( new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    int row = table.rowAtPoint( e.getPoint() );
+                    table.setRowSelectionInterval(row,row);
+                    pop_up.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
+    }
+    private void loadRecordAttendanceDiner(){
+        Diner diner=model.get(table.convertRowIndexToModel(table.getSelectedRow()));
+        TabRecordAttendanceDiner tabRecordAttendanceDiner=new TabRecordAttendanceDiner(diner);
+        if(Utilities.getTabbedPane().indexOfTab(tabRecordAttendanceDiner.getTabPane().getTitle())!=-1){
+            Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(tabRecordAttendanceDiner.getTabPane().getTitle()));
+        }
+        Utilities.getTabbedPane().addTab(tabRecordAttendanceDiner.getTabPane().getTitle(),tabRecordAttendanceDiner.getTabPane());
+        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabRecordAttendanceDiner.getTabPane().getTitle()));
+
     }
     private void loadTable(){
         model=new DinerTableModel(VPrincipal.diners);

@@ -2,7 +2,6 @@ package com.moreno.views;
 
 import com.moreno.App;
 import com.moreno.controllers.DayAttendances;
-import com.moreno.controllers.DinnerAttendance;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.CButton;
 import com.moreno.custom.CPane;
@@ -12,7 +11,6 @@ import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
-import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
 import com.moreno.views.menus.MenuDiners;

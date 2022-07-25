@@ -59,9 +59,13 @@ public class TabRecordAttendance {
         });
     }
     private void generateReport(){
-        btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
-        btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        if(model.getRowCount()>0){
+            btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+            btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }else{
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
+        }
     }
     private void calculateTotals(){
         totalAttendances=0;

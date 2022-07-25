@@ -91,23 +91,25 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
-    public static void generateReportDinerAttendance(DayAttendance dayAttendance) {
+    public static void generateReportDinerAttendance(Date start,Date end,List<DinerAttendance> dinerAttendances,int totalAttendances,int totalNotAttendances) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinerAttendances.jasper");
         try {
             if(pathReport!=null){
-                List<DinerAttendance> list=new ArrayList<>(dayAttendance.getAttendances());
+                List<DinerAttendance> list=new ArrayList<>(dinerAttendances);
                 list.add(0,new DinerAttendance());
                 JasperReport report=(JasperReport) JRLoader.loadObject(pathReport);
                 JRBeanArrayDataSource sp=new JRBeanArrayDataSource(list.toArray());
                 Map<String,Object> parameters=new HashMap<>();
-                parameters.put("date",Utilities.formatoFecha.format(dayAttendance.getDate()));
+                parameters.put("periodStart",Utilities.formatoFecha.format(start));
+                parameters.put("periodEnd",Utilities.formatoFecha.format(end));
                 parameters.put("dinerAttendances",sp);
+                parameters.put("nameDiner",list.get(1).getDiner().getLastNames()+", "+list.get(1).getDiner().getNames());
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
-                parameters.put("totalNotAttendances",dayAttendance.getTotalDinerNotAttendance());
-                parameters.put("totalAttendanesPercentaje",dayAttendance.getPercentageNotAtendet());
+                parameters.put("totalNotAttendances",totalNotAttendances);
+                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
-                    viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(dayAttendance.getDate())+")");
+                    viewer.setTitle("Reporte "+list.get(1).getDiner().getDni()+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
                     if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
                         Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                     }
