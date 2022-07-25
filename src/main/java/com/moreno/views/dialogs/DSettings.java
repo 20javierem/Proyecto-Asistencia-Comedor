@@ -18,10 +18,10 @@ public class DSettings extends JDialog{
     private JButton btnTryConection;
     private JButton btnHecho;
     private JButton btnSave;
-    private Propiedades propiedades;
+    private Propiedades propiedades=Utilities.getPropiedades();
     private VPrincipal vPrincipal;
 
-    public DSettings(VPrincipal vPrincipal,Propiedades propiedades){
+    public DSettings(VPrincipal vPrincipal){
         super(vPrincipal);
         this.vPrincipal=vPrincipal;
         this.propiedades=propiedades;
@@ -46,7 +46,8 @@ public class DSettings extends JDialog{
         });
     }
     private void save(){
-        propiedades.setTema(cbbTema.getSelectedItem().toString());
+        propiedades.setTema((String) cbbTema.getSelectedItem());
+        propiedades.setNameInstitute(txtNameInstitution.getText());
         propiedades.save();
         dispose();
         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","Cambios guardados");
@@ -64,6 +65,7 @@ public class DSettings extends JDialog{
     }
     private void loadSettings(){
         cbbTema.setSelectedItem(propiedades.getTema());
+        txtNameInstitution.setText(propiedades.getNameInstitute());
     }
     private void initComponents(){
         setContentPane(contentPane);

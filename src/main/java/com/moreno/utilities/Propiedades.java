@@ -35,9 +35,8 @@ public class Propiedades {
             setKey("2QXDJJUCSSUW2GC");
             save();
             setUsuario("");
-            setActualizado(true);
             setContraseña("");
-            setEstadoImprecion("preguntar");
+            setNameInstitute("");
             setTema("Claro");
             save();
         }else{
@@ -64,20 +63,8 @@ public class Propiedades {
     public String getUsuario() {
         return properties.getProperty("usuario");
     }
-    public void setActualizado(boolean estado) {
-        properties.put("Actualizado", String.valueOf(estado));
-    }
-    public boolean getActualizado() {
-        return Boolean.parseBoolean(properties.getProperty("Actualizado"));
-    }
     public void setContraseña(String contraseña){
         properties.put("contrasena",contraseña);
-    }
-    public void setEstadoImprecion(String preguntar){
-        properties.put("estadoImprimir",preguntar);
-    }
-    public String getEstadoImprecion() {
-        return properties.getProperty("estadoImprimir");
     }
     public String getContraseña(){
         return properties.getProperty("contrasena");
@@ -88,11 +75,11 @@ public class Propiedades {
     public void setKey(String key){
         properties.put("key",key);
     }
-    public void setTokenApiPeru(String token){
-        properties.put("TokenApiPeru",token);
+    public void setNameInstitute(String nameInstitute){
+        properties.put("nameInstitute",nameInstitute);
     }
-    public String getTokenApiperu() {
-        return properties.getProperty("TokenApiPeru");
+    public String getNameInstitute(){
+        return properties.getProperty("nameInstitute");
     }
     public void setTema(String tema){
         properties.put("tema", tema);

@@ -99,8 +99,7 @@ public class TabAllDiners {
             listaFiltros.put(1,txtSearch.getText());
             listaFiltros.put(2,txtSearch.getText());
             listaFiltros.put(3,txtSearch.getText());
-            listaFiltros.put(4,txtSearch.getText());
-            listaFiltros.put(6,txtSearch.getText());
+            listaFiltros.put(5,txtSearch.getText());
         }
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);

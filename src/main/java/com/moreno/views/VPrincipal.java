@@ -140,6 +140,7 @@ public class VPrincipal extends JFrame{
         setTitle("Software de asistencia");
         Utilities.setJFrame(this);
         Utilities.setTabbedPane(tabbedPane);
+        Utilities.setPropiedades(propiedades);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
         loadLists();
@@ -196,7 +197,7 @@ public class VPrincipal extends JFrame{
         btnMenuInicio.add(menuExport);
     }
     private void loadSettings(){
-        DSettings dSettings=new DSettings(this,propiedades);
+        DSettings dSettings=new DSettings(this);
         dSettings.setVisible(true);
     }
 

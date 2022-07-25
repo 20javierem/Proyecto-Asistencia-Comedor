@@ -36,8 +36,9 @@ public class UtilitiesReports {
                 parameters.put("periodStart",Utilities.formatoFecha.format(start));
                 parameters.put("periodEnd",Utilities.formatoFecha.format(end));
                 parameters.put("dayAttendances",sp);
+                parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",totalNotAttendances);
-                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format((double) ((totalNotAttendances*100) / (totalAttendances+totalNotAttendances)))+"%");
+                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
@@ -68,6 +69,7 @@ public class UtilitiesReports {
                 Map<String,Object> parameters=new HashMap<>();
                 parameters.put("date",Utilities.formatoFecha.format(dayAttendance.getDate()));
                 parameters.put("dinerAttendances",sp);
+                parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",dayAttendance.getTotalDinerNotAttendance());
                 parameters.put("totalAttendanesPercentaje",dayAttendance.getPercentageNotAtendet());
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);

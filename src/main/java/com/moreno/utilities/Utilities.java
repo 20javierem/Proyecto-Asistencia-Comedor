@@ -36,7 +36,7 @@ import java.util.*;
 
 public class Utilities {
     public static DateFormat formatoFecha=new SimpleDateFormat("dd-MM-yyyy");
-    public static DateFormat formatDate=new SimpleDateFormat("dd-MM-yy");
+    public static DateFormat formatDate=new SimpleDateFormat("dd-MM");
     public static DateFormat formatoFechaHora=new SimpleDateFormat("dd/MM/yyyy: h:mm a");
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm a");
     public static DateFormat año=new SimpleDateFormat("yyyy");
@@ -47,7 +47,9 @@ public class Utilities {
     }
     private static JFrame jFrame;
     private static TabbedPane tabbedPane;
+    private static Propiedades propiedades;
     public static SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }
@@ -298,4 +300,10 @@ public class Utilities {
         return Base64.getDecoder().decode(property);
     }
 
+    public static void setPropiedades(Propiedades propiedades) {
+        Utilities.propiedades=propiedades;
+    }
+    public static Propiedades getPropiedades(){
+        return propiedades;
+    }
 }

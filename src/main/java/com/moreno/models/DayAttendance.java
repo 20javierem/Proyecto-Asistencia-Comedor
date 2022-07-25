@@ -74,10 +74,8 @@ public class DayAttendance extends Moreno {
         }
         totalDinerAttendance=totalAssisted;
         totalDinerNotAttendance=totalNotAssited;
-        double totalAttendetPorcentual= (double) (getTotalDinerAttendance()*100) / getAttendances().size();
-        percentageAtendet=Utilities.numberFormat.format(totalAttendetPorcentual)+"%";
-        double totalNotAttendedPorcentual= (double) (getTotalDinerNotAttendance()*100) / getAttendances().size();
-        percentageNotAtendet=Utilities.numberFormat.format(totalNotAttendedPorcentual)+"%";
+        percentageAtendet=Utilities.numberFormat.format(((double) (getTotalDinerAttendance()*100)) / getAttendances().size())+"%";
+        percentageNotAtendet=Utilities.numberFormat.format(((double) (getTotalDinerNotAttendance()*100)) / getAttendances().size())+"%";
     }
 
     public String getPercentageAtendet() {
