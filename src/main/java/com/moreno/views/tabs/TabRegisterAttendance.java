@@ -10,8 +10,8 @@ import com.moreno.models.Diner;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
-import com.moreno.utilitiesTables.tablesCellRendered.DinerAttendanceCellRendered;
-import com.moreno.utilitiesTables.tablesModels.DinerAttendanceTableModel;
+import com.moreno.utilitiesTables.tablesCellRendered.DinerDayAttendanceCellRendered;
+import com.moreno.utilitiesTables.tablesModels.DinerDayAttendanceTableModel;
 import com.moreno.views.VPrincipal;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class TabRegisterAttendance {
     private TxtSearch txtDiner;
     private JLabel lblAttendances;
     private JLabel lblFaltaron;
-    private DinerAttendanceTableModel model;
+    private DinerDayAttendanceTableModel model;
     private HashMap<String,DinerAttendance> attendanceHashMap=new HashMap<>();
 
     public TabRegisterAttendance(){
@@ -89,10 +89,10 @@ public class TabRegisterAttendance {
             VPrincipal.attendancesToday.getAttendances().forEach(Moreno::save);
         }
         loadHashMap();
-        model=new DinerAttendanceTableModel(VPrincipal.attendancesToday.getAttendances());
+        model=new DinerDayAttendanceTableModel(VPrincipal.attendancesToday.getAttendances());
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
-        DinerAttendanceCellRendered.setCellRenderer(table);
+        DinerDayAttendanceCellRendered.setCellRenderer(table);
         loadCalculateTotals();
     }
     private void loadHashMap(){

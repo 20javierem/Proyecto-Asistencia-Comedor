@@ -1,7 +1,6 @@
 package com.moreno.utilitiesTables.tablesCellRendered;
 
 import com.moreno.utilitiesTables.UtilitiesTables;
-import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -9,10 +8,10 @@ import java.awt.*;
 
 import static com.moreno.utilitiesTables.UtilitiesTables.buscarTexto;
 
-public class DinerAttendanceCellRendered extends DefaultTableCellRenderer {
+public class DinerDayAttendanceCellRendered extends DefaultTableCellRenderer {
 
     public static void setCellRenderer(JTable table){
-        DinerAttendanceCellRendered cellRendered=new DinerAttendanceCellRendered();
+        DinerDayAttendanceCellRendered cellRendered=new DinerDayAttendanceCellRendered();
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(cellRendered);
         }

@@ -6,6 +6,7 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
+import java.util.List;
 import java.util.Vector;
 
 public class Diners extends Moreno {
@@ -30,7 +31,8 @@ public class Diners extends Moreno {
         root=criteria.from(Diner.class);
         criteria.select(root)
                 .where(builder.equal(root.get("dni"),dni));
-        return session.createQuery(criteria).uniqueResult();
+        List<Diner> diners=session.createQuery(criteria).getResultList();
+        return !diners.isEmpty()?diners.get(0):null;
     }
     public static Vector<Diner> getActives(){
         criteria = builder.createQuery(Diner.class);

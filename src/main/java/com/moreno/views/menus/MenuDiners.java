@@ -28,12 +28,12 @@ public class MenuDiners {
         if (tabStudents == null) {
             tabStudents = new TabAllDiners();
         }
-        if (Utilities.getTabbedPane().indexOfTab(tabStudents.getTabPane().getTitle())==-1) {
+        if (Utilities.getTabbedPane().indexOfComponent(tabStudents.getTabPane())==-1) {
             tabStudents = new TabAllDiners();
             tabStudents.getTabPane().setOption(btnAllDiners);
             Utilities.getTabbedPane().addTab(tabStudents.getTabPane().getTitle(), tabStudents.getTabPane().getIcon(), tabStudents.getTabPane());
         }
-        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabStudents.getTabPane().getTitle()));
+        Utilities.getTabbedPane().setSelectedComponent(tabStudents.getTabPane());
     }
 
     public JPanel getContentPane() {

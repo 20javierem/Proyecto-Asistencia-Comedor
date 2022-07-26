@@ -42,13 +42,12 @@ public class UtilitiesReports {
                 parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
-                    viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
-                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
-                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    viewer.setTitle("Reporte de comensales 2");
+                    if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
+                        Utilities.getTabbedPane().remove(viewer.getContentPane());
                     }
                     Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
                     Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
-                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                 }else{
                     Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
                 }
@@ -75,13 +74,12 @@ public class UtilitiesReports {
                 parameters.put("totalNotAttendancesPercentage",dayAttendance.getPercentageNotAtendet());
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
-                    viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(dayAttendance.getDate())+")");
-                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
-                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    viewer.setTitle("Reporte del ("+Utilities.formatoFecha.format(dayAttendance.getDate())+")");
+                    if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
+                        Utilities.getTabbedPane().remove(viewer.getContentPane());
                     }
                     Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
                     Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
-                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                 }else{
                     Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
                 }
@@ -92,7 +90,7 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
-    public static void generateReportDinerAttendances(Date start,Date end,List<DinerAttendance> dinerAttendances,int totalAttendances,int totalNotAttendances) {
+    public static void generateReportDinerAttendances(Date start,Date end,List<DinerAttendance> dinerAttendances,int totalNotAttendances) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinerAttendances.jasper");
         try {
             if(pathReport!=null){
@@ -107,16 +105,15 @@ public class UtilitiesReports {
                 parameters.put("nameDiner",list.get(1).getDiner().getLastNames()+", "+list.get(1).getDiner().getNames());
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",totalNotAttendances);
-                parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
+                parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (dinerAttendances.size()))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
-                    viewer.setTitle("Reporte "+list.get(1).getDiner().getDni()+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
-                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
-                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    viewer.setTitle("Reporte de comensal");
+                    if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
+                        Utilities.getTabbedPane().remove(viewer.getContentPane());
                     }
                     Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
                     Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
-                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                 }else{
                     Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
                 }
@@ -145,13 +142,12 @@ public class UtilitiesReports {
                 parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
-                    viewer.setTitle("Reporte comensales"+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
-                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
-                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    viewer.setTitle("Reporte de comensales");
+                    if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
+                        Utilities.getTabbedPane().remove(viewer.getContentPane());
                     }
                     Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
                     Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
-                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                 }else{
                     Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
                 }

@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class MenuReports {
     private JPanel contentPane;
     private JToggleButton btnAllDiners;
-    private JToggleButton btnByDiner;
     private TabRecordDinersAttendances tabRecordDinersAttendances;
 
     public MenuReports(){
@@ -28,12 +27,12 @@ public class MenuReports {
         if (tabRecordDinersAttendances == null) {
             tabRecordDinersAttendances = new TabRecordDinersAttendances();
         }
-        if (Utilities.getTabbedPane().indexOfTab(tabRecordDinersAttendances.getTabPane().getTitle())==-1) {
+        if (Utilities.getTabbedPane().indexOfComponent(tabRecordDinersAttendances.getTabPane())==-1) {
             tabRecordDinersAttendances = new TabRecordDinersAttendances();
             tabRecordDinersAttendances.getTabPane().setOption(btnAllDiners);
             Utilities.getTabbedPane().addTab(tabRecordDinersAttendances.getTabPane().getTitle(), tabRecordDinersAttendances.getTabPane().getIcon(), tabRecordDinersAttendances.getTabPane());
         }
-        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabRecordDinersAttendances.getTabPane().getTitle()));
+        Utilities.getTabbedPane().setSelectedComponent(tabRecordDinersAttendances.getTabPane());
     }
 
     public JPanel getContentPane() {

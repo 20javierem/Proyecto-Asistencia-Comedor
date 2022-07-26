@@ -10,6 +10,7 @@ import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDayAttendance;
 import com.moreno.utilitiesTables.tablesCellRendered.DayAttendancesCellRendered;
+import com.moreno.utilitiesTables.tablesCellRendered.DinerDayAttendanceCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DinerDayAttendanceTableModel;
 import com.toedter.calendar.JDateChooser;
 
@@ -34,11 +35,13 @@ public class TabRecordAttendanceDiner {
     private JButton btnBuscar;
     private JButton btnGenerateReport;
     private JTable table;
-    private JLabel lblTotalAttendances;
     private JLabel lbltotalNotAttendances;
+    private JLabel lblDiner;
+    private JLabel lblDniDiner;
+    private JLabel lblState;
+    private JLabel lblPhone;
     private DinerDayAttendanceTableModel model;
     private Diner diner;
-    private int totalAttendances;
     private int totalNotAttendances;
 
     public TabRecordAttendanceDiner(Diner diner){
@@ -61,27 +64,30 @@ public class TabRecordAttendanceDiner {
             }
         });
     }
+    private void loadDiner(){
+        lblDiner.setText(diner.getLastNames()+" "+diner.getNames());
+        lblDniDiner.setText(diner.getDni());
+        lblPhone.setText(diner.getPhone());
+        lblState.setText(diner.isActive()?"ACTIVO":"INACTIVO");
+    }
     private void generateReport(){
         if(model.getRowCount()>0){
             btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            UtilitiesReports.generateReportDinerAttendances(model.get(0).getDayAttendance().getDate(),model.get(model.getRowCount()-1).getDayAttendance().getDate(), model.getVector(),totalAttendances,totalNotAttendances);
+            UtilitiesReports.generateReportDinerAttendances(model.get(0).getDayAttendance().getDate(),model.get(model.getRowCount()-1).getDayAttendance().getDate(), model.getVector(),totalNotAttendances);
             btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
         }
     }
     private void calculateTotals(){
-        totalAttendances=0;
         totalNotAttendances=0;
         for (DinerAttendance dinerAttendance:model.getVector()){
-            if(dinerAttendance.isAttended()){
-                totalAttendances++;
-            }else{
+            if(!dinerAttendance.isAttended()) {
                 totalNotAttendances++;
             }
         }
-        lblTotalAttendances.setText(String.valueOf(totalAttendances));
         lbltotalNotAttendances.setText(String.valueOf(totalNotAttendances));
+        lbltotalNotAttendances.setText(totalNotAttendances+" : "+Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / model.getVector().size())+"%");
     }
     private void initComponents(){
         tabPane.setTitle("Historial de asistencia "+diner.getDni());
@@ -92,6 +98,7 @@ public class TabRecordAttendanceDiner {
                 calculateTotals();
             }
         });
+        loadDiner();
         loadPlaceHolders();
         Calendar start= Calendar.getInstance();
         start.set(Calendar.DATE,1);
@@ -141,7 +148,7 @@ public class TabRecordAttendanceDiner {
         model=new DinerDayAttendanceTableModel(list);
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
-        DayAttendancesCellRendered.setCellRenderer(table);
+        DinerDayAttendanceCellRendered.setCellRenderer(table);
         table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDayAttendance(table));
         calculateTotals();
     }

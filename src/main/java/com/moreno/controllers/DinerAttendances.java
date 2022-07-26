@@ -45,7 +45,7 @@ public class DinerAttendances extends Moreno {
         root=criteria.from(DinerAttendance.class);
         criteria.select(root).where(builder.and(
                 builder.equal(root.get("diner"),diner),
-                builder.lessThan(root.get("date"),Utilities.getDateLessThan(end))
+                builder.lessThan(root.get("dayAttendance").get("date"),Utilities.getDateLessThan(end))
                 )
         );
         todos=new Vector<>(session.createQuery(criteria).getResultList());
@@ -57,7 +57,7 @@ public class DinerAttendances extends Moreno {
         root=criteria.from(DinerAttendance.class);
         criteria.select(root).where(builder.and(
                 builder.equal(root.get("diner"),diner),
-                builder.greaterThan(root.get("date"),Utilities.getDateGreaterThan(start))
+                builder.greaterThan(root.get("dayAttendance").get("date"),Utilities.getDateGreaterThan(start))
                 )
         );
         todos=new Vector<>(session.createQuery(criteria).getResultList());

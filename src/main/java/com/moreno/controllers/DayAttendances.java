@@ -1,8 +1,10 @@
 package com.moreno.controllers;
 
 import com.moreno.models.DayAttendance;
+import com.moreno.models.DinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
@@ -14,6 +16,10 @@ public class DayAttendances extends Moreno {
     private static CriteriaQuery<DayAttendance> criteria;
     private static Vector<DayAttendance> todos;
 
+    public static DayAttendance get(Integer id) {
+        DayAttendance election = session.find(DayAttendance.class, id, LockModeType.NONE);
+        return election;
+    }
     public static DayAttendance getOfDate(Date date){
         criteria = builder.createQuery(DayAttendance.class);
         root=criteria.from(DayAttendance.class);

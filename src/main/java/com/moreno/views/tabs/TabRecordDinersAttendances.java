@@ -1,5 +1,6 @@
 package com.moreno.views.tabs;
 
+import com.moreno.App;
 import com.moreno.Notify;
 import com.moreno.controllers.DayAttendances;
 import com.moreno.controllers.DinerAttendances;
@@ -18,11 +19,14 @@ import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
 import com.moreno.utilitiesTables.tablesModels.DinerDaysAttendancesTableModel;
 import com.moreno.views.VPrincipal;
 import com.toedter.calendar.JDateChooser;
+import org.jfree.data.time.Day;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,6 +51,8 @@ public class TabRecordDinersAttendances {
     private DinerDaysAttendancesTableModel model;
     private int totalAttendances=0;
     private int totalNotAttendances=0;
+    private Date start;
+    private Date end;
 
     public TabRecordDinersAttendances(){
         initComponents();
@@ -70,7 +76,13 @@ public class TabRecordDinersAttendances {
     private void generateReport(){
         if(model.getRowCount()>0){
             btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            UtilitiesReports.generateReportDinersAttendances(model.get(0).getDiner().getAttendances().get(0).getDayAttendance().getDate(), model.get(model.getRowCount()-1).getDiner().getAttendances().get(0).getDayAttendance().getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+            if(start!=null&&end!=null){
+                UtilitiesReports.generateReportDinersAttendances(start, end,model.getVector(),totalAttendances,totalNotAttendances);
+            }else if(start!=null){
+                UtilitiesReports.generateReportDinersAttendances(start, new Date(),model.getVector(),totalAttendances,totalNotAttendances);
+            }else if(end!=null){
+                UtilitiesReports.generateReportDinersAttendances(DayAttendances.get(1).getDate(), end,model.getVector(),totalAttendances,totalNotAttendances);
+            }
             btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
@@ -87,7 +99,7 @@ public class TabRecordDinersAttendances {
         lbltotalNotAttendances.setText(String.valueOf(totalNotAttendances));
     }
     private void initComponents(){
-        tabPane.setTitle("Historial Comensales");
+        tabPane.setTitle("Todos los comensales");
         tabPane.getActions().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,14 +108,45 @@ public class TabRecordDinersAttendances {
             }
         });
         loadPlaceHolders();
-        Calendar start= Calendar.getInstance();
-        start.set(Calendar.DATE,1);
-        loadTable(getList(start.getTime(),new Date()));
+        Calendar calendar= Calendar.getInstance();
+        calendar.set(Calendar.DATE,1);
+        start=calendar.getTime();
+        end=new Date();
+        loadTable(getList(start,end));
+        insertarMenuPopUp();
+    }
+    private void insertarMenuPopUp(){
+        JPopupMenu pop_up = new JPopupMenu();
+        JMenuItem editarProducto = new JMenuItem("Ver historial de asistencia", new ImageIcon(App.class.getResource("Icons/x16/mostrarContraseña.png")));
+        editarProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadRecordAttendanceDiner();
+            }
+        });
+        pop_up.add(editarProducto);
+        table.addMouseListener( new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    int row = table.rowAtPoint( e.getPoint() );
+                    table.setRowSelectionInterval(row,row);
+                    pop_up.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
+    }
+    private void loadRecordAttendanceDiner(){
+        Diner diner=model.get(table.convertRowIndexToModel(table.getSelectedRow())).getDiner()  ;
+        if(Utilities.getTabbedPane().indexOfTab("Historial de asistencia "+diner.getDni())==-1){
+            TabRecordAttendanceDiner tabRecordAttendanceDiner=new TabRecordAttendanceDiner(diner);
+            Utilities.getTabbedPane().addTab(tabRecordAttendanceDiner.getTabPane().getTitle(),tabRecordAttendanceDiner.getTabPane());
+        }
+        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab("Historial de asistencia "+diner.getDni()));
     }
     private void getRecords(){
         btnBuscar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        Date start = null;
-        Date end = null;
+        start = null;
+        end = null;
         if(paneEntreFecha.isVisible()){
             if(fechaInicio.getDate()!=null&&fechaFin.getDate()!=null){
                 start=fechaInicio.getDate();
