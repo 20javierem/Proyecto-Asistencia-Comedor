@@ -4,7 +4,7 @@ import com.moreno.App;
 import com.moreno.controllers.DayAttendances;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.CButton;
-import com.moreno.custom.CPane;
+import com.moreno.custom.CustomPane;
 import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
 import com.moreno.models.DayAttendance;
@@ -15,7 +15,6 @@ import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
 import com.moreno.views.menus.MenuDiners;
 import com.moreno.views.menus.MenuReports;
-import org.apache.xmlbeans.impl.store.Cur;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -32,7 +31,6 @@ public class VPrincipal extends JFrame{
     private JButton btnAllDiners;
     private JButton btnAttendance;
     private JButton btnDiners;
-    private JButton btnGestionar;
     private JPanel paneNotify;
     private TabbedPane tabbedPane;
     private JSplitPane splitPane;
@@ -89,7 +87,6 @@ public class VPrincipal extends JFrame{
     private void loadMenuReports(){
         Utilities.updateComponents(menuReports.getContentPane());
         despintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioDefault.png")));
-        despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
         despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/dinersDefault.png")));
         pintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaSelected.png")));
         splitPane.setRightComponent(null);
@@ -98,7 +95,6 @@ public class VPrincipal extends JFrame{
     private void loadMenuDiners(){
         Utilities.updateComponents(menuDiners.getContentPane());
         despintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioDefault.png")));
-        despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
         despintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaDefault.png")));
         pintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/studentsSelected.png")));
         splitPane.setRightComponent(null);
@@ -107,7 +103,6 @@ public class VPrincipal extends JFrame{
     private void loadMenuAttendance(){
         Utilities.updateComponents(menuAttendance.getContentPane());
         despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/dinersDefault.png")));
-        despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
         despintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaDefault.png")));
         pintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioSelected.png")));
         splitPane.setRightComponent(null);
@@ -161,9 +156,7 @@ public class VPrincipal extends JFrame{
         Border border=BorderFactory.createEmptyBorder();
         btnAttendance.setBorder(border);
         btnDiners.setBorder(border);
-        btnGestionar.setBorder(border);
         btnReports.setBorder(border);
-        border.getBorderInsets(btnGestionar).set(0,4,0,4);
         border.getBorderInsets(btnAttendance).set(0,4,0,4);
         border.getBorderInsets(btnDiners).set(0,4,0,4);
         border.getBorderInsets(btnReports).set(0,4,0,4);
@@ -173,7 +166,6 @@ public class VPrincipal extends JFrame{
         btnNewAttendance.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnAttendance.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDiners.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnGestionar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnReports.setCursor(new Cursor(Cursor.HAND_CURSOR));
         paneNotify.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
@@ -205,9 +197,9 @@ public class VPrincipal extends JFrame{
     private void createUIComponents() {
         // TODO: place custom component creation code here
         paneNotify=new FondoPanel("Icons/x32/notificacion.png",new Dimension(32,32));
-        panelControles=new CPane(2);
+        panelControles=new CustomPane(2);
         panelControles.updateUI();
-        cPane=new CPane(2);
+        cPane=new CustomPane(2);
         cPane.updateUI();
     }
 }

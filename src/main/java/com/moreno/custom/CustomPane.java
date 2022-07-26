@@ -2,13 +2,13 @@ package com.moreno.custom;
 
 import javax.swing.*;
 
-public class CPane extends JPanel {
+public class CustomPane extends JPanel {
     private int dark=1;
 
-    public CPane(int dark){
+    public CustomPane(int dark){
         this.dark=dark;
     }
-    public CPane(){
+    public CustomPane(){
 
     }
     @Override

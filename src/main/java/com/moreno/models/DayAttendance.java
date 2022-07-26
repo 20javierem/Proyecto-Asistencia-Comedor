@@ -39,7 +39,7 @@ public class DayAttendance extends Moreno {
     }
 
     public String getStringDate(){
-        return Utilities.formatDate.format(date);
+        return Utilities.formatoFecha.format(date);
     }
 
     public void setDate(Date date) {

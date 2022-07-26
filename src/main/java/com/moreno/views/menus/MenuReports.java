@@ -1,8 +1,7 @@
 package com.moreno.views.menus;
 
-import com.moreno.custom.CPane;
+import com.moreno.custom.CustomPane;
 import com.moreno.utilities.Utilities;
-import com.moreno.views.tabs.TabAllDiners;
 import com.moreno.views.tabs.TabRecordDinersAttendances;
 
 import javax.swing.*;
@@ -43,6 +42,6 @@ public class MenuReports {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        contentPane=new CPane();
+        contentPane=new CustomPane();
     }
 }

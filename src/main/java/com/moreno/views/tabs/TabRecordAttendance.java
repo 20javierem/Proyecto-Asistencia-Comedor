@@ -61,7 +61,7 @@ public class TabRecordAttendance {
     private void generateReport(){
         if(model.getRowCount()>0){
             btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            UtilitiesReports.generateReportAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+            UtilitiesReports.generateReportDaysAttendances(model.get(0).getDate(),model.get(model.getRowCount()-1).getDate(),model.getVector(),totalAttendances,totalNotAttendances);
             btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
@@ -102,7 +102,6 @@ public class TabRecordAttendance {
             }else{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó las fechas");
             }
-            btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         if(paneDesdeFecha.isVisible()){
             if(fechaDesde.getDate()!=null){
@@ -112,7 +111,6 @@ public class TabRecordAttendance {
             }else{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó la fecha");
             }
-            btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         if(paneHastaFecha.isVisible()){
             if(fechaHasta.getDate()!=null){
@@ -122,8 +120,8 @@ public class TabRecordAttendance {
             }else{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR", "No seleccionó la fecha");
             }
-            btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
+        btnBuscar.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
     private void loadPlaceHolders(){
         fechaInicio.getDateEditor().getUiComponent().putClientProperty("JTextField.placeholderText","Inicio...");

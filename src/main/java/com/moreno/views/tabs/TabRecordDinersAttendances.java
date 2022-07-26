@@ -70,7 +70,7 @@ public class TabRecordDinersAttendances {
     private void generateReport(){
         if(model.getRowCount()>0){
             btnGenerateReport.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            UtilitiesReports.generateReportDinersDaysAttendances(model.get(0).getDiner().getAttendances().get(0).getDayAttendance().getDate(), model.get(model.getRowCount()-1).getDiner().getAttendances().get(0).getDayAttendance().getDate(),model.getVector(),totalAttendances,totalNotAttendances);
+            UtilitiesReports.generateReportDinersAttendances(model.get(0).getDiner().getAttendances().get(0).getDayAttendance().getDate(), model.get(model.getRowCount()-1).getDiner().getAttendances().get(0).getDayAttendance().getDate(),model.getVector(),totalAttendances,totalNotAttendances);
             btnGenerateReport.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");

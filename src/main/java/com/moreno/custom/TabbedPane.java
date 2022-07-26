@@ -17,8 +17,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TabbedPane extends JTabbedPane {
 
@@ -52,9 +50,13 @@ public class TabbedPane extends JTabbedPane {
             return components;
         }
         return super.getComponents();
-
     }
 
+    @Override
+    public void updateUI() {
+        super.updateUI();
+        verificarSelected();
+    }
 
     @Override
     public void removeTabAt(int index) {
@@ -108,6 +110,8 @@ public class TabbedPane extends JTabbedPane {
     private void despintar(){
         for (Component component : getComponents()) {
             if(indexOfComponent(component)!=-1){
+                setBackgroundAt(indexOfComponent(component),new JPanel().getBackground());
+                setEnabledAt(indexOfComponent(component),true);
                 if(component instanceof TabPane){
                     TabPane tabPane=(TabPane) component;
                     if(tabPane.getOption()!=null){
@@ -125,6 +129,8 @@ public class TabbedPane extends JTabbedPane {
 
     public void pintarSeleccionado(){
         if(getSelectedIndex()!=-1){
+            setBackgroundAt(getSelectedIndex(),new JPanel().getBackground().brighter());
+            setEnabledAt(getSelectedIndex(),false);
             if(getComponentAt(getSelectedIndex()) instanceof TabPane){
                 TabPane tabPane =(TabPane) getComponentAt(getSelectedIndex());
                 if(tabPane.getOption()!=null){
@@ -722,10 +728,10 @@ class Cross extends JPanel {
     private JLabel title;
     private JButton closeButton;
     private int size = 22;
-    public Cross(final JTabbedPane jTabbedPane,String title){
-        this(jTabbedPane,title,null);
+    public Cross(final TabbedPane tabbedPane,String title){
+        this(tabbedPane,title,null);
     }
-    public Cross(final JTabbedPane jTabbedPane, String title,Icon icon) {
+    public Cross(final TabbedPane tabbedPane, String title,Icon icon) {
         setOpaque(false);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -744,7 +750,7 @@ class Cross extends JPanel {
         closeButton.setIcon(getImage("close.png"));
         closeButton.setRolloverIcon(getImage("close2.png"));
         closeButton.setPressedIcon(getImage("close3.png"));
-        closeButton.addActionListener(e -> jTabbedPane.removeTabAt(jTabbedPane.indexOfTab(title)));
+        closeButton.addActionListener(e -> tabbedPane.removeTabAt(tabbedPane.indexOfTab(title)));
         add(this.title, gbc);
         gbc.gridx++;
         gbc.weightx = 0;

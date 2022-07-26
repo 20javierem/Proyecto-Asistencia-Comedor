@@ -2,7 +2,6 @@ package com.moreno.utilitiesReports;
 
 import com.moreno.App;
 import com.moreno.Notify;
-import com.moreno.custom.TabbedPane;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
 import com.moreno.models.DinerAttendance;
@@ -26,7 +25,7 @@ import java.util.List;
 
 public class UtilitiesReports {
 
-    public static void generateReportAttendances(Date start,Date end, List<DayAttendance> attendanceList,int totalAttendances,int totalNotAttendances) {
+    public static void generateReportDaysAttendances(Date start,Date end, List<DayAttendance> attendanceList,int totalAttendances,int totalNotAttendances) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDaysAttendances.jasper");
         try {
             if(pathReport!=null){
@@ -40,7 +39,7 @@ public class UtilitiesReports {
                 parameters.put("dayAttendances",sp);
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",totalNotAttendances);
-                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
+                parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
@@ -73,7 +72,7 @@ public class UtilitiesReports {
                 parameters.put("dinerAttendances",sp);
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",dayAttendance.getTotalDinerNotAttendance());
-                parameters.put("totalAttendanesPercentaje",dayAttendance.getPercentageNotAtendet());
+                parameters.put("totalNotAttendancesPercentage",dayAttendance.getPercentageNotAtendet());
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte ("+ Utilities.formatoFecha.format(dayAttendance.getDate())+")");
@@ -93,7 +92,7 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
-    public static void generateReportDinerAttendance(Date start,Date end,List<DinerAttendance> dinerAttendances,int totalAttendances,int totalNotAttendances) {
+    public static void generateReportDinerAttendances(Date start,Date end,List<DinerAttendance> dinerAttendances,int totalAttendances,int totalNotAttendances) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinerAttendances.jasper");
         try {
             if(pathReport!=null){
@@ -108,7 +107,7 @@ public class UtilitiesReports {
                 parameters.put("nameDiner",list.get(1).getDiner().getLastNames()+", "+list.get(1).getDiner().getNames());
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",totalNotAttendances);
-                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
+                parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte "+list.get(1).getDiner().getDni()+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
@@ -128,7 +127,7 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
-    public static void generateReportDinersDaysAttendances(Date start, Date end, List<DinerDaysAttendances> dinerAttendances, int totalAttendances, int totalNotAttendances) {
+    public static void generateReportDinersAttendances(Date start, Date end, List<DinerDaysAttendances> dinerAttendances, int totalAttendances, int totalNotAttendances) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinersAttendances.jasper");
         try {
             if(pathReport!=null){
@@ -143,7 +142,7 @@ public class UtilitiesReports {
                 parameters.put("nameDiner",list.get(1).getDiner().getLastNames()+", "+list.get(1).getDiner().getNames());
                 parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
                 parameters.put("totalNotAttendances",totalNotAttendances);
-                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
+                parameters.put("totalNotAttendancesPercentage",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte comensales"+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
