@@ -48,11 +48,11 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
                     table.getColumn(table.getColumnName(column)).setMinWidth(100);
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(100);
                     break;
-                case "ACTIVO":
+                case "ESTADO":
                     componente.setHorizontalAlignment(SwingConstants.CENTER);
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
-                    table.getColumn(table.getColumnName(column)).setMinWidth(80);
-                    table.getColumn(table.getColumnName(column)).setPreferredWidth(80);
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(90);
+                    table.getColumn(table.getColumnName(column)).setMinWidth(90);
+                    table.getColumn(table.getColumnName(column)).setPreferredWidth(90);
                     break;
                 default:
                     break;

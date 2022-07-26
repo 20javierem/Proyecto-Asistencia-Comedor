@@ -14,6 +14,8 @@ import com.moreno.utilities.Utilities;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
 import com.moreno.views.menus.MenuDiners;
+import com.moreno.views.menus.MenuReports;
+import org.apache.xmlbeans.impl.store.Cur;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -43,6 +45,7 @@ public class VPrincipal extends JFrame{
     private CButton btnReports;
     private Propiedades propiedades;
     private MenuDiners menuDiners;
+    private MenuReports menuReports;
     private MenuAttendance menuAttendance;
     public static List<Diner> diners;
     public static List<Diner> dinersActives;
@@ -79,18 +82,18 @@ public class VPrincipal extends JFrame{
         btnReports.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                loadMenuReports();
             }
         });
     }
-    private void loadMenuStatistics(){
-        Utilities.updateComponents(menuDiners.getContentPane());
+    private void loadMenuReports(){
+        Utilities.updateComponents(menuReports.getContentPane());
         despintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioDefault.png")));
         despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
-        pintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/estadisticaSelected.png")));
+        despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/dinersDefault.png")));
+        pintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaSelected.png")));
         splitPane.setRightComponent(null);
-        splitPane.setRightComponent(menuDiners.getContentPane());
-        contentPane.updateUI();
+        splitPane.setRightComponent(menuReports.getContentPane());
     }
     private void loadMenuDiners(){
         Utilities.updateComponents(menuDiners.getContentPane());
@@ -100,17 +103,15 @@ public class VPrincipal extends JFrame{
         pintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/studentsSelected.png")));
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(menuDiners.getContentPane());
-        contentPane.updateUI();
     }
     private void loadMenuAttendance(){
         Utilities.updateComponents(menuAttendance.getContentPane());
-        despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/studentsDefault.png")));
+        despintar(btnDiners,new ImageIcon(App.class.getResource("Icons/x32/dinersDefault.png")));
         despintar(btnGestionar,new ImageIcon(App.class.getResource("Icons/x32/gestionarDefault.png")));
         despintar(btnReports,new ImageIcon(App.class.getResource("Icons/x32/estadisticaDefault.png")));
         pintar(btnAttendance,new ImageIcon(App.class.getResource("Icons/x32/calendarioSelected.png")));
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(menuAttendance.getContentPane());
-        contentPane.updateUI();
     }
 
     private void loadLists(){
@@ -152,8 +153,9 @@ public class VPrincipal extends JFrame{
         setLocationRelativeTo(null);
     }
     private void loadMenus(){
-        menuDiners=new MenuDiners(tabbedPane);
-        menuAttendance=new MenuAttendance(tabbedPane);
+        menuDiners=new MenuDiners();
+        menuAttendance=new MenuAttendance();
+        menuReports=new MenuReports();
     }
     private void quitarBordes(){
         Border border=BorderFactory.createEmptyBorder();
@@ -172,6 +174,7 @@ public class VPrincipal extends JFrame{
         btnAttendance.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDiners.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnGestionar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnReports.setCursor(new Cursor(Cursor.HAND_CURSOR));
         paneNotify.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     private void loadMenuItems(){

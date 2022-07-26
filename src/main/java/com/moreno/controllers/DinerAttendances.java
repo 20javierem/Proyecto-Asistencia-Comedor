@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.Root;
 import java.util.Date;
 import java.util.Vector;
 
-public class DinnerAttendances extends Moreno {
+public class DinerAttendances extends Moreno {
     private static Root<DinerAttendance> root;
     private static CriteriaQuery<DinerAttendance> criteria;
     private static Vector<DinerAttendance> todos;

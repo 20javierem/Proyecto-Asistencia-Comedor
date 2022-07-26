@@ -281,7 +281,7 @@
                           <contentAreaFilled value="false"/>
                           <font size="16"/>
                           <horizontalTextPosition value="0"/>
-                          <icon value="com/moreno/Icons/x32/studentsDefault.png"/>
+                          <icon value="com/moreno/Icons/x32/dinersDefault.png"/>
                           <text value="Comensales"/>
                           <verticalTextPosition value="3"/>
                         </properties>

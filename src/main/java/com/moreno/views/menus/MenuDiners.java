@@ -13,11 +13,9 @@ public class MenuDiners {
     private JPanel contentPane;
     private JToggleButton btnActiveDiners;
     private JToggleButton btnAllDiners;
-    private TabbedPane tabbedPane;
     private TabAllDiners tabStudents;
 
-    public MenuDiners(TabbedPane tabbedPane){
-        this.tabbedPane=tabbedPane;
+    public MenuDiners(){
         btnAllDiners.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,12 +29,12 @@ public class MenuDiners {
         if (tabStudents == null) {
             tabStudents = new TabAllDiners();
         }
-        if (tabbedPane.indexOfTab(tabStudents.getTabPane().getTitle())==-1) {
+        if (Utilities.getTabbedPane().indexOfTab(tabStudents.getTabPane().getTitle())==-1) {
             tabStudents = new TabAllDiners();
             tabStudents.getTabPane().setOption(btnAllDiners);
-            tabbedPane.addTab(tabStudents.getTabPane().getTitle(), tabStudents.getTabPane().getIcon(), tabStudents.getTabPane());
+            Utilities.getTabbedPane().addTab(tabStudents.getTabPane().getTitle(), tabStudents.getTabPane().getIcon(), tabStudents.getTabPane());
         }
-        tabbedPane.setSelectedIndex(tabbedPane.indexOfTab(tabStudents.getTabPane().getTitle()));
+        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabStudents.getTabPane().getTitle()));
     }
 
     public JPanel getContentPane() {

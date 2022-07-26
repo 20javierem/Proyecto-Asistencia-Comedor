@@ -4,7 +4,9 @@ import com.moreno.App;
 import com.moreno.Notify;
 import com.moreno.custom.TabbedPane;
 import com.moreno.models.DayAttendance;
+import com.moreno.models.Diner;
 import com.moreno.models.DinerAttendance;
+import com.moreno.models.DinerDaysAttendances;
 import com.moreno.utilities.Utilities;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -110,6 +112,41 @@ public class UtilitiesReports {
                 JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
                 if(viewer!=null){
                     viewer.setTitle("Reporte "+list.get(1).getDiner().getDni()+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
+                    if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
+                        Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                    }
+                    Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
+                    Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
+                    Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
+                }else{
+                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
+                }
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","No se encontró la plantilla");
+            }
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void generateReportDinersDaysAttendances(Date start, Date end, List<DinerDaysAttendances> dinerAttendances, int totalAttendances, int totalNotAttendances) {
+        InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDinersAttendances.jasper");
+        try {
+            if(pathReport!=null){
+                List<DinerDaysAttendances> list=new ArrayList<>(dinerAttendances);
+                list.add(0,new DinerDaysAttendances(new Diner(),new ArrayList<>()));
+                JasperReport report=(JasperReport) JRLoader.loadObject(pathReport);
+                JRBeanArrayDataSource sp=new JRBeanArrayDataSource(list.toArray());
+                Map<String,Object> parameters=new HashMap<>();
+                parameters.put("periodStart",Utilities.formatoFecha.format(start));
+                parameters.put("periodEnd",Utilities.formatoFecha.format(end));
+                parameters.put("dinerAttendances",sp);
+                parameters.put("nameDiner",list.get(1).getDiner().getLastNames()+", "+list.get(1).getDiner().getNames());
+                parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
+                parameters.put("totalNotAttendances",totalNotAttendances);
+                parameters.put("totalAttendanesPercentaje",Utilities.numberFormat.format(((double) (totalNotAttendances*100)) / (totalAttendances+totalNotAttendances))+"%");
+                JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
+                if(viewer!=null){
+                    viewer.setTitle("Reporte comensales"+" ("+ Utilities.formatoFecha.format(start)+") al ("+Utilities.formatoFecha.format(end)+")");
                     if(Utilities.getTabbedPane().indexOfTab(viewer.getTitle())!=-1){
                         Utilities.getTabbedPane().removeTabAt(Utilities.getTabbedPane().indexOfTab(viewer.getTitle()));
                     }

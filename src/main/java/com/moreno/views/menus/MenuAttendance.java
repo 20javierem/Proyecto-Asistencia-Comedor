@@ -14,12 +14,10 @@ public class MenuAttendance {
     private JPanel contentPane;
     private JToggleButton btnRegisterAttendance;
     private JToggleButton btnRecordAttendance;
-    private TabbedPane tabbedPane;
     private TabRegisterAttendance tabRegisterAttendance;
     private TabRecordAttendance tabRecordAttendance;
 
-    public MenuAttendance(TabbedPane tabbedPane){
-        this.tabbedPane=tabbedPane;
+    public MenuAttendance(){
         btnRegisterAttendance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,12 +38,12 @@ public class MenuAttendance {
         if (tabRegisterAttendance == null) {
             tabRegisterAttendance = new TabRegisterAttendance();
         }
-        if (tabbedPane.indexOfTab(tabRegisterAttendance.getTabPane().getTitle())==-1) {
+        if (Utilities.getTabbedPane().indexOfTab(tabRegisterAttendance.getTabPane().getTitle())==-1) {
             tabRegisterAttendance = new TabRegisterAttendance();
             tabRegisterAttendance.getTabPane().setOption(btnRegisterAttendance);
-            tabbedPane.addTab(tabRegisterAttendance.getTabPane().getTitle(), tabRegisterAttendance.getTabPane().getIcon(), tabRegisterAttendance.getTabPane());
+            Utilities.getTabbedPane().addTab(tabRegisterAttendance.getTabPane().getTitle(), tabRegisterAttendance.getTabPane().getIcon(), tabRegisterAttendance.getTabPane());
         }
-        tabbedPane.setSelectedIndex(tabbedPane.indexOfTab(tabRegisterAttendance.getTabPane().getTitle()));
+        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabRegisterAttendance.getTabPane().getTitle()));
     }
     public void loadRecordAttendace(){
         Utilities.despintarButton(btnRegisterAttendance);
@@ -53,12 +51,12 @@ public class MenuAttendance {
         if (tabRecordAttendance == null) {
             tabRecordAttendance = new TabRecordAttendance();
         }
-        if (tabbedPane.indexOfTab(tabRecordAttendance.getTabPane().getTitle())==-1) {
+        if (Utilities.getTabbedPane().indexOfTab(tabRecordAttendance.getTabPane().getTitle())==-1) {
             tabRecordAttendance = new TabRecordAttendance();
             tabRecordAttendance.getTabPane().setOption(btnRecordAttendance);
-            tabbedPane.addTab(tabRecordAttendance.getTabPane().getTitle(), tabRecordAttendance.getTabPane().getIcon(), tabRecordAttendance.getTabPane());
+            Utilities.getTabbedPane().addTab(tabRecordAttendance.getTabPane().getTitle(), tabRecordAttendance.getTabPane().getIcon(), tabRecordAttendance.getTabPane());
         }
-        tabbedPane.setSelectedIndex(tabbedPane.indexOfTab(tabRecordAttendance.getTabPane().getTitle()));
+        Utilities.getTabbedPane().setSelectedIndex(Utilities.getTabbedPane().indexOfTab(tabRecordAttendance.getTabPane().getTitle()));
     }
 
     public JPanel getContentPane() {
