@@ -99,4 +99,8 @@ public class DayAttendance extends Moreno {
         }
         calculateTotals();
     }
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
 }

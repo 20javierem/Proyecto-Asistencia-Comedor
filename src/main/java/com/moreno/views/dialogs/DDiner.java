@@ -70,7 +70,7 @@ public class DDiner extends JDialog{
         getRootPane().setDefaultButton(btnSave);
         pack();
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(Utilities.getJFrame());
     }
     private void onCancel(){
         if(update){

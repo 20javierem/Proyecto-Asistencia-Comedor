@@ -20,7 +20,7 @@ public class DSettings extends JDialog{
     private final VPrincipal vPrincipal;
 
     public DSettings(VPrincipal vPrincipal){
-        super(vPrincipal);
+        super(Utilities.getJFrame(),"Configuraciones",true);
         this.vPrincipal=vPrincipal;
         initComponents();
         btnAplyThme.addActionListener(new ActionListener() {
@@ -69,7 +69,7 @@ public class DSettings extends JDialog{
         setContentPane(contentPane);
         loadSettings();
         pack();
-        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btnSave);
+        setLocationRelativeTo(Utilities.getJFrame());
     }
 }

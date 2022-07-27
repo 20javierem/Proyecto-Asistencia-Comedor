@@ -106,4 +106,8 @@ public class Diner extends Moreno {
         setActive(Boolean.parseBoolean(attributes[5]));
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
 }

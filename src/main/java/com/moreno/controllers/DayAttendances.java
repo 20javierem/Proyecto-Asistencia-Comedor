@@ -1,6 +1,7 @@
 package com.moreno.controllers;
 
 import com.moreno.models.DayAttendance;
+import com.moreno.models.Diner;
 import com.moreno.models.DinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
@@ -19,6 +20,12 @@ public class DayAttendances extends Moreno {
     public static DayAttendance get(Integer id) {
         DayAttendance election = session.find(DayAttendance.class, id, LockModeType.NONE);
         return election;
+    }
+    public static Vector<DayAttendance> getTodos(){
+        criteria = builder.createQuery(DayAttendance.class);
+        criteria.select(criteria.from(DayAttendance.class));
+        todos = new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
     }
     public static DayAttendance getOfDate(Date date){
         criteria = builder.createQuery(DayAttendance.class);

@@ -11,6 +11,7 @@ import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
+import com.moreno.views.dialogs.DExport;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
 import com.moreno.views.menus.MenuDiners;
@@ -183,7 +184,7 @@ public class VPrincipal extends JFrame{
         menuExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loadSettings();
+                loadExport();
             }
         });
         btnMenuInicio.add(menuSettings);
@@ -192,6 +193,10 @@ public class VPrincipal extends JFrame{
     private void loadSettings(){
         DSettings dSettings=new DSettings(this);
         dSettings.setVisible(true);
+    }
+    private void loadExport(){
+        DExport dExport=new DExport();
+        dExport.setVisible(true);
     }
 
     private void createUIComponents() {
