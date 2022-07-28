@@ -1,55 +1,39 @@
 package com.moreno.views.tabs;
 
-import com.moreno.App;
 import com.moreno.custom.TabPane;
 import com.moreno.custom.TxtSearch;
-import com.moreno.models.Diner;
-import com.moreno.utilities.CSVReader;
-import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
-import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DinerTableModel;
 import com.moreno.views.VPrincipal;
-import com.moreno.views.dialogs.DDiner;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabAllDiners {
+public class TabRecordDiners {
     private TabPane tabPane;
-    private JTable table;
-    private JButton nuevoComensalButton;
-    private JButton btnImportDiners;
-    private JComboBox cbbSex;
-    private JButton btnClearFilters;
-    private TxtSearch txtSearch;
     private JComboBox cbbState;
+    private JButton btnClearFilters;
+    private JButton btnImportDiners;
+    private TxtSearch txtSearch;
+    private JTable table;
+    private JComboBox cbbSex;
     private DinerTableModel model;
     private TableRowSorter<DinerTableModel> modeloOrdenado;
     private Map<Integer, String> listaFiltros = new HashMap<Integer, String>();
     private List<RowFilter<DinerTableModel, String>> filtros = new ArrayList<>();
     private RowFilter filtroand;
 
-    public TabAllDiners(){
+    public TabRecordDiners(){
         initComponents();
-        nuevoComensalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadNewDiner();
-            }
-        });
-        btnImportDiners.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadImportDiners();
-            }
-        });
         txtSearch.getBtnClearSearch().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,35 +48,29 @@ public class TabAllDiners {
                 filter();
             }
         });
-        cbbSex.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                filter();
-            }
-        });
-        btnClearFilters.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearFilters();
-            }
-        });
         cbbState.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 filter();
             }
         });
+        cbbSex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filter();
+            }
+        });
     }
-    private void loadImportDiners(){
-        CSVReader.importDiners(table,this);
-    }
-    private void clearFilters(){
-        cbbSex.setSelectedIndex(0);
-        txtSearch.getBtnClearSearch().doClick();
-    }
-    private void loadNewDiner(){
-        DDiner dDiner=new DDiner(table);
-        dDiner.setVisible(true);
+    private void initComponents(){
+        tabPane.setTitle("Todos los Comensales");
+        tabPane.getActions().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UtilitiesTables.actualizarTabla(table);
+            }
+        });
+        txtSearch.setPlaceHolderText("Buscar...");
+        loadTable();
     }
     public void filter() {
         filtros.clear();
@@ -114,19 +92,6 @@ public class TabAllDiners {
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);
     }
-    private void initComponents(){
-        tabPane.setTitle("Todos los comensales");
-        tabPane.getActions().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                UtilitiesTables.actualizarTabla(table);
-                filter();
-            }
-        });
-        txtSearch.setPlaceHolderText("Buscar...");
-        loadTable();
-    }
-
     private void loadTable(){
         model=new DinerTableModel(VPrincipal.diners);
         table.setModel(model);
@@ -134,10 +99,9 @@ public class TabAllDiners {
         table.setRowSorter(modeloOrdenado);
         UtilitiesTables.headerNegrita(table);
         DinerCellRendered.setCellRenderer(table,listaFiltros);
-        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDiner(table));
+        table.removeColumn(table.getColumn(""));
     }
     public TabPane getTabPane(){
         return tabPane;
     }
-
 }

@@ -99,7 +99,7 @@ public class TabRecordDinersAttendances {
         lbltotalNotAttendances.setText(String.valueOf(totalNotAttendances));
     }
     private void initComponents(){
-        tabPane.setTitle("Todos los comensales");
+        tabPane.setTitle("Asistencia de comensales");
         tabPane.getActions().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
