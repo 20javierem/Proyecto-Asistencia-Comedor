@@ -114,28 +114,28 @@ public class TabRecordDinersAttendances {
         start=calendar.getTime();
         end=new Date();
         loadTable(getList(start,end));
-        insertarMenuPopUp();
+//        insertarMenuPopUp();
     }
-    private void insertarMenuPopUp(){
-        JPopupMenu pop_up = new JPopupMenu();
-        JMenuItem editarProducto = new JMenuItem("Ver historial de asistencia", new ImageIcon(App.class.getResource("Icons/x16/mostrarContraseña.png")));
-        editarProducto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadRecordAttendanceDiner();
-            }
-        });
-        pop_up.add(editarProducto);
-        table.addMouseListener( new MouseAdapter() {
-            public void mouseReleased(MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    int row = table.rowAtPoint( e.getPoint() );
-                    table.setRowSelectionInterval(row,row);
-                    pop_up.show(e.getComponent(), e.getX(), e.getY());
-                }
-            }
-        });
-    }
+//    private void insertarMenuPopUp(){
+//        JPopupMenu pop_up = new JPopupMenu();
+//        JMenuItem editarProducto = new JMenuItem("Ver historial de asistencia", new ImageIcon(App.class.getResource("Icons/x16/mostrarContraseña.png")));
+//        editarProducto.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                loadRecordAttendanceDiner();
+//            }
+//        });
+//        pop_up.add(editarProducto);
+//        table.addMouseListener( new MouseAdapter() {
+//            public void mouseReleased(MouseEvent e) {
+//                if (e.isPopupTrigger()) {
+//                    int row = table.rowAtPoint( e.getPoint() );
+//                    table.setRowSelectionInterval(row,row);
+//                    pop_up.show(e.getComponent(), e.getX(), e.getY());
+//                }
+//            }
+//        });
+//    }
     private void loadRecordAttendanceDiner(){
         Diner diner=model.get(table.convertRowIndexToModel(table.getSelectedRow())).getDiner()  ;
         if(Utilities.getTabbedPane().indexOfTab("Historial de asistencia "+diner.getDni())==-1){
