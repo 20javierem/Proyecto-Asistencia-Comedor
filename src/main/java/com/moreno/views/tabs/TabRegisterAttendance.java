@@ -68,6 +68,8 @@ public class TabRegisterAttendance {
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ALERTA","No se encontró al comensal");
             }
         }
+        txtDiner.setSelectionStart(0);
+        txtDiner.setSelectionEnd(txtDiner.getText().length());
     }
     private void initComponents(){
         tabPane.setTitle("Registrar asistencia");

@@ -13,6 +13,7 @@ import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDayAttendance;
+import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDinersAttendances;
 import com.moreno.utilitiesTables.tablesCellRendered.DayAttendancesCellRendered;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerDaysAttendancesCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
@@ -214,7 +215,7 @@ public class TabRecordDinersAttendances {
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
         DinerDaysAttendancesCellRendered.setCellRenderer(table);
-        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDayAttendance(table));
+        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDinersAttendances(table));
         calculateTotals();
     }
     public TabPane getTabPane(){

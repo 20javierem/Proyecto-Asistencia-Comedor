@@ -158,6 +158,36 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
+
+    public static void generateReportDiners(List<Diner> diners) {
+        InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDiners.jasper");
+        try {
+            if(pathReport!=null){
+                List<Diner> list=new ArrayList<>(diners);
+                list.add(0,new Diner());
+                JasperReport report=(JasperReport) JRLoader.loadObject(pathReport);
+                JRBeanArrayDataSource sp=new JRBeanArrayDataSource(list.toArray());
+                Map<String,Object> parameters=new HashMap<>();
+                parameters.put("diners",sp);
+                parameters.put("nameInstitute",Utilities.getPropiedades().getNameInstitute());
+                JasperViewer viewer = getjasperViewer(report,parameters,sp,true);
+                if(viewer!=null){
+                    viewer.setTitle("Reporte comensales");
+                    if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
+                        Utilities.getTabbedPane().remove(viewer.getContentPane());
+                    }
+                    Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
+                    Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
+                }else{
+                    Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","Sucedio un error inesperado");
+                }
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.WARNING, Notify.Location.BOTTOM_RIGHT,"ERROR","No se encontró la plantilla");
+            }
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
     public static JasperViewer getjasperViewer(JasperReport report, Map<String, Object> parameters, JRBeanArrayDataSource sp, boolean isExitOnClose){
         try {
             JasperViewer jasperViewer=new JasperViewer(JasperFillManager.fillReport(report,parameters,sp),isExitOnClose);

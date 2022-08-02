@@ -1,14 +1,16 @@
 package com.moreno.utilitiesTables.tablesModels;
 
 import com.moreno.models.DinerDaysAttendances;
+import com.moreno.utilitiesTables.buttonEditors.JButtonAction;
+import org.jfree.ui.action.ActionButton;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class DinerDaysAttendancesTableModel extends AbstractTableModel {
-    private String[] columnNames = {"DNI","NOMBRES","APELLIDOS","CELULAR","FALTAS","FALTAS %"};
-    private Class[] m_colTypes = {String.class, String.class, String.class, String.class,String.class,String.class};
+    private String[] columnNames = {"DNI","NOMBRES","APELLIDOS","CELULAR","FALTAS","FALTAS %",""};
+    private Class[] m_colTypes = {String.class, String.class, String.class, String.class,String.class,String.class,JButton.class};
     private List<DinerDaysAttendances> vector;
 
     public DinerDaysAttendancesTableModel(List<DinerDaysAttendances> vector){
@@ -45,8 +47,10 @@ public class DinerDaysAttendancesTableModel extends AbstractTableModel {
                 return dinerDaysAttendances.getDiner().getPhone();
             case 4:
                 return dinerDaysAttendances.getTotalNotAttendances();
-            default:
+            case 5:
                 return dinerDaysAttendances.getTotalNotAttendancesPercentage();
+            default:
+                return new JButtonAction("x16/mostrarContraseña.png");
         }
     }
 

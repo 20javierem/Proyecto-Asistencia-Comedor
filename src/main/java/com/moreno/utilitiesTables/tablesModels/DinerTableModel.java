@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class DinerTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","NOMBRES","APELLIDOS","DNI","SEXO","CELULAR","ESTADO",""};
+    private String[] columnNames = {"ID","DNI","APELLIDOS","NOMBRES","SEXO","CELULAR","ESTADO",""};
     private Class[] m_colTypes = {Integer.class, String.class, String.class,String.class, String.class, String.class, String.class,JButton.class};
     private List<Diner> vector;
 
@@ -38,13 +38,13 @@ public class DinerTableModel extends AbstractTableModel {
             case 0:
                 return diner.getId();
             case 1:
-                return diner.getNames();
+                return diner.getDni();
             case 2:
                 return diner.getLastNames();
             case 3:
-                return diner.getDni();
+                return diner.getNames();
             case 4:
-                return diner.isMale()?"MASCULINO":"FEMENINO";
+                return diner.getSex();
             case 5:
                 return diner.getPhone();
             case 6:

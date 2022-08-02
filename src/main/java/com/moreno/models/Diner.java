@@ -105,7 +105,12 @@ public class Diner extends Moreno {
         setPhone(attributes[4].trim());
         setActive(Boolean.parseBoolean(attributes[5]));
     }
-
+    public String getSex(){
+        return isMale()?"MASCULINO":"FEMENINO";
+    }
+    public String getStade(){
+        return isActive()?"SI":"NO";
+    }
     @Override
     public String toString() {
         return String.valueOf(id);

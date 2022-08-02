@@ -1,7 +1,11 @@
 package com.moreno.views.tabs;
 
+import com.moreno.Notify;
 import com.moreno.custom.TabPane;
 import com.moreno.custom.TxtSearch;
+import com.moreno.models.Diner;
+import com.moreno.utilities.Utilities;
+import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DinerTableModel;
@@ -60,6 +64,18 @@ public class TabRecordDiners {
                 filter();
             }
         });
+        btnImportDiners.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateReport();
+            }
+        });
+        btnClearFilters.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearFilters();
+            }
+        });
     }
     private void initComponents(){
         tabPane.setTitle("Todos los Comensales");
@@ -71,6 +87,22 @@ public class TabRecordDiners {
         });
         txtSearch.setPlaceHolderText("Buscar...");
         loadTable();
+    }
+    private void clearFilters(){
+        cbbSex.setSelectedIndex(0);
+        cbbState.setSelectedIndex(0);
+        txtSearch.getBtnClearSearch().doClick();
+    }
+    private void generateReport(){
+        List<Diner> diners=new ArrayList<>();
+        for (int i=0;i<table.getRowCount();i++){
+            diners.add(model.get(table.convertRowIndexToModel(i)));
+        }
+        if(!diners.isEmpty()){
+            UtilitiesReports.generateReportDiners(diners);
+        }else{
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
+        }
     }
     public void filter() {
         filtros.clear();
