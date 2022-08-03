@@ -9,6 +9,7 @@ import com.moreno.custom.FondoPanel;
 import com.moreno.custom.TabbedPane;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
+import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
 import com.moreno.views.dialogs.DExport;
@@ -40,7 +41,6 @@ public class VPrincipal extends JFrame{
     private JPanel panelControles;
     private JPanel paneMenus;
     private JButton btnExit;
-    private JLabel lblNotify;
     private CButton btnReports;
     private Propiedades propiedades;
     private MenuDiners menuDiners;
@@ -84,6 +84,20 @@ public class VPrincipal extends JFrame{
                 loadMenuReports();
             }
         });
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeSesion();
+            }
+        });
+    }
+    private void closeSesion(){
+        int siono=JOptionPane.showOptionDialog(null,"¿Cerrar sesión?","MENSAJE",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+        if(siono==0){
+            Moreno.close();
+            dispose();
+        }
+
     }
     private void loadMenuReports(){
         Utilities.updateComponents(menuReports.getContentPane());

@@ -107,6 +107,7 @@ public class TabbedPane extends JTabbedPane {
     private void setVisibleButtonEsquina(boolean istade){
         toolBar.setVisible(istade);
     }
+
     private void despintar(){
         for (Component component : getComponents()) {
             if(indexOfComponent(component)!=-1){
@@ -219,7 +220,6 @@ public class TabbedPane extends JTabbedPane {
         toolBar.add(buttonEsquina);
         putClientProperty("JTabbedPane.trailingComponent", toolBar);
         putClientProperty("JTabbedPane.tabInsets",new Insets(0,10,0,5));
-        putClientProperty("JTabbedPane.showTabSeparators",true);
     }
 
     public TabbedPane() {

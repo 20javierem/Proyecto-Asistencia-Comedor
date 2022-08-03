@@ -92,8 +92,8 @@
                       <model>
                         <item value="Claro"/>
                         <item value="Oscuro"/>
-                        <item value="Darcula"/>
                         <item value="Ligth"/>
+                        <item value="Darcula"/>
                       </model>
                     </properties>
                   </component>

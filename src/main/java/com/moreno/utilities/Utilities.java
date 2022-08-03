@@ -53,6 +53,7 @@ public class Utilities {
     }
 
     public static void setTema(String tema){
+        FlatLaf.registerCustomDefaultsSource("com.moreno.themes");
         switch (tema){
             case "Ligth":
                 FlatIntelliJLaf.setup();
