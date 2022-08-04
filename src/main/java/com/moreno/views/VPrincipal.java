@@ -92,7 +92,7 @@ public class VPrincipal extends JFrame{
         });
     }
     private void closeSesion(){
-        int siono=JOptionPane.showOptionDialog(null,"¿Cerrar sesión?","MENSAJE",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+        int siono=JOptionPane.showOptionDialog(Utilities.getJFrame(),"¿Cerrar sesión?","MENSAJE",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
         if(siono==0){
             Moreno.close();
             dispose();
