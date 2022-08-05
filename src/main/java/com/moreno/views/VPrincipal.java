@@ -41,7 +41,7 @@ public class VPrincipal extends JFrame{
     private JPanel panelControles;
     private JPanel paneMenus;
     private JButton btnExit;
-    private CButton btnReports;
+    private JButton btnReports;
     private Propiedades propiedades;
     private MenuDiners menuDiners;
     private MenuReports menuReports;
