@@ -2,7 +2,7 @@ package com.moreno.views.tabs;
 
 import com.moreno.Notify;
 import com.moreno.custom.TabPane;
-import com.moreno.custom.TxtSearch;
+import com.moreno.custom.TextFieldSearch;
 import com.moreno.models.Diner;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesReports.UtilitiesReports;
@@ -27,7 +27,7 @@ public class TabRecordDiners {
     private JComboBox cbbState;
     private JButton btnClearFilters;
     private JButton btnImportDiners;
-    private TxtSearch txtSearch;
+    private TextFieldSearch textFieldSearch;
     private JTable table;
     private JComboBox cbbSex;
     private DinerTableModel model;
@@ -38,14 +38,14 @@ public class TabRecordDiners {
 
     public TabRecordDiners(){
         initComponents();
-        txtSearch.getBtnClearSearch().addActionListener(new ActionListener() {
+        textFieldSearch.getBtnClearSearch().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtSearch.setText(null);
+                textFieldSearch.setText(null);
                 filter();
             }
         });
-        txtSearch.addKeyListener(new KeyAdapter() {
+        textFieldSearch.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
@@ -85,13 +85,13 @@ public class TabRecordDiners {
                 UtilitiesTables.actualizarTabla(table);
             }
         });
-        txtSearch.setPlaceHolderText("Buscar...");
+        textFieldSearch.setPlaceHolderText("Buscar...");
         loadTable();
     }
     private void clearFilters(){
         cbbSex.setSelectedIndex(0);
         cbbState.setSelectedIndex(0);
-        txtSearch.getBtnClearSearch().doClick();
+        textFieldSearch.getBtnClearSearch().doClick();
     }
     private void generateReport(){
         List<Diner> diners=new ArrayList<>();
@@ -114,12 +114,12 @@ public class TabRecordDiners {
         if (cbbState.getSelectedIndex()!=0) {
             filtros.add(RowFilter.regexFilter(cbbState.getSelectedItem().toString(), 6));
         }
-        if(!txtSearch.getText().isBlank()){
-            filtros.add(RowFilter.regexFilter(txtSearch.getText(), 1,2,3,5));
-            listaFiltros.put(1,txtSearch.getText());
-            listaFiltros.put(2,txtSearch.getText());
-            listaFiltros.put(3,txtSearch.getText());
-            listaFiltros.put(5,txtSearch.getText());
+        if(!textFieldSearch.getText().isBlank()){
+            filtros.add(RowFilter.regexFilter(textFieldSearch.getText(), 1,2,3,5));
+            listaFiltros.put(1, textFieldSearch.getText());
+            listaFiltros.put(2, textFieldSearch.getText());
+            listaFiltros.put(3, textFieldSearch.getText());
+            listaFiltros.put(5, textFieldSearch.getText());
         }
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);

@@ -3,7 +3,7 @@ package com.moreno.views.tabs;
 import com.moreno.Notify;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.TabPane;
-import com.moreno.custom.TxtSearch;
+import com.moreno.custom.TextFieldSearch;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.DinerAttendance;
 import com.moreno.models.Diner;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class TabRegisterAttendance {
     private TabPane tabPane;
     private JTable table;
-    private TxtSearch txtDiner;
+    private TextFieldSearch txtDiner;
     private JLabel lblAttendances;
     private JLabel lblFaltaron;
     private DinerDayAttendanceTableModel model;

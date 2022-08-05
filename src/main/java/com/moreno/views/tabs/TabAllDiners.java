@@ -1,11 +1,8 @@
 package com.moreno.views.tabs;
 
-import com.moreno.App;
 import com.moreno.custom.TabPane;
-import com.moreno.custom.TxtSearch;
-import com.moreno.models.Diner;
+import com.moreno.custom.TextFieldSearch;
 import com.moreno.utilities.CSVReader;
-import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerCellRendered;
@@ -28,7 +25,7 @@ public class TabAllDiners {
     private JButton btnImportDiners;
     private JComboBox cbbSex;
     private JButton btnClearFilters;
-    private TxtSearch txtSearch;
+    private TextFieldSearch textFieldSearch;
     private JComboBox cbbState;
     private DinerTableModel model;
     private TableRowSorter<DinerTableModel> modeloOrdenado;
@@ -50,14 +47,14 @@ public class TabAllDiners {
                 loadImportDiners();
             }
         });
-        txtSearch.getBtnClearSearch().addActionListener(new ActionListener() {
+        textFieldSearch.getBtnClearSearch().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtSearch.setText(null);
+                textFieldSearch.setText(null);
                 filter();
             }
         });
-        txtSearch.addKeyListener(new KeyAdapter() {
+        textFieldSearch.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
@@ -88,7 +85,7 @@ public class TabAllDiners {
     }
     private void clearFilters(){
         cbbSex.setSelectedIndex(0);
-        txtSearch.getBtnClearSearch().doClick();
+        textFieldSearch.getBtnClearSearch().doClick();
     }
     private void loadNewDiner(){
         DDiner dDiner=new DDiner(table);
@@ -104,12 +101,12 @@ public class TabAllDiners {
         if (cbbState.getSelectedIndex()!=0) {
             filtros.add(RowFilter.regexFilter(cbbState.getSelectedItem().toString(), 6));
         }
-        if(!txtSearch.getText().isBlank()){
-            filtros.add(RowFilter.regexFilter(txtSearch.getText(), 1,2,3,5));
-            listaFiltros.put(1,txtSearch.getText());
-            listaFiltros.put(2,txtSearch.getText());
-            listaFiltros.put(3,txtSearch.getText());
-            listaFiltros.put(5,txtSearch.getText());
+        if(!textFieldSearch.getText().isBlank()){
+            filtros.add(RowFilter.regexFilter(textFieldSearch.getText(), 1,2,3,5));
+            listaFiltros.put(1, textFieldSearch.getText());
+            listaFiltros.put(2, textFieldSearch.getText());
+            listaFiltros.put(3, textFieldSearch.getText());
+            listaFiltros.put(5, textFieldSearch.getText());
         }
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);
@@ -123,7 +120,7 @@ public class TabAllDiners {
                 filter();
             }
         });
-        txtSearch.setPlaceHolderText("Buscar...");
+        textFieldSearch.setPlaceHolderText("Buscar...");
         loadTable();
     }
 

@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TxtSearch extends JTextField {
+public class TextFieldSearch extends JTextField {
     private JButton btnClearSearch=new JButton();
 
-    public TxtSearch(){
+    public TextFieldSearch(){
         putClientProperty("JTextField.padding",new Insets(0,2,0,0));
         putClientProperty("JTextField.leadingIcon",new ImageIcon(App.class.getResource("Icons/x16/lupa.png")));
         btnClearSearch.putClientProperty("JButton.buttonType","square");
