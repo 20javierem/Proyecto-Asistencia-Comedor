@@ -97,9 +97,10 @@ public class DDiner extends JDialog{
                 if(diner.isActive()){
                     if(VPrincipal.attendancesToday!=null){
                         DinerAttendance dinerAttendance=new DinerAttendance(diner,VPrincipal.attendancesToday);
-                        dinerAttendance.save();
                         VPrincipal.attendancesToday.getAttendances().add(dinerAttendance);
+                        dinerAttendance.setAttended(!VPrincipal.attendancesToday.isState());
                         VPrincipal.attendancesToday.calculateTotals();
+                        dinerAttendance.save();
                     }
                 }
                 updateTable();

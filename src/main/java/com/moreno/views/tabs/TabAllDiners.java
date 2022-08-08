@@ -94,12 +94,11 @@ public class TabAllDiners {
     public void filter() {
         filtros.clear();
         listaFiltros.clear();
-
         if (cbbSex.getSelectedIndex()!=0) {
             filtros.add(RowFilter.regexFilter(cbbSex.getSelectedItem().toString(), 4));
         }
         if (cbbState.getSelectedIndex()!=0) {
-            filtros.add(RowFilter.regexFilter(cbbState.getSelectedItem().toString(), 6));
+            filtros.add(RowFilter.regexFilter(cbbState.getSelectedIndex()==1?"SI":"NO", 6));
         }
         if(!textFieldSearch.getText().isBlank()){
             filtros.add(RowFilter.regexFilter(textFieldSearch.getText(), 1,2,3,5));

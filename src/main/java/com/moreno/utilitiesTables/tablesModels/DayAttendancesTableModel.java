@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DayAttendancesTableModel extends AbstractTableModel {
-    private String[] columnNames = {"ID","FECHA","DÍA","ASISTIERON","FALTARON","ASISTIERON %","FALTARON %","DETALLE"};
-    private Class[] m_colTypes = {Integer.class, Date.class, String.class,String.class, String.class,String.class,String.class, JButton.class};
+    private String[] columnNames = {"ID","FECHA","DÍA","ESTADO","ASISTIERON","FALTARON","ASISTIERON %","FALTARON %","DETALLE"};
+    private Class[] m_colTypes = {Integer.class, Date.class,String.class, String.class,String.class, String.class,String.class,String.class, JButton.class};
     private List<DayAttendance> vector;
 
     public DayAttendancesTableModel(List<DayAttendance> vector){
@@ -45,12 +45,14 @@ public class DayAttendancesTableModel extends AbstractTableModel {
             case 2:
                 return Utilities.dayFormat.format(dayAttendance.getDate()).toUpperCase();
             case 3:
-                return dayAttendance.getTotalDinerAttendance();
+                return dayAttendance.isState()?"NORMAL":"FERIADO";
             case 4:
-                return dayAttendance.getTotalDinerNotAttendance();
+                return dayAttendance.getTotalDinerAttendance();
             case 5:
-                return dayAttendance.getPercentageAtendet();
+                return dayAttendance.getTotalDinerNotAttendance();
             case 6:
+                return dayAttendance.getPercentageAtendet();
+            case 7:
                 return dayAttendance.getPercentageNotAtendet();
             default:
                 return new JButtonAction("x16/mostrarContraseña.png","Detalle");

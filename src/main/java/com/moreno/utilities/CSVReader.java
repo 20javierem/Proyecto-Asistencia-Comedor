@@ -47,8 +47,9 @@ public class CSVReader {
                                 if(diner.isActive()){
                                     if(VPrincipal.attendancesToday!=null){
                                         DinerAttendance dinerAttendance=new DinerAttendance(diner,VPrincipal.attendancesToday);
-                                        dinerAttendance.save();
                                         VPrincipal.attendancesToday.getAttendances().add(dinerAttendance);
+                                        dinerAttendance.setAttended(!VPrincipal.attendancesToday.isState());
+                                        dinerAttendance.save();
                                         VPrincipal.attendancesToday.calculateTotals();
                                         VPrincipal.attendancesToday.save();
                                     }

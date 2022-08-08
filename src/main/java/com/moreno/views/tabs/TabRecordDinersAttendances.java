@@ -114,7 +114,7 @@ public class TabRecordDinersAttendances {
         start=calendar.getTime();
         end=new Date();
         loadTable(getList(start,end));
-//        insertarMenuPopUp();
+        insertarMenuPopUp();
     }
      private void insertarMenuPopUp(){
         JPopupMenu pop_up = new JPopupMenu();
@@ -128,7 +128,7 @@ public class TabRecordDinersAttendances {
         pop_up.add(editarProducto);
         table.addMouseListener( new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
-                if (e.isPopupTrigger()) {
+                if (e.getButton()==3) {
                     int row = table.rowAtPoint( e.getPoint() );
                     table.setRowSelectionInterval(row,row);
                     pop_up.show(e.getComponent(), e.getX(), e.getY());
@@ -181,9 +181,15 @@ public class TabRecordDinersAttendances {
 
     private List<DinerDaysAttendances> getList(Date start,Date end){
         List<DinerDaysAttendances> dinerDaysAttendances=new ArrayList<>();
-        List<Diner> diners=VPrincipal.dinersActives;
+        List<Diner> diners=new ArrayList<>();
         if(ckIncludeInactives.isSelected()){
             diners=VPrincipal.diners;
+        }else{
+            for(Diner diner:VPrincipal.diners){
+                if(diner.isActive()){
+                    diners.add(diner);
+                }
+            }
         }
         if(start!=null&&end!=null){
             for (Diner diner:diners){

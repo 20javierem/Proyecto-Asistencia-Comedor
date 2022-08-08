@@ -1,6 +1,7 @@
 package com.moreno.views.tabs;
 
 import com.moreno.Notify;
+import com.moreno.controllers.DayAttendances;
 import com.moreno.controllers.Diners;
 import com.moreno.custom.TabPane;
 import com.moreno.custom.TextFieldSearch;
@@ -13,12 +14,12 @@ import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerDayAttendanceCellRendered;
 import com.moreno.utilitiesTables.tablesModels.DinerDayAttendanceTableModel;
 import com.moreno.views.VPrincipal;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.event.*;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -28,8 +29,13 @@ public class TabRegisterAttendance {
     private TextFieldSearch txtDiner;
     private JLabel lblAttendances;
     private JLabel lblFaltaron;
+    private JDateChooser dateChosser;
+    private JComboBox cbbState;
+    private JButton btnSave;
     private DinerDayAttendanceTableModel model;
     private HashMap<String,DinerAttendance> attendanceHashMap=new HashMap<>();
+    private DayAttendance dayAttendance;
+    private String date="";
 
     public TabRegisterAttendance(){
         initComponents();
@@ -41,8 +47,57 @@ public class TabRegisterAttendance {
                 }
             }
         });
-    }
+        ((JTextField)dateChosser.getDateEditor()).getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if(!date.equals(((JTextField)dateChosser.getDateEditor()).getText())){
+                    loadRecordsAttendances();
+                    date=((JTextField)dateChosser.getDateEditor()).getText();
+                }
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save();
+            }
+        });
+    }
+    private void save(){
+        dayAttendance.setState(cbbState.getSelectedIndex()==0);
+        dayAttendance.getAttendances().forEach(dinerAttendance -> {
+            dinerAttendance.setAttended(true);
+            dinerAttendance.save();
+        });
+        dayAttendance.calculateTotals();
+        loadCalculateTotals();
+        dayAttendance.save();
+        btnSave.setEnabled(dayAttendance.isState());
+        txtDiner.setEnabled(dayAttendance.isState());
+    }
+    private void loadRecordsAttendances(){
+        if(dateChosser.getDate() != null){
+            DayAttendance dayAttendance= DayAttendances.getOfDate(dateChosser.getDate());
+            if(dayAttendance!=null){
+                this.dayAttendance=dayAttendance;
+                btnSave.setEnabled(dayAttendance.isState());
+                txtDiner.setEnabled(dayAttendance.isState());
+                loadTable();
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Registros cargados");
+            }else{
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
+            }
+        }
+    }
     private void registerAttendance(){
         String code= txtDiner.getText().trim();
         if(!code.isBlank()){
@@ -53,8 +108,8 @@ public class TabRegisterAttendance {
                     if(!dinerAttendance.isAttended()){
                         dinerAttendance.setAttended(true);
                         dinerAttendance.save();
-                        VPrincipal.attendancesToday.calculateTotals();
-                        VPrincipal.attendancesToday.save();
+                        dayAttendance.calculateTotals();
+                        dayAttendance.save();
                         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Asistencia registrada");
                         UtilitiesTables.actualizarTabla(table);
                         loadCalculateTotals();
@@ -73,40 +128,45 @@ public class TabRegisterAttendance {
     }
     private void initComponents(){
         tabPane.setTitle("Registrar asistencia");
-        tabPane.getActions().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadHashMap();
-                UtilitiesTables.actualizarTabla(table);
-                loadCalculateTotals();
-            }
+        dayAttendance=VPrincipal.attendancesToday;
+        loadTable();
+        tabPane.getActions().addActionListener(e -> {
+            loadHashMap();
+            UtilitiesTables.actualizarTabla(table);
+            loadCalculateTotals();
         });
         txtDiner.setPlaceHolderText("DNI...");
-        loadTable();
     }
     private void loadTable(){
-        if(VPrincipal.attendancesToday==null) {
-            VPrincipal.attendancesToday = new DayAttendance(new Date());
-            VPrincipal.attendancesToday.save();
-            VPrincipal.attendancesToday.getAttendances().forEach(Moreno::save);
+        if(dayAttendance==null) {
+            dayAttendance = new DayAttendance(new Date());
+            dayAttendance.save();
+            dayAttendance.getAttendances().forEach(Moreno::save);
+            VPrincipal.attendancesToday=dayAttendance;
         }
         loadHashMap();
-        model=new DinerDayAttendanceTableModel(VPrincipal.attendancesToday.getAttendances());
+        model=new DinerDayAttendanceTableModel(dayAttendance.getAttendances());
         table.setModel(model);
         UtilitiesTables.headerNegrita(table);
         DinerDayAttendanceCellRendered.setCellRenderer(table);
         loadCalculateTotals();
     }
     private void loadHashMap(){
-        for (DinerAttendance dinerAttendance:VPrincipal.attendancesToday.getAttendances()){
+        for (DinerAttendance dinerAttendance:dayAttendance.getAttendances()){
             attendanceHashMap.put(dinerAttendance.getDiner().getDni(),dinerAttendance);
         }
     }
     private void loadCalculateTotals(){
-        lblAttendances.setText(VPrincipal.attendancesToday.getTotalDinerAttendance()+" : "+VPrincipal.attendancesToday.getPercentageAtendet());
-        lblFaltaron.setText(VPrincipal.attendancesToday.getTotalDinerNotAttendance()+" : "+VPrincipal.attendancesToday.getPercentageNotAtendet());
+        lblAttendances.setText(dayAttendance.getTotalDinerAttendance()+" : "+dayAttendance.getPercentageAtendet());
+        lblFaltaron.setText(dayAttendance.getTotalDinerNotAttendance()+" : "+dayAttendance.getPercentageNotAtendet());
     }
     public TabPane getTabPane(){
         return tabPane;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        dateChosser =new JDateChooser(new Date());
+        dateChosser.setDateFormatString(Utilities.getFormatoFecha());
     }
 }

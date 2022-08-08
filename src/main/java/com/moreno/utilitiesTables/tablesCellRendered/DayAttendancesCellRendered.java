@@ -36,6 +36,7 @@ public class DayAttendancesCellRendered extends DefaultTableCellRenderer {
                     table.getColumn(table.getColumnName(column)).setPreferredWidth(40);
                     break;
                 case "DNI":
+                case "ESTADO":
                 case "CELULAR":
                 case "SEXO":
                 case "ASISTIERON":

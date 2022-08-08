@@ -4,6 +4,7 @@ import com.moreno.controllers.Diners;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,9 @@ public class DayAttendance extends Moreno {
 
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    @NotNull
+    private boolean state=true;
 
     @OneToMany(mappedBy = "dayAttendance")
     private List<DinerAttendance> attendances=new ArrayList<>();
@@ -60,6 +64,14 @@ public class DayAttendance extends Moreno {
 
     public List<DinerAttendance> getAttendances() {
         return attendances;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
     public void calculateTotals(){

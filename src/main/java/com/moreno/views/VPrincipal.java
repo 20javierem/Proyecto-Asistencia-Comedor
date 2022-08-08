@@ -12,6 +12,7 @@ import com.moreno.models.Diner;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
+import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.views.dialogs.DExport;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
@@ -47,9 +48,7 @@ public class VPrincipal extends JFrame{
     private MenuReports menuReports;
     private MenuAttendance menuAttendance;
     public static List<Diner> diners;
-    public static List<Diner> dinersActives;
     public static DayAttendance attendancesToday;
-    public static List<DayAttendance> attendancesOfMonth;
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
@@ -126,11 +125,7 @@ public class VPrincipal extends JFrame{
 
     private void loadLists(){
         diners= Diners.getTodos();
-        dinersActives=Diners.getActives();
         attendancesToday= DayAttendances.getOfDate(new Date());
-        Calendar start= Calendar.getInstance();
-        start.set(Calendar.DATE,1);
-        attendancesOfMonth=DayAttendances.getByRangeOfDate(start.getTime(),new Date());
     }
 
     private void despintar(JButton boton,Icon icon){
@@ -147,6 +142,8 @@ public class VPrincipal extends JFrame{
     private void initComponents(){
         setContentPane(contentPane);
         setTitle("Software de asistencia");
+        Image icon = (new ImageIcon(App.class.getResource("Images/icon.png"))).getImage();
+        setIconImage(icon);
         Utilities.setJFrame(this);
         Utilities.setTabbedPane(tabbedPane);
         Utilities.setPropiedades(propiedades);
@@ -187,6 +184,7 @@ public class VPrincipal extends JFrame{
     private void loadMenuItems(){
         JMenuItem menuSettings=new JMenuItem("Configuraciones");
         JMenuItem menuExport=new JMenuItem("Exportar");
+        JMenuItem menuHelp=new JMenuItem("Ayuda");
         menuSettings.setIcon(new ImageIcon(App.class.getResource("Icons/x16/settings.png")));
         menuSettings.addActionListener(new ActionListener() {
             @Override
@@ -201,8 +199,16 @@ public class VPrincipal extends JFrame{
                 loadExport();
             }
         });
+        menuHelp.setIcon(new ImageIcon(App.class.getResource("Icons/x16/export.png")));
+        menuHelp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UtilitiesReports.openManual();
+            }
+        });
         btnMenuInicio.add(menuSettings);
         btnMenuInicio.add(menuExport);
+        btnMenuInicio.add(menuHelp);
     }
     private void loadSettings(){
         DSettings dSettings=new DSettings(this);

@@ -17,6 +17,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +88,9 @@ public class TabRecordAttendance {
             }
         });
         loadPlaceHolders();
-        loadTable(VPrincipal.attendancesOfMonth);
+        Calendar start= Calendar.getInstance();
+        start.set(Calendar.DATE,1);
+        loadTable(DayAttendances.getByRangeOfDate(start.getTime(),new Date()));
     }
     private void getRecords(){
         btnBuscar.setCursor(new Cursor(Cursor.WAIT_CURSOR));

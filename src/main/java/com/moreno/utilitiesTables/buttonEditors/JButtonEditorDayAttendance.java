@@ -1,7 +1,9 @@
 package com.moreno.utilitiesTables.buttonEditors;
 
+import com.moreno.Notify;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
+import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.tablesModels.DayAttendancesTableModel;
@@ -29,11 +31,13 @@ public class JButtonEditorDayAttendance extends AbstractCellEditor implements Ta
         button.addActionListener(this);
     }
     public void actionPerformed(ActionEvent e) {
-        if(table.getSelectedRow()!=-1){
+        DayAttendance dayAttendance=((DayAttendancesTableModel) table.getModel()).get(table.convertRowIndexToModel(table.getSelectedRow()));
+        if(dayAttendance.isState()){
             button.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            DayAttendance dayAttendance=((DayAttendancesTableModel) table.getModel()).get(table.convertRowIndexToModel(table.getSelectedRow()));
             UtilitiesReports.generateReportDayAttendance(dayAttendance);
             button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }else{
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","El día seleccionado es feriado");
         }
     }
 
