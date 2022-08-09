@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "diner_tbl")
 public class Diner extends Moreno {
 
     @Id
@@ -99,8 +99,8 @@ public class Diner extends Moreno {
     }
     public Diner(String[] attributes){
         setDni(attributes[0].trim());
-        setNames(attributes[1].trim());
-        setLastNames(attributes[2].trim());
+        setLastNames(attributes[1].trim());
+        setNames(attributes[2].trim());
         setMale(Boolean.parseBoolean(attributes[3]));
         setPhone(attributes[4].trim());
         setActive(Boolean.parseBoolean(attributes[5]));

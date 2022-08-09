@@ -2,7 +2,7 @@ package com.moreno.views.tabs;
 
 import com.moreno.custom.TabPane;
 import com.moreno.custom.TextFieldSearch;
-import com.moreno.utilities.CSVReader;
+import com.moreno.utilities.UtilitiesCsv;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.buttonEditors.JButtonEditorDiner;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerCellRendered;
@@ -81,14 +81,14 @@ public class TabAllDiners {
         });
     }
     private void loadImportDiners(){
-        CSVReader.importDiners(table,this);
+        UtilitiesCsv.importDiners(table,this);
     }
     private void clearFilters(){
         cbbSex.setSelectedIndex(0);
         textFieldSearch.getBtnClearSearch().doClick();
     }
     private void loadNewDiner(){
-        DDiner dDiner=new DDiner(table);
+        DDiner dDiner=new DDiner(this,table);
         dDiner.setVisible(true);
     }
     public void filter() {
@@ -130,7 +130,7 @@ public class TabAllDiners {
         table.setRowSorter(modeloOrdenado);
         UtilitiesTables.headerNegrita(table);
         DinerCellRendered.setCellRenderer(table,listaFiltros);
-        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDiner(table));
+        table.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorDiner(this,table));
     }
     public TabPane getTabPane(){
         return tabPane;

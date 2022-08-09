@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity(name = "Day_attendance_tbl")
 public class DayAttendance extends Moreno {
 
     @Id

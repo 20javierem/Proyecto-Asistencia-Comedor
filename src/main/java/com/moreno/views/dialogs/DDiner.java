@@ -7,6 +7,7 @@ import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.validators.DinerValidator;
 import com.moreno.views.VPrincipal;
+import com.moreno.views.tabs.TabAllDiners;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
@@ -26,13 +27,16 @@ public class DDiner extends JDialog{
     private Diner diner;
     private boolean update=false;
     private JTable table;
-    public DDiner(JTable table){
-        this(new Diner(),table);
+    private TabAllDiners tabAllDiners;
+
+    public DDiner(TabAllDiners tabAllDiners,JTable table){
+        this(tabAllDiners,new Diner(),table);
     }
-    public DDiner(Diner diner,JTable table){
+    public DDiner(TabAllDiners tabAllDiners,Diner diner, JTable table){
         super(Utilities.getJFrame(),"Nuevo comensal",true);
         this.diner=diner;
         this.table=table;
+        this.tabAllDiners=tabAllDiners;
         initComponents();
         btnSave.addActionListener(new ActionListener() {
             @Override
@@ -115,6 +119,7 @@ public class DDiner extends JDialog{
     private void updateTable(){
         if(table!=null){
             UtilitiesTables.actualizarTabla(table);
+            tabAllDiners.filter();
         }
     }
     private void loadDiner(){

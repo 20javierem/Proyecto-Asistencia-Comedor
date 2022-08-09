@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
 
-@Entity
+@Entity(name = "diner_attedance_tbl")
 public class DinerAttendance extends Moreno {
 
     @Id

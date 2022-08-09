@@ -1,7 +1,7 @@
 package com.moreno.views.dialogs;
 
 import com.moreno.Notify;
-import com.moreno.utilities.CSVReader;
+import com.moreno.utilities.UtilitiesCsv;
 import com.moreno.utilities.Utilities;
 
 import javax.swing.*;
@@ -66,14 +66,14 @@ public class DExport extends JDialog{
         if(ckIdDiner.isSelected()){
             columns.add("id");
         }
-        if(ckNames.isSelected()){
-            columns.add("names");
+        if(ckDni.isSelected()){
+            columns.add("dni");
         }
         if(ckLastNames.isSelected()){
             columns.add("lastNames");
         }
-        if(ckDni.isSelected()){
-            columns.add("dni");
+        if(ckNames.isSelected()){
+            columns.add("names");
         }
         if(ckSex.isSelected()){
             columns.add("male");
@@ -85,7 +85,7 @@ public class DExport extends JDialog{
             columns.add("active");
         }
         if(!columns.isEmpty()){
-            CSVReader.exportDiners(columns);
+            UtilitiesCsv.exportDiners(columns);
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
         }
@@ -111,7 +111,7 @@ public class DExport extends JDialog{
             columns.add("percentageNotAtendet");
         }
         if(!columns.isEmpty()){
-            CSVReader.exportAttendancesDays(columns);
+            UtilitiesCsv.exportAttendancesDays(columns);
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
         }
@@ -129,7 +129,7 @@ public class DExport extends JDialog{
             columns.add("dayAttendance");
         }
         if(!columns.isEmpty()){
-            CSVReader.exportDinersAttendances(columns);
+            UtilitiesCsv.exportDinersAttendances(columns);
         }else{
             Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
         }
