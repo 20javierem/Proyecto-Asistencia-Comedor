@@ -85,6 +85,7 @@ public class TabAllDiners {
     }
     private void clearFilters(){
         cbbSex.setSelectedIndex(0);
+        cbbState.setSelectedIndex(0);
         textFieldSearch.getBtnClearSearch().doClick();
     }
     private void loadNewDiner(){
