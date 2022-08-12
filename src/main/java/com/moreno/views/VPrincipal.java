@@ -208,7 +208,7 @@ public class VPrincipal extends JFrame{
         });
         btnMenuInicio.add(menuSettings);
         btnMenuInicio.add(menuExport);
-        btnMenuInicio.add(menuHelp);
+//        btnMenuInicio.add(menuHelp);
     }
     private void loadSettings(){
         DSettings dSettings=new DSettings(this);

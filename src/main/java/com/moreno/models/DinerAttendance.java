@@ -20,15 +20,11 @@ public class DinerAttendance extends Moreno {
     @Id
     @GeneratedValue(generator = "increment")
     private Integer id;
-
     @ManyToOne
     private Diner diner;
-
     @ManyToOne
     private DayAttendance dayAttendance;
-
     private boolean attended=false;
-
     public DinerAttendance() {
 
     }

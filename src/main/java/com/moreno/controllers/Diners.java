@@ -32,7 +32,6 @@ public class Diners extends Moreno {
         criteria.select(root)
                 .where(builder.equal(root.get("dni"),dni));
         List<Diner> diners=session.createQuery(criteria).getResultList();
-        System.out.println(diners.size());
         return !diners.isEmpty()?diners.get(0):null;
     }
     public static Vector<Diner> getActives(){
