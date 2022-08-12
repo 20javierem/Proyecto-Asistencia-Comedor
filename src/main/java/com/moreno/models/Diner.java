@@ -37,9 +37,6 @@ public class Diner extends Moreno {
     @NotBlank(message = "Celular")
     private String phone;
 
-    @OneToMany(mappedBy = "diner")
-    private List<DinerAttendance> dinerAttendances =new ArrayList<>();
-
     private boolean active=false;
 
     public Integer getId() {
@@ -84,10 +81,6 @@ public class Diner extends Moreno {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public List<DinerAttendance> getAttendances() {
-        return dinerAttendances;
     }
 
     public boolean isMale() {
