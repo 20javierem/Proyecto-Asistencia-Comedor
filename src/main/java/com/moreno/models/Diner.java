@@ -1,5 +1,9 @@
 package com.moreno.models;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moreno.common.Common;
 import com.moreno.utilities.Moreno;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -111,8 +115,16 @@ public class Diner extends Moreno {
     public String getStade(){
         return isActive()?"SI":"NO";
     }
+
     @Override
-    public String toString() {
-        return String.valueOf(id);
+    public void save() {
+        super.save();
+        DatabaseReference reference= Common.getDatabase().getReference("Diner_tbl");
+        reference.child(String.valueOf(getId())).setValue(this, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+            }
+        });
     }
 }

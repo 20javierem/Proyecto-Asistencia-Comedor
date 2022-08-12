@@ -1,6 +1,12 @@
 package com.moreno.models;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moreno.common.Common;
 import com.moreno.controllers.Diners;
+import com.moreno.modelsFirebase.FBDayAttendance;
+import com.moreno.modelsFirebase.FBDinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.*;
@@ -112,7 +118,14 @@ public class DayAttendance extends Moreno {
         calculateTotals();
     }
     @Override
-    public String toString() {
-        return String.valueOf(id);
+    public void save() {
+        super.save();
+        DatabaseReference reference= Common.getDatabase().getReference("dayAttendance_tbl");
+        reference.child(String.valueOf(getId())).setValue(new FBDayAttendance(this), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+            }
+        });
     }
 }

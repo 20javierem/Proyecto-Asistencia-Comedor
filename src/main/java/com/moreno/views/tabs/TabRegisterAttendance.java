@@ -102,6 +102,8 @@ public class TabRegisterAttendance {
         String code= txtDiner.getText().trim();
         if(!code.isBlank()){
             Diner diner= Diners.getByDni(code);
+            System.out.println(code);
+            System.out.println(Diners.get(1).getDni());
             if(diner!=null){
                 if(diner.isActive()){
                     DinerAttendance dinerAttendance=attendanceHashMap.get(diner.getDni());
