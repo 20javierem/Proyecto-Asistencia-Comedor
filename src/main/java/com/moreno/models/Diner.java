@@ -1,10 +1,11 @@
 package com.moreno.models;
 
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.api.client.util.Sleeper;
+import com.google.firebase.database.*;
 import com.moreno.common.Common;
 import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Utilities;
+import com.moreno.views.VPrincipal;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,7 +14,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity(name = "diner_tbl")
 public class Diner extends Moreno {
@@ -105,6 +108,7 @@ public class Diner extends Moreno {
     public String getSex(){
         return isMale()?"MASCULINO":"FEMENINO";
     }
+
     public String getStade(){
         return isActive()?"SI":"NO";
     }
@@ -116,8 +120,8 @@ public class Diner extends Moreno {
         reference.child(String.valueOf(getId())).setValue(this, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
             }
         });
     }
+
 }
