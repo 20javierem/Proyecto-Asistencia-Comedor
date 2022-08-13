@@ -132,16 +132,18 @@ public class TabbedPane extends JTabbedPane {
         if(getSelectedIndex()!=-1){
             setBackgroundAt(getSelectedIndex(),new JPanel().getBackground().brighter());
             setEnabledAt(getSelectedIndex(),false);
-            if(getComponentAt(getSelectedIndex()) instanceof TabPane){
-                TabPane tabPane =(TabPane) getComponentAt(getSelectedIndex());
-                if(tabPane.getOption()!=null){
-                    Utilities.buttonSelected(tabPane.getOption());
-                }
-                tabPane.update();
-            }
+            updateTab();
         }
     }
-
+    public void updateTab(){
+        if(getComponentAt(getSelectedIndex()) instanceof TabPane){
+            TabPane tabPane =(TabPane) getComponentAt(getSelectedIndex());
+            if(tabPane.getOption()!=null){
+                Utilities.buttonSelected(tabPane.getOption());
+            }
+            tabPane.update();
+        }
+    }
     private void insertarButtons(){
         //creacion de pop_up
         JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");

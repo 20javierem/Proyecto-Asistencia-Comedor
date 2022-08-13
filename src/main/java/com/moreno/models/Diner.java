@@ -3,6 +3,7 @@ package com.moreno.models;
 import com.google.api.client.util.Sleeper;
 import com.google.firebase.database.*;
 import com.moreno.common.Common;
+import com.moreno.controllers.Diners;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import com.moreno.views.VPrincipal;
@@ -22,7 +23,6 @@ import java.util.Map;
 public class Diner extends Moreno {
 
     @Id
-    @GeneratedValue(generator = "increment")
     private Integer id;
 
     @NotBlank(message = "Nombres")
@@ -115,6 +115,9 @@ public class Diner extends Moreno {
 
     @Override
     public void save() {
+        if(id==null){
+            id= Diners.getLastId();
+        }
         super.save();
         DatabaseReference reference= Common.getDatabase().getReference("Diner_tbl");
         reference.child(String.valueOf(getId())).setValue(this, new DatabaseReference.CompletionListener() {

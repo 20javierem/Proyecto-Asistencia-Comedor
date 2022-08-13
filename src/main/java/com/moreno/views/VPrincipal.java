@@ -124,6 +124,7 @@ public class VPrincipal extends JFrame{
     }
 
     private void loadLists(){
+        Diners.all();
         diners= Diners.getTodos();
         attendancesToday= DayAttendances.getOfDate(new Date());
     }

@@ -18,7 +18,6 @@ public class Common {
                     .setCredentials(GoogleCredentials.fromStream(refreshToken))
                     .setDatabaseUrl("https://proyecto-movilesii-default-rtdb.firebaseio.com/")
                     .build();
-
             FirebaseApp.initializeApp(options);
         } catch (IOException e) {
             e.printStackTrace();

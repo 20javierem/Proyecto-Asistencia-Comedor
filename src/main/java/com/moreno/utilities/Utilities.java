@@ -32,6 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.List;
 
 public class Utilities {
     public static DateFormat formatoFecha=new SimpleDateFormat("dd-MM-yyyy");
@@ -47,7 +48,7 @@ public class Utilities {
     private static TabbedPane tabbedPane;
     private static Propiedades propiedades;
     public static SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-
+    public static List<JTable> tables=new ArrayList<>();
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }
@@ -296,6 +297,10 @@ public class Utilities {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<JTable> getTables(){
+        return tables;
     }
 
     private static byte[] base64Decode(String property) throws IOException {
