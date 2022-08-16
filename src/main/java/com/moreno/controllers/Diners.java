@@ -52,7 +52,7 @@ public class Diners extends Moreno {
     public static void all(){
         try{
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference reference=database.getReference("Diner_tbl");
+            DatabaseReference reference=database.getReference("diner_tbl");
             reference.orderByChild("id").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {

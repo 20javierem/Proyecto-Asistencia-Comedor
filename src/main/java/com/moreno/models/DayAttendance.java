@@ -40,6 +40,8 @@ public class DayAttendance extends Moreno {
 
     private String percentageNotAtendet="100%";
 
+    private String menuDescription="";
+
     public Integer getId() {
         return id;
     }
@@ -58,6 +60,14 @@ public class DayAttendance extends Moreno {
 
     public Integer getTotalDinerAttendance() {
         return totalDinerAttendance;
+    }
+
+    public String getMenuDescription() {
+        return menuDescription;
+    }
+
+    public void setMenuDescription(String menuDescription) {
+        this.menuDescription = menuDescription;
     }
 
     public void setTotalDinerAttendance(Integer totalDinerAttendance) {
@@ -124,7 +134,7 @@ public class DayAttendance extends Moreno {
         reference.child(String.valueOf(getId())).setValue(new FBDayAttendance(this), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
+                    databaseError.toException().printStackTrace();
             }
         });
     }

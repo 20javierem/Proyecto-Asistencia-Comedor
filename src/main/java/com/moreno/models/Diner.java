@@ -105,6 +105,7 @@ public class Diner extends Moreno {
         setPhone(attributes[4].trim());
         setActive(Boolean.parseBoolean(attributes[5]));
     }
+
     public String getSex(){
         return isMale()?"MASCULINO":"FEMENINO";
     }
@@ -119,7 +120,7 @@ public class Diner extends Moreno {
             id= Diners.getLastId();
         }
         super.save();
-        DatabaseReference reference= Common.getDatabase().getReference("Diner_tbl");
+        DatabaseReference reference= Common.getDatabase().getReference("diner_tbl");
         reference.child(String.valueOf(getId())).setValue(this, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

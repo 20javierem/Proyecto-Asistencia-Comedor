@@ -32,6 +32,7 @@ public class TabRegisterAttendance {
     private JDateChooser dateChosser;
     private JComboBox cbbState;
     private JButton btnSave;
+    private JTextField txtMenuDescription;
     private DinerDayAttendanceTableModel model;
     private HashMap<String,DinerAttendance> attendanceHashMap=new HashMap<>();
     private DayAttendance dayAttendance;
@@ -73,11 +74,17 @@ public class TabRegisterAttendance {
         });
     }
     private void save(){
-        dayAttendance.setState(cbbState.getSelectedIndex()==0);
-        dayAttendance.getAttendances().forEach(dinerAttendance -> {
-            dinerAttendance.setAttended(true);
-            dinerAttendance.save();
-        });
+        dayAttendance.setMenuDescription(txtMenuDescription.getText().trim());
+        if(cbbState.getSelectedIndex()!=0){
+            int siono=JOptionPane.showOptionDialog(Utilities.getJFrame(),"¿Esta acción no se puede deshacer?","CAMBIAR A FERIADO",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+            if(siono==0){
+                dayAttendance.setState(cbbState.getSelectedIndex()==0);
+                dayAttendance.getAttendances().forEach(dinerAttendance -> {
+                    dinerAttendance.setAttended(true);
+                    dinerAttendance.save();
+                });
+            }
+        }
         dayAttendance.calculateTotals();
         loadCalculateTotals();
         dayAttendance.save();
@@ -89,14 +96,26 @@ public class TabRegisterAttendance {
             DayAttendance dayAttendance= DayAttendances.getOfDate(dateChosser.getDate());
             if(dayAttendance!=null){
                 this.dayAttendance=dayAttendance;
-                btnSave.setEnabled(dayAttendance.isState());
-                txtDiner.setEnabled(dayAttendance.isState());
-                loadTable();
-                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Registros cargados");
+                loadAttendance();
             }else{
                 Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","No se encontraron registros");
             }
         }
+    }
+    private void loadAttendance(){
+        if(dayAttendance==null) {
+            dayAttendance = new DayAttendance(new Date());
+            dayAttendance.save();
+            dayAttendance.getAttendances().forEach(Moreno::save);
+            VPrincipal.attendancesToday=dayAttendance;
+        }
+        txtMenuDescription.setText(dayAttendance.getMenuDescription());
+        cbbState.setSelectedItem(dayAttendance.isState()?"NORMAL":"FERIADO");
+        btnSave.setEnabled(dayAttendance.isState());
+        txtDiner.setEnabled(dayAttendance.isState());
+        txtMenuDescription.setEnabled(dayAttendance.isState());
+        loadTable();
+        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Registros cargados");
     }
     private void registerAttendance(){
         String code= txtDiner.getText().trim();
@@ -131,7 +150,7 @@ public class TabRegisterAttendance {
     private void initComponents(){
         tabPane.setTitle("Registrar asistencia");
         dayAttendance=VPrincipal.attendancesToday;
-        loadTable();
+        loadAttendance();
         tabPane.getActions().addActionListener(e -> {
             loadHashMap();
             UtilitiesTables.actualizarTabla(table);
@@ -140,12 +159,7 @@ public class TabRegisterAttendance {
         txtDiner.setPlaceHolderText("DNI...");
     }
     private void loadTable(){
-        if(dayAttendance==null) {
-            dayAttendance = new DayAttendance(new Date());
-            dayAttendance.save();
-            dayAttendance.getAttendances().forEach(Moreno::save);
-            VPrincipal.attendancesToday=dayAttendance;
-        }
+        txtMenuDescription.setText(dayAttendance.getMenuDescription());
         loadHashMap();
         model=new DinerDayAttendanceTableModel(dayAttendance.getAttendances());
         table.setModel(model);

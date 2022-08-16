@@ -11,18 +11,14 @@ import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.validators.DinerValidator;
 import com.moreno.views.VPrincipal;
 import com.moreno.views.tabs.TabAllDiners;
-import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvValidationException;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 

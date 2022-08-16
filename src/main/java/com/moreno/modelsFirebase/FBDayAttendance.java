@@ -21,6 +21,7 @@ public class FBDayAttendance {
     private Integer totalDinerNotAttendance=0;
     private String percentageAtendet="0%";
     private String percentageNotAtendet="100%";
+    private String menuDescription="";
 
     public FBDayAttendance(DayAttendance dayAttendance){
         setId(dayAttendance.getId());
@@ -30,6 +31,7 @@ public class FBDayAttendance {
         setTotalDinerNotAttendance(dayAttendance.getTotalDinerNotAttendance());
         setTotalDinerAttendance(dayAttendance.getTotalDinerAttendance());
         setState(dayAttendance.isState());
+        setMenuDescription(dayAttendance.getMenuDescription());
         for (DinerAttendance dinerAttendance:dayAttendance.getAttendances()){
             getAttendances().add(dinerAttendance.getId());
         }
@@ -96,5 +98,13 @@ public class FBDayAttendance {
 
     public void setPercentageNotAtendet(String percentageNotAtendet) {
         this.percentageNotAtendet = percentageNotAtendet;
+    }
+
+    public String getMenuDescription() {
+        return menuDescription;
+    }
+
+    public void setMenuDescription(String menuDescription) {
+        this.menuDescription = menuDescription;
     }
 }
