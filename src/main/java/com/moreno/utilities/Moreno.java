@@ -29,14 +29,9 @@ public class Moreno {
     }
 
     public void save(){
-        try {
-            session.beginTransaction();
-            session.persist(this);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            session.getTransaction().commit();
-        }
+        session.beginTransaction();
+        session.persist(this);
+        session.getTransaction().commit();
     }
     public static void close(){
         session.close();

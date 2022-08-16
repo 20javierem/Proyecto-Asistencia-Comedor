@@ -16,7 +16,7 @@ public class Common {
             refreshToken = new FileInputStream("credentials.json");
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(refreshToken))
-                    .setDatabaseUrl("https://proyecto-movilesii-default-rtdb.firebaseio.com/")
+                    .setDatabaseUrl("https://comedor-universitario-a09f3-default-rtdb.firebaseio.com")
                     .build();
             FirebaseApp.initializeApp(options);
         } catch (IOException e) {
