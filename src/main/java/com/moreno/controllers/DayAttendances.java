@@ -55,6 +55,4 @@ public class DayAttendances extends Moreno {
         todos=new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }
-
-
 }
