@@ -24,6 +24,8 @@ public class DDiner extends JDialog{
     private JTextField txtPhone;
     private JComboBox cbbSex;
     private JComboBox cbbState;
+    private JTextField txtUser;
+    private JPasswordField txtPassword;
     private Diner diner;
     private boolean update=false;
     private JTable table;
@@ -89,6 +91,8 @@ public class DDiner extends JDialog{
         diner.setMale(cbbSex.getSelectedIndex()==1);
         diner.setPhone(txtPhone.getText().trim());
         diner.setActive(cbbState.getSelectedIndex()==0);
+        diner.setNameUser(txtUser.getText().trim());
+        diner.setPasword(new String(txtPassword.getPassword()));
         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
         if (errors.isEmpty()) {
             diner.save();
@@ -129,5 +133,7 @@ public class DDiner extends JDialog{
         cbbSex.setSelectedIndex(diner.isMale()?1:0);
         txtPhone.setText(diner.getPhone());
         cbbState.setSelectedIndex(diner.isActive()?0:1);
+        txtUser.setText(diner.getNameUser());
+        txtPassword.setText(Utilities.desencriptar(diner.getPasword()));
     }
 }

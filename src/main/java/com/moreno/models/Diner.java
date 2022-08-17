@@ -40,7 +40,17 @@ public class Diner extends Moreno {
     @NotBlank(message = "Celular")
     private String phone;
 
+    @NotBlank(message = "USUARIO")
+    private String nameUser;
+
+    @NotBlank(message = "CONTRASEÑA")
+    private String pasword;
+
     private boolean active=false;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -94,9 +104,26 @@ public class Diner extends Moreno {
         this.male = male;
     }
 
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public String getPasword() {
+        return pasword;
+    }
+
+    public void setPasword(String pasword) {
+        this.pasword = Utilities.encriptar(pasword);
+    }
+
     public Diner(){
 
     }
+
     public Diner(String[] attributes){
         setDni(attributes[0].trim());
         setLastNames(attributes[1].trim());
@@ -104,6 +131,8 @@ public class Diner extends Moreno {
         setMale(Boolean.parseBoolean(attributes[3]));
         setPhone(attributes[4].trim());
         setActive(Boolean.parseBoolean(attributes[5]));
+        setNameUser(attributes[6]);
+        setPasword(attributes[7]);
     }
 
     public String getSex(){

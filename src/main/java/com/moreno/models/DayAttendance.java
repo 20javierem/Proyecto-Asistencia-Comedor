@@ -40,7 +40,11 @@ public class DayAttendance extends Moreno {
 
     private String percentageNotAtendet="100%";
 
-    private String menuDescription="";
+    private String launch="";
+
+    private String beverage="";
+
+    private String dessert="";
 
     public Integer getId() {
         return id;
@@ -62,12 +66,28 @@ public class DayAttendance extends Moreno {
         return totalDinerAttendance;
     }
 
-    public String getMenuDescription() {
-        return menuDescription;
+    public String getLaunch() {
+        return launch;
     }
 
-    public void setMenuDescription(String menuDescription) {
-        this.menuDescription = menuDescription;
+    public void setLaunch(String launch) {
+        this.launch = launch;
+    }
+
+    public String getBeverage() {
+        return beverage;
+    }
+
+    public void setBeverage(String beverage) {
+        this.beverage = beverage;
+    }
+
+    public String getDessert() {
+        return dessert;
+    }
+
+    public void setDessert(String dessert) {
+        this.dessert = dessert;
     }
 
     public void setTotalDinerAttendance(Integer totalDinerAttendance) {
@@ -127,14 +147,16 @@ public class DayAttendance extends Moreno {
         }
         calculateTotals();
     }
+
     @Override
     public void save() {
         super.save();
+        FBDayAttendance fbDayAttendance=new FBDayAttendance(this);
         DatabaseReference reference= Common.getDatabase().getReference("dayAttendance_tbl");
-        reference.child(String.valueOf(getId())).setValue(new FBDayAttendance(this), new DatabaseReference.CompletionListener() {
+        reference.child(Utilities.formatoFecha.format(getDate())).setValue(fbDayAttendance, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    databaseError.toException().printStackTrace();
+                databaseError.toException().printStackTrace();
             }
         });
     }

@@ -33,7 +33,7 @@ public class UtilitiesCsv {
             while ((row = csvReader.readLine()) != null) {
                 String[] attributes;
                 attributes = row.split(";");
-                if(attributes.length==6){
+                if(attributes.length==8){
                     Diner diner = new Diner(attributes);
                     Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
                     if (errors.isEmpty()) {

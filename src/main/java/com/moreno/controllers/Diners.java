@@ -32,8 +32,8 @@ public class Diners extends Moreno {
     public static Integer getLastId(){
         criteria = builder.createQuery(Diner.class);
         criteria.select(criteria.from(Diner.class));
-        todos = new Vector<>(session.createQuery(criteria).getResultList());
-        return todos.isEmpty()?1:todos.get(todos.size()-1).getId()+1;
+        List<Diner> dinerList = session.createQuery(criteria).getResultList();
+        return dinerList.isEmpty()?1:dinerList.get(dinerList.size()-1).getId()+1;
     }
     public static Diner getByDni(String dni){
         criteria = builder.createQuery(Diner.class);

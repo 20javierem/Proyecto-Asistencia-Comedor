@@ -32,6 +32,8 @@ public class DExport extends JDialog{
     private JCheckBox ckPercentageAtendet;
     private JCheckBox ckPercentageNotAtendet;
     private JButton btnExportDinerAttendances;
+    private JCheckBox ckUser;
+    private JCheckBox ckPasword;
 
     public DExport(){
         super(Utilities.getJFrame(),"Exportar",true);
@@ -83,6 +85,12 @@ public class DExport extends JDialog{
         }
         if(ckState.isSelected()){
             columns.add("active");
+        }
+        if(ckUser.isSelected()){
+            columns.add("nameUser");
+        }
+        if(ckPasword.isSelected()){
+            columns.add("pasword");
         }
         if(!columns.isEmpty()){
             UtilitiesCsv.exportDiners(columns);

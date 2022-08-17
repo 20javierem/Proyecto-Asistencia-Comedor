@@ -32,7 +32,10 @@ public class TabRegisterAttendance {
     private JDateChooser dateChosser;
     private JComboBox cbbState;
     private JButton btnSave;
-    private JTextField txtMenuDescription;
+    private JTextField txtLunch;
+    private JTextField txtDessert;
+    private JTextField txtBeverage;
+    private JButton btnSave2;
     private DinerDayAttendanceTableModel model;
     private HashMap<String,DinerAttendance> attendanceHashMap=new HashMap<>();
     private DayAttendance dayAttendance;
@@ -72,9 +75,17 @@ public class TabRegisterAttendance {
                 save();
             }
         });
+        btnSave2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save();
+            }
+        });
     }
     private void save(){
-        dayAttendance.setMenuDescription(txtMenuDescription.getText().trim());
+        dayAttendance.setLaunch(txtLunch.getText().trim());
+        dayAttendance.setDessert(txtDessert.getText().trim());
+        dayAttendance.setBeverage(txtBeverage.getText().trim());
         if(cbbState.getSelectedIndex()!=0){
             int siono=JOptionPane.showOptionDialog(Utilities.getJFrame(),"¿Esta acción no se puede deshacer?","CAMBIAR A FERIADO",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
             if(siono==0){
@@ -109,14 +120,18 @@ public class TabRegisterAttendance {
             dayAttendance.getAttendances().forEach(Moreno::save);
             VPrincipal.attendancesToday=dayAttendance;
         }
-        txtMenuDescription.setText(dayAttendance.getMenuDescription());
+        txtLunch.setText(dayAttendance.getLaunch());
+        txtDessert.setText(dayAttendance.getDessert());
+        txtBeverage.setText(dayAttendance.getBeverage());
         cbbState.setSelectedItem(dayAttendance.isState()?"NORMAL":"FERIADO");
         btnSave.setEnabled(dayAttendance.isState());
+        btnSave2.setEnabled(dayAttendance.isState());
         txtDiner.setEnabled(dayAttendance.isState());
-        txtMenuDescription.setEnabled(dayAttendance.isState());
+        txtLunch.setEnabled(dayAttendance.isState());
         loadTable();
         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Registros cargados");
     }
+
     private void registerAttendance(){
         String code= txtDiner.getText().trim();
         if(!code.isBlank()){
@@ -159,7 +174,6 @@ public class TabRegisterAttendance {
         txtDiner.setPlaceHolderText("DNI...");
     }
     private void loadTable(){
-        txtMenuDescription.setText(dayAttendance.getMenuDescription());
         loadHashMap();
         model=new DinerDayAttendanceTableModel(dayAttendance.getAttendances());
         table.setModel(model);
