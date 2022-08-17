@@ -117,7 +117,7 @@ public class Diner extends Moreno {
     }
 
     public void setPasword(String pasword) {
-        this.pasword = Utilities.encriptar(pasword);
+        this.pasword = pasword;
     }
 
     public Diner(){
@@ -132,7 +132,7 @@ public class Diner extends Moreno {
         setPhone(attributes[4].trim());
         setActive(Boolean.parseBoolean(attributes[5]));
         setNameUser(attributes[6]);
-        setPasword(attributes[7]);
+        setPasword(Utilities.encriptar(attributes[7]));
     }
 
     public String getSex(){

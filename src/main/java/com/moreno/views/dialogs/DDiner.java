@@ -92,7 +92,7 @@ public class DDiner extends JDialog{
         diner.setPhone(txtPhone.getText().trim());
         diner.setActive(cbbState.getSelectedIndex()==0);
         diner.setNameUser(txtUser.getText().trim());
-        diner.setPasword(new String(txtPassword.getPassword()));
+        diner.setPasword(Utilities.encriptar(new String(txtPassword.getPassword())));
         Set<ConstraintViolation<Diner>> errors = DinerValidator.loadViolations(diner);
         if (errors.isEmpty()) {
             diner.save();
