@@ -53,10 +53,11 @@ public class Diners extends Moreno {
         try{
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference reference=database.getReference("diner_tbl");
-            reference.orderByChild("id").addChildEventListener(new ChildEventListener() {
+            reference.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Diner dinerUpdate=dataSnapshot.getValue(Diner.class);
+                    System.out.println(dinerUpdate);
                     Diner cache= Moreno.session.get(Diner.class,dinerUpdate.getId());
                     if(cache==null){
                         VPrincipal.diners.add(dinerUpdate);

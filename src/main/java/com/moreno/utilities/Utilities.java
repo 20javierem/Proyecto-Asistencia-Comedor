@@ -49,6 +49,7 @@ public class Utilities {
     private static Propiedades propiedades;
     public static SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
     public static List<JTable> tables=new ArrayList<>();
+    public static JLabel lblIzquiera;
     public static JSpinner.NumberEditor getEditorPrice(JSpinner spinner) {
         return new JSpinner.NumberEditor(spinner, "###,###,###.##");
     }

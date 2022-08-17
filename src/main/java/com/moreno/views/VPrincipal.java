@@ -43,6 +43,7 @@ public class VPrincipal extends JFrame{
     private JPanel paneMenus;
     private JButton btnExit;
     private JButton btnReports;
+    private JLabel lblIzquiera;
     private Propiedades propiedades;
     private MenuDiners menuDiners;
     private MenuReports menuReports;
@@ -157,6 +158,7 @@ public class VPrincipal extends JFrame{
         loadMenus();
         loadMenuDiners();
         menuDiners.loadAllDiners();
+        Utilities.lblIzquiera=lblIzquiera;
         pack();
         setLocationRelativeTo(null);
     }

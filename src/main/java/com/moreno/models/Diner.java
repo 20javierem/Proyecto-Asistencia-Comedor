@@ -150,32 +150,32 @@ public class Diner extends Moreno {
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
             }
         });
-        try {
-            UserRecord userRecord = FirebaseAuth.getInstance().getUser(getNameUser());
-            userRecord.updateRequest()
-                    .setEmail(getNameUser())
-                    .setEmailVerified(false)
-                    .setPassword(Utilities.encriptar(getPasword()))
-                    .setPhoneNumber(getPhone())
-                    .setDisplayName(getNames()+getLastNames())
-                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
-                    .setDisabled(false);
-        } catch (FirebaseAuthException e) {
-            UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                    .setEmail(getNameUser())
-                    .setEmailVerified(false)
-                    .setPassword(Utilities.encriptar(getPasword()))
-                    .setPhoneNumber(getPhone())
-                    .setDisplayName(getNames()+getLastNames())
-                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
-                    .setDisabled(false);
-            try {
-                UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-                System.out.println("Successfully created new user: " + userRecord.getUid());
-            } catch (FirebaseAuthException authException) {
-                authException.printStackTrace();
-            }
-        }
+//        try {
+//            UserRecord userRecord = FirebaseAuth.getInstance().getUser(getNameUser());
+//            userRecord.updateRequest()
+//                    .setEmail(getNameUser())
+//                    .setEmailVerified(false)
+//                    .setPassword(Utilities.encriptar(getPasword()))
+//                    .setPhoneNumber(getPhone())
+//                    .setDisplayName(getNames()+getLastNames())
+//                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
+//                    .setDisabled(false);
+//        } catch (FirebaseAuthException e) {
+//            UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+//                    .setEmail(getNameUser())
+//                    .setEmailVerified(false)
+//                    .setPassword(Utilities.encriptar(getPasword()))
+//                    .setPhoneNumber(getPhone())
+//                    .setDisplayName(getNames()+getLastNames())
+//                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
+//                    .setDisabled(false);
+//            try {
+//                UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+//                System.out.println("Successfully created new user: " + userRecord.getUid());
+//            } catch (FirebaseAuthException authException) {
+//                authException.printStackTrace();
+//            }
+//        }
     }
 
 }

@@ -16,7 +16,6 @@ import java.util.Date;
 
 @Entity(name = "diner_attedance_tbl")
 public class DinerAttendance extends Moreno {
-
     @Id
     @GeneratedValue(generator = "increment")
     private Integer id;

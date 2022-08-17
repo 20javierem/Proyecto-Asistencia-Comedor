@@ -1,8 +1,7 @@
 package com.moreno.models;
 
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
+import com.moreno.Notify;
 import com.moreno.common.Common;
 import com.moreno.controllers.Diners;
 import com.moreno.modelsFirebase.FBDayAttendance;
@@ -23,7 +22,6 @@ public class DayAttendance extends Moreno {
     @GeneratedValue(generator = "increment")
     private Integer id;
 
-    @Temporal(TemporalType.DATE)
     private Date date;
 
     @NotNull
@@ -151,12 +149,12 @@ public class DayAttendance extends Moreno {
     @Override
     public void save() {
         super.save();
-        FBDayAttendance fbDayAttendance=new FBDayAttendance(this);
         DatabaseReference reference= Common.getDatabase().getReference("dayAttendance_tbl");
+        FBDayAttendance fbDayAttendance=new FBDayAttendance(this);
         reference.child(Utilities.formatoFecha.format(getDate())).setValue(fbDayAttendance, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                databaseError.toException().printStackTrace();
+                Utilities.lblIzquiera.setText("Éxito -> cambios guardados");
             }
         });
     }
