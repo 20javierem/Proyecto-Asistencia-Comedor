@@ -149,6 +149,7 @@ public class DayAttendance extends Moreno {
     @Override
     public void save() {
         super.save();
+        Utilities.lblIzquiera.setText("...");
         DatabaseReference reference= Common.getDatabase().getReference("dayAttendance_tbl");
         FBDayAttendance fbDayAttendance=new FBDayAttendance(this);
         reference.child(Utilities.formatoFecha.format(getDate())).setValue(fbDayAttendance, new DatabaseReference.CompletionListener() {
