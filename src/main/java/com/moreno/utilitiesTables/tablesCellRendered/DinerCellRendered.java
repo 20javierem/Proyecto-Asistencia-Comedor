@@ -16,6 +16,7 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
     public DinerCellRendered(Map<Integer, String> listaFiltros){
         this.listaFiltros=listaFiltros;
     }
+
     public static void setCellRenderer(JTable table,Map<Integer, String> listaFiltros){
         DinerCellRendered cellRendered=new DinerCellRendered(listaFiltros);
         for (int i=0;i<table.getColumnCount();i++){
@@ -60,4 +61,5 @@ public class DinerCellRendered extends DefaultTableCellRenderer {
             return componente;
         }
     }
+
 }

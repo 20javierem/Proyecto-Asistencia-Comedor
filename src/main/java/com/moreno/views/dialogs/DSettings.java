@@ -26,7 +26,7 @@ public class DSettings extends JDialog{
         btnAplyThme.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeTheme();
+                changeTheme(String.valueOf(cbbTema.getSelectedItem()));
             }
         });
         btnSave.addActionListener(new ActionListener() {
@@ -51,13 +51,11 @@ public class DSettings extends JDialog{
         Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","Cambios guardados");
     }
     private void onCancel(){
-        Utilities.setTema(propiedades.getTema());
-        Utilities.updateComponents(getRootPane());
-        Utilities.updateComponents(vPrincipal.getRootPane());
+        changeTheme(propiedades.getTema());
         dispose();
     }
-    private void changeTheme(){
-        Utilities.setTema(String.valueOf(cbbTema.getSelectedItem()));
+    private void changeTheme(String theme){
+        Utilities.setTema(theme);
         Utilities.updateComponents(getRootPane());
         Utilities.updateComponents(vPrincipal.getRootPane());
     }

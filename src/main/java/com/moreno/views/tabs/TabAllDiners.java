@@ -102,7 +102,7 @@ public class TabAllDiners {
             filtros.add(RowFilter.regexFilter(cbbState.getSelectedIndex()==1?"SI":"NO", 6));
         }
         if(!textFieldSearch.getText().isBlank()){
-            filtros.add(RowFilter.regexFilter(textFieldSearch.getText(), 1,2,3,5));
+            filtros.add(RowFilter.regexFilter("(?i)"+textFieldSearch.getText(), 1,2,3,5));
             listaFiltros.put(1, textFieldSearch.getText());
             listaFiltros.put(2, textFieldSearch.getText());
             listaFiltros.put(3, textFieldSearch.getText());

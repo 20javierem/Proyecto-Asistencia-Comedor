@@ -53,9 +53,9 @@ public class UtilitiesTables {
             Highlighter.HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(componente.getSelectionColor());
             componente.setHighlighter(hilit);
             if(listaFiltros.get(column)!=null){
-                String s = listaFiltros.get(column);
+                String s = listaFiltros.get(column).toLowerCase();
                 if (s.length() > 0) {
-                    String contenido = componente.getText();
+                    String contenido = componente.getText().toLowerCase();
                     int index = contenido.indexOf(s);
                     if (index >= 0) {
                         try {
