@@ -95,7 +95,7 @@ public class DExport extends JDialog{
         if(!columns.isEmpty()){
             UtilitiesCsv.exportDiners(columns);
         }else{
-            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.TOP_CENTER,"ADVERTENCIA","Debe seleccionar las columnas");
         }
     }
     private void exportDayAttendances(){
@@ -121,7 +121,7 @@ public class DExport extends JDialog{
         if(!columns.isEmpty()){
             UtilitiesCsv.exportAttendancesDays(columns);
         }else{
-            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.TOP_CENTER,"ADVERTENCIA","Debe seleccionar las columnas");
         }
     }
 
@@ -139,7 +139,7 @@ public class DExport extends JDialog{
         if(!columns.isEmpty()){
             UtilitiesCsv.exportDinersAttendances(columns);
         }else{
-            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"ADVERTENCIA","Debe seleccionar las columnas");
+            Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.TOP_CENTER,"ADVERTENCIA","Debe seleccionar las columnas");
         }
     }
     private void onCancel(){

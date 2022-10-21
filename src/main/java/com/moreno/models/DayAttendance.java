@@ -1,11 +1,6 @@
 package com.moreno.models;
 
-import com.google.firebase.database.*;
-import com.moreno.Notify;
-import com.moreno.common.Common;
 import com.moreno.controllers.Diners;
-import com.moreno.modelsFirebase.FBDayAttendance;
-import com.moreno.modelsFirebase.FBDinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.*;
@@ -144,19 +139,5 @@ public class DayAttendance extends Moreno {
             attendances.add(dinerAttendance);
         }
         calculateTotals();
-    }
-
-    @Override
-    public void save() {
-        super.save();
-        Utilities.lblIzquiera.setText("...");
-        DatabaseReference reference= Common.getDatabase().getReference("dayAttendance_tbl");
-        FBDayAttendance fbDayAttendance=new FBDayAttendance(this);
-        reference.child(Utilities.formatoFecha.format(getDate())).setValue(fbDayAttendance, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                Utilities.lblIzquiera.setText("Éxito -> cambios guardados");
-            }
-        });
     }
 }

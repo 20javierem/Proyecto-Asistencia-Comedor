@@ -1,10 +1,5 @@
 package com.moreno.models;
 
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.moreno.common.Common;
-import com.moreno.modelsFirebase.FBDinerAttendance;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.Entity;
@@ -72,13 +67,5 @@ public class DinerAttendance extends Moreno {
     @Override
     public void save() {
         super.save();
-
-        DatabaseReference reference= Common.getDatabase().getReference("dinnerAttendance_tbl");
-        reference.child(String.valueOf(getId())).setValue(new FBDinerAttendance(this), new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
-            }
-        });
     }
 }

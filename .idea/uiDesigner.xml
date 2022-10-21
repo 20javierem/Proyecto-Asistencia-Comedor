@@ -128,14 +128,17 @@
       <item class="com.moreno.custom.TabPane" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false" is-container="true">
         <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
       </item>
-      <item class="com.moreno.custom.CButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="true" auto-create-binding="true" can-attach-label="false">
-        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="0" />
-      </item>
       <item class="com.toedter.calendar.JDateChooser" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="true" can-attach-label="false">
         <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="0" />
       </item>
       <item class="com.moreno.custom.TextFieldSearch" icon="/com/intellij/uiDesigner/icons/textField.png" removable="true" auto-create-binding="true" can-attach-label="false">
         <default-constraints vsize-policy="0" hsize-policy="7" anchor="0" fill="1" />
+      </item>
+      <item class="com.formdev.flatlaf.extras.components.FlatButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.formdev.flatlaf.extras.components.FlatToggleButton" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
     </group>
   </component>

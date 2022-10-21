@@ -58,6 +58,9 @@ public class MenuReports {
         Utilities.getTabbedPane().setSelectedComponent(tabRecordDinersAttendances.getTabPane());
     }
     public JPanel getContentPane() {
+        btnAllDiners.updateUI();
+        btnAttendancesDiners.updateUI();
+        contentPane.updateUI();
         return contentPane;
     }
 

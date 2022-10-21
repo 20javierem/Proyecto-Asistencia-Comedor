@@ -59,6 +59,9 @@ public class MenuAttendance {
     }
 
     public JPanel getContentPane() {
+        btnRegisterAttendance.updateUI();
+        btnRecordAttendance.updateUI();
+        contentPane.updateUI();
         return contentPane;
     }
 

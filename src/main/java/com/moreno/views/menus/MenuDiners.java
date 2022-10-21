@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 public class MenuDiners {
     private JPanel contentPane;
-    private JToggleButton btnActiveDiners;
     private JToggleButton btnAllDiners;
     private TabAllDiners tabStudents;
 
@@ -37,6 +36,8 @@ public class MenuDiners {
     }
 
     public JPanel getContentPane() {
+        contentPane.updateUI();
+        btnAllDiners.updateUI();
         return contentPane;
     }
 

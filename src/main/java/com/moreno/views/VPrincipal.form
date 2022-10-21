@@ -59,7 +59,7 @@
               <component id="92ebf" class="javax.swing.JButton" binding="btnAllDiners">
                 <constraints/>
                 <properties>
-                  <icon value="com/moreno/Icons/x32/studentsSelected.png"/>
+                  <icon value="com/moreno/Icons/x32/dinersSelected.png"/>
                   <text value="Todos los comensales"/>
                 </properties>
               </component>
@@ -104,7 +104,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="57f29" binding="panelControles" custom-create="true" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="57f29" binding="panelControles" custom-create="true" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="0">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <splitpane position="left"/>
@@ -168,96 +168,67 @@
                     <border type="none"/>
                     <children/>
                   </grid>
-                  <grid id="66e97" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="5" bottom="0" right="0"/>
+                  <component id="11777" class="com.formdev.flatlaf.extras.components.FlatToggleButton" binding="btnDiners" custom-create="true">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12811323"/>
-                      <opaque value="false"/>
+                      <buttonType value="tab"/>
+                      <focusable value="false"/>
+                      <font style="1"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/moreno/Icons/x32/dinersDefault.png"/>
+                      <iconTextGap value="-2"/>
+                      <margin top="10" left="10" bottom="10" right="10"/>
+                      <rolloverEnabled value="false"/>
+                      <selected value="true"/>
+                      <selectedIcon value="com/moreno/Icons/x32/dinersSelected.png"/>
+                      <tabUnderlineHeight value="5"/>
+                      <tabUnderlinePlacement value="2"/>
+                      <text value="Comensales"/>
+                      <verticalTextPosition value="3"/>
                     </properties>
-                    <border type="none"/>
-                    <children>
-                      <component id="fc89d" class="com.moreno.custom.CButton" binding="btnAttendance">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                            <minimum-size width="90" height="70"/>
-                            <preferred-size width="90" height="70"/>
-                            <maximum-size width="90" height="70"/>
-                          </grid>
-                        </constraints>
-                        <properties>
-                          <contentAreaFilled value="false"/>
-                          <font size="16"/>
-                          <horizontalTextPosition value="0"/>
-                          <icon value="com/moreno/Icons/x32/calendarioDefault.png"/>
-                          <text value="Asistencia"/>
-                          <verticalTextPosition value="3"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                  <grid id="53a75" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="5" bottom="0" right="0"/>
+                  </component>
+                  <component id="6d598" class="com.formdev.flatlaf.extras.components.FlatToggleButton" binding="btnAttendance" custom-create="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12811323"/>
-                      <opaque value="false"/>
+                      <buttonType value="tab"/>
+                      <focusable value="false"/>
+                      <font style="1"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/moreno/Icons/x32/calendarioDefault.png"/>
+                      <iconTextGap value="-2"/>
+                      <margin top="10" left="10" bottom="10" right="10"/>
+                      <rolloverEnabled value="false"/>
+                      <selectedIcon value="com/moreno/Icons/x32/calendarioSelected.png"/>
+                      <tabUnderlineHeight value="5"/>
+                      <tabUnderlinePlacement value="2"/>
+                      <text value="Asistencia"/>
+                      <verticalTextPosition value="3"/>
                     </properties>
-                    <border type="none"/>
-                    <children>
-                      <component id="1ae49" class="com.moreno.custom.CButton" binding="btnDiners">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                            <minimum-size width="90" height="70"/>
-                            <preferred-size width="90" height="70"/>
-                            <maximum-size width="90" height="70"/>
-                          </grid>
-                        </constraints>
-                        <properties>
-                          <contentAreaFilled value="false"/>
-                          <font size="16"/>
-                          <horizontalTextPosition value="0"/>
-                          <icon value="com/moreno/Icons/x32/dinersDefault.png"/>
-                          <text value="Comensales"/>
-                          <verticalTextPosition value="3"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                  <grid id="6246a" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="5" bottom="0" right="0"/>
+                  </component>
+                  <component id="47b59" class="com.formdev.flatlaf.extras.components.FlatToggleButton" binding="btnReports" custom-create="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12811323"/>
-                      <opaque value="false"/>
+                      <buttonType value="tab"/>
+                      <focusable value="false"/>
+                      <font style="1"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/moreno/Icons/x32/estadisticaDefault.png"/>
+                      <iconTextGap value="-2"/>
+                      <margin top="10" left="10" bottom="10" right="10"/>
+                      <rolloverEnabled value="false"/>
+                      <selectedIcon value="com/moreno/Icons/x32/estadisticaSelected.png"/>
+                      <tabUnderlineHeight value="5"/>
+                      <tabUnderlinePlacement value="2"/>
+                      <text value="Reportes"/>
+                      <verticalTextPosition value="3"/>
                     </properties>
-                    <border type="none"/>
-                    <children>
-                      <component id="5dfdc" class="com.moreno.custom.CButton" binding="btnReports">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                            <minimum-size width="90" height="70"/>
-                            <preferred-size width="90" height="70"/>
-                            <maximum-size width="90" height="70"/>
-                          </grid>
-                        </constraints>
-                        <properties>
-                          <contentAreaFilled value="false"/>
-                          <font size="16"/>
-                          <horizontalTextPosition value="0"/>
-                          <icon value="com/moreno/Icons/x32/estadisticaDefault.png"/>
-                          <text value="Reportes"/>
-                          <verticalTextPosition value="3"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
+                  </component>
                 </children>
               </grid>
             </children>
@@ -333,4 +304,13 @@
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="6d598"/>
+      <member id="6d598"/>
+      <member id="11777"/>
+      <member id="47b59"/>
+      <member id="c5dff"/>
+    </group>
+  </buttonGroups>
 </form>

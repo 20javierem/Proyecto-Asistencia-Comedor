@@ -99,7 +99,7 @@ public class DDiner extends JDialog{
             if(update){
                 updateTable();
                 dispose();
-                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Cambios guardados");
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.TOP_CENTER,"ÉXITO","Cambios guardados");
             }else{
                 VPrincipal.diners.add(diner);
                 if(diner.isActive()){
@@ -113,7 +113,7 @@ public class DDiner extends JDialog{
                 }
                 updateTable();
                 diner=new Diner();
-                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.BOTTOM_RIGHT,"ÉXITO","Comensal creado");
+                Notify.sendNotify(Utilities.getJFrame(), Notify.Type.SUCCESS, Notify.Location.TOP_CENTER,"ÉXITO","Comensal creado");
                 loadDiner();
             }
         } else {

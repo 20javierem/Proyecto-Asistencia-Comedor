@@ -1,14 +1,9 @@
 package com.moreno.models;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
-import com.google.firebase.database.*;
-import com.moreno.common.Common;
-import com.moreno.controllers.Diners;
 import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Utilities;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +13,7 @@ import jakarta.validation.constraints.NotNull;
 public class Diner extends Moreno {
 
     @Id
+    @GeneratedValue(generator = "increment")
     private Integer id;
 
     @NotBlank(message = "Nombres")
@@ -138,44 +134,5 @@ public class Diner extends Moreno {
         return isActive()?"SI":"NO";
     }
 
-    @Override
-    public void save() {
-        if(id==null){
-            id= Diners.getLastId();
-        }
-        super.save();
-        DatabaseReference reference= Common.getDatabase().getReference("diner_tbl");
-        reference.child(String.valueOf(getId())).setValue(this, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-            }
-        });
-//        try {
-//            UserRecord userRecord = FirebaseAuth.getInstance().getUser(getNameUser());
-//            userRecord.updateRequest()
-//                    .setEmail(getNameUser())
-//                    .setEmailVerified(false)
-//                    .setPassword(Utilities.encriptar(getPasword()))
-//                    .setPhoneNumber(getPhone())
-//                    .setDisplayName(getNames()+getLastNames())
-//                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
-//                    .setDisabled(false);
-//        } catch (FirebaseAuthException e) {
-//            UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-//                    .setEmail(getNameUser())
-//                    .setEmailVerified(false)
-//                    .setPassword(Utilities.encriptar(getPasword()))
-//                    .setPhoneNumber(getPhone())
-//                    .setDisplayName(getNames()+getLastNames())
-//                    .setPhotoUrl("http://www.example.com/12345678/photo.png")
-//                    .setDisabled(false);
-//            try {
-//                UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-//                System.out.println("Successfully created new user: " + userRecord.getUid());
-//            } catch (FirebaseAuthException authException) {
-//                authException.printStackTrace();
-//            }
-//        }
-    }
 
 }

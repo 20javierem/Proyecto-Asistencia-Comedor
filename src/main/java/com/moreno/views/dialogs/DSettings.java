@@ -48,7 +48,7 @@ public class DSettings extends JDialog{
         propiedades.setNameInstitute(txtNameInstitution.getText());
         propiedades.save();
         dispose();
-        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.BOTTOM_RIGHT,"MENSAJE","Cambios guardados");
+        Notify.sendNotify(Utilities.getJFrame(), Notify.Type.INFO, Notify.Location.TOP_CENTER,"MENSAJE","Cambios guardados");
     }
     private void onCancel(){
         changeTheme(propiedades.getTema());
