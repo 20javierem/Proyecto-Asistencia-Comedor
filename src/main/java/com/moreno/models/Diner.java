@@ -1,43 +1,56 @@
 package com.moreno.models;
 
-import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Mongo;
 import com.moreno.utilities.Utilities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
-@Entity(name = "diner_tbl")
-public class Diner extends Moreno {
+@Entity
+@Table(name = "EMAIL", schema = "KunderaExamples@twingo")
+@Embeddable
+public class Diner extends Mongo {
 
-    @Id
-    @GeneratedValue(generator = "increment")
+    @Column(name = "DINER_ID")
     private Integer id;
 
     @NotBlank(message = "Nombres")
+    @Column(name = "NAMES")
     private String names;
 
     @NotBlank(message = "Apellidos")
+    @Column(name = "LAST_NAMES")
     private String lastNames;
 
-    @NotNull
+    @Column(name = "MALE")
     private boolean male;
 
     @NotBlank(message = "DNI")
+    @Column(name = "DNI")
     private String dni;
 
     @NotBlank(message = "Celular")
+    @Column(name = "PHONE")
     private String phone;
 
     @NotBlank(message = "USUARIO")
+    @Column(name = "NAME_USER")
     private String nameUser;
 
     @NotBlank(message = "CONTRASEÑA")
+    @Column(name = "PASSWORD")
     private String pasword;
 
+    @Column(name = "ACTIVE")
     private boolean active=false;
+
+    public Diner() {
+
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -111,10 +124,6 @@ public class Diner extends Moreno {
         this.pasword = pasword;
     }
 
-    public Diner(){
-
-    }
-
     public Diner(String[] attributes){
         setDni(attributes[0].trim());
         setLastNames(attributes[1].trim());
@@ -133,6 +142,5 @@ public class Diner extends Moreno {
     public String getStade(){
         return isActive()?"SI":"NO";
     }
-
 
 }

@@ -1,27 +1,30 @@
 package com.moreno.models;
 
-import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Mongo;
 import com.moreno.utilities.Utilities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
-import java.util.Date;
+import javax.persistence.*;
 
-@Entity(name = "diner_attedance_tbl")
-public class DinerAttendance extends Moreno {
+@Entity
+@Table(name = "DINERATTENDANCE", schema = "KunderaExamples@twingo")
+public class DinerAttendance extends Mongo {
     @Id
-    @GeneratedValue(generator = "increment")
+    @Column(name="DINERATTENDANCE_ID")
     private Integer id;
-    @ManyToOne
+
+    @Embedded
     private Diner diner;
+
+    @Column(name="ATTENDED")
+    private boolean attended=false;
+
     @ManyToOne
     private DayAttendance dayAttendance;
-    private boolean attended=false;
+
     public DinerAttendance() {
 
     }
+
 
     public String getDinerNames(){
         return diner.getLastNames()+" "+diner.getNames();

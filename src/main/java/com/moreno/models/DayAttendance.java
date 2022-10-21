@@ -1,20 +1,21 @@
 package com.moreno.models;
 
 import com.moreno.controllers.Diners;
-import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Mongo;
 import com.moreno.utilities.Utilities;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "Day_attendance_tbl")
-public class DayAttendance extends Moreno {
+@Entity
+@Table(name = "DAYATTENDANCE", schema = "KunderaExamples@twingo")
+public class DayAttendance extends Mongo {
 
     @Id
-    @GeneratedValue(generator = "increment")
+    @Column(name="DAYATTENDANCE_ID")
     private Integer id;
 
     private Date date;
@@ -22,7 +23,8 @@ public class DayAttendance extends Moreno {
     @NotNull
     private boolean state=true;
 
-    @OneToMany(mappedBy = "dayAttendance")
+    @ElementCollection
+    @CollectionTable(name = "ATTENDANCES")
     private List<DinerAttendance> attendances=new ArrayList<>();
 
     private Integer totalDinerAttendance=0;

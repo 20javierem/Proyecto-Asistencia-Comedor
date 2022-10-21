@@ -8,7 +8,7 @@ import com.moreno.custom.TextFieldSearch;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.DinerAttendance;
 import com.moreno.models.Diner;
-import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Mongo;
 import com.moreno.utilities.Utilities;
 import com.moreno.utilitiesTables.UtilitiesTables;
 import com.moreno.utilitiesTables.tablesCellRendered.DinerDayAttendanceCellRendered;
@@ -117,7 +117,7 @@ public class TabRegisterAttendance {
         if(dayAttendance==null) {
             dayAttendance = new DayAttendance(new Date());
             dayAttendance.save();
-            dayAttendance.getAttendances().forEach(Moreno::save);
+            dayAttendance.getAttendances().forEach(Mongo::save);
             VPrincipal.attendancesToday=dayAttendance;
         }
         txtLunch.setText(dayAttendance.getLaunch());

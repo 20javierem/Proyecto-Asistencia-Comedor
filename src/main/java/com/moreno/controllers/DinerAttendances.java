@@ -2,29 +2,28 @@ package com.moreno.controllers;
 
 import com.moreno.models.DinerAttendance;
 import com.moreno.models.Diner;
-import com.moreno.utilities.Moreno;
+import com.moreno.utilities.Mongo;
 import com.moreno.utilities.Utilities;
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Date;
 import java.util.Vector;
 
-public class DinerAttendances extends Moreno {
+public class DinerAttendances extends Mongo {
     private static Root<DinerAttendance> root;
     private static CriteriaQuery<DinerAttendance> criteria;
     private static Vector<DinerAttendance> todos;
 
     public static DinerAttendance get(Integer id) {
-        DinerAttendance election = session.find(DinerAttendance.class, id, LockModeType.NONE);
+        DinerAttendance election = entityManager.find(DinerAttendance.class, id);
         return election;
     }
 
     public static Vector<DinerAttendance> getTodos(){
         criteria = builder.createQuery(DinerAttendance.class);
         criteria.select(criteria.from(DinerAttendance.class));
-        todos = new Vector<>(session.createQuery(criteria).getResultList());
+        todos = new Vector<>(entityManager.createQuery(criteria).getResultList());
         return todos;
     }
 
@@ -36,7 +35,7 @@ public class DinerAttendances extends Moreno {
                 builder.between(root.get("dayAttendance").get("date"),Utilities.getDateStart(start),Utilities.getDateEnd(end))
                 )
         );
-        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        todos=new Vector<>(entityManager.createQuery(criteria).getResultList());
         return todos;
     }
 
@@ -48,7 +47,7 @@ public class DinerAttendances extends Moreno {
                 builder.lessThan(root.get("dayAttendance").get("date"),Utilities.getDateLessThan(end))
                 )
         );
-        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        todos=new Vector<>(entityManager.createQuery(criteria).getResultList());
         return todos;
     }
 
@@ -60,7 +59,7 @@ public class DinerAttendances extends Moreno {
                 builder.greaterThan(root.get("dayAttendance").get("date"),Utilities.getDateGreaterThan(start))
                 )
         );
-        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        todos=new Vector<>(entityManager.createQuery(criteria).getResultList());
         return todos;
     }
 }

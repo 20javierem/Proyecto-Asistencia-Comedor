@@ -80,7 +80,7 @@ public class DDiner extends JDialog{
     }
     private void onCancel(){
         if(update){
-            diner.refresh();
+//            diner.refresh();
         }
         dispose();
     }

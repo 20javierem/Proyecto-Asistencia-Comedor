@@ -160,56 +160,7 @@ public class UtilitiesReports {
             e.printStackTrace();
         }
     }
-    public static void openManual(){
-//        try {
-//            JasperViewer viewer= new Jas
-//            JPanel panel= (JPanel) viewer.getRootPane().getContentPane().getComponent(0);
-//            JRViewer visor= (JRViewer) panel.getComponent(0);
-//            JRViewerToolbar toolbar= (JRViewerToolbar) visor.getComponent(0);
-//            toolbar.setLayout(new FlowLayout(FlowLayout.CENTER,2,3));
-//            JRViewerPanel jrViewer= (JRViewerPanel) visor.getComponent(1);
-//            JScrollPane jScrollPane= (JScrollPane) jrViewer.getComponent(0);
-//            jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-//            ((JPanel)visor.getComponent(2)).setLayout(new FlowLayout(FlowLayout.CENTER));
-//            Font font=new Font(new JTextField().getFont().getFontName(),Font.PLAIN,14);
-//            ((JPanel)visor.getComponent(2)).getComponent(0).setFont(font);
-//            for (Component component: toolbar.getComponents()){
-//                if(component instanceof JTextField||component instanceof JComboBox){
-//                    component.setMaximumSize(new Dimension(component.getMaximumSize().width,40));
-//                    component.setPreferredSize(new Dimension(component.getPreferredSize().width,40));
-//                    component.setMinimumSize(new Dimension(component.getMinimumSize().width,40));
-//                }else {
-//                    component.setMaximumSize(new Dimension(40,40));
-//                    component.setPreferredSize(new Dimension(40,40));
-//                    component.setMinimumSize(new Dimension(40,40));
-//                }
-//                if(component instanceof JPanel){
-//                    component.setMaximumSize(new Dimension(component.getMaximumSize().width,50));
-//                    component.setPreferredSize(new Dimension(component.getPreferredSize().width,50));
-//                    component.setMinimumSize(new Dimension(component.getMinimumSize().width,50));
-//                }
-//            }
-//            JButton mrZoom=(JButton)toolbar.getComponent(14);
-//            JButton mnZoom=(JButton)toolbar.getComponent(15);
-//            jScrollPane.addMouseWheelListener(e -> {
-//                if(e.isControlDown()){
-//                    if (e.getWheelRotation() < 0) {
-//                        mrZoom.doClick();
-//                    } else {
-//                        mnZoom.doClick();
-//                    }
-//                }
-//            });
-//            viewer.setTitle("Manual de usuario");
-//            if(Utilities.getTabbedPane().indexOfComponent(viewer.getContentPane())!=-1){
-//                Utilities.getTabbedPane().remove(viewer.getContentPane());
-//            }
-//            Utilities.getTabbedPane().addTab(viewer.getTitle(), viewer.getContentPane());
-//            Utilities.getTabbedPane().setSelectedComponent(viewer.getContentPane());
-//        } catch (JRException | IOException e) {
-//            e.printStackTrace();
-//        }
-    }
+
     public static void generateReportDiners(List<Diner> diners) {
         InputStream pathReport = App.class.getResourceAsStream("JasperReport/ReportDiners.jasper");
         try {

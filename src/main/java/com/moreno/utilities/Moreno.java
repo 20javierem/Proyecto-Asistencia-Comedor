@@ -11,17 +11,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class Moreno {
     public static Session session;
     protected static CriteriaBuilder builder;
-    public static boolean state;
 
-    private static void buildSessionFactory() {
+    private static void initialize() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         session = sessionFactory.openSession();
         builder = session.getCriteriaBuilder();
-    }
-    public static void initialize() {
-        buildSessionFactory();
-        state=true;
     }
 
     public void refresh(){
@@ -35,6 +30,5 @@ public class Moreno {
     }
     public static void close(){
         session.close();
-        state=false;
     }
 }

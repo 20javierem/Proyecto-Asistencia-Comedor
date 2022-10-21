@@ -7,10 +7,8 @@ import com.moreno.controllers.Diners;
 import com.moreno.custom.*;
 import com.moreno.models.DayAttendance;
 import com.moreno.models.Diner;
-import com.moreno.utilities.Moreno;
 import com.moreno.utilities.Propiedades;
 import com.moreno.utilities.Utilities;
-import com.moreno.utilitiesReports.UtilitiesReports;
 import com.moreno.views.dialogs.DExport;
 import com.moreno.views.dialogs.DSettings;
 import com.moreno.views.menus.MenuAttendance;
@@ -18,11 +16,9 @@ import com.moreno.views.menus.MenuDiners;
 import com.moreno.views.menus.MenuReports;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +88,6 @@ public class VPrincipal extends JFrame{
     private void closeSesion(){
         int siono=JOptionPane.showOptionDialog(Utilities.getJFrame(),"¿Cerrar sesión?","MENSAJE",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
         if(siono==0){
-            Moreno.close();
             dispose();
         }
 
@@ -168,7 +163,6 @@ public class VPrincipal extends JFrame{
         menuHelp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UtilitiesReports.openManual();
             }
         });
         btnMenuInicio.add(menuSettings);
